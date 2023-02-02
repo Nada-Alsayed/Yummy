@@ -2,4 +2,7 @@
     <string name="app_name">Yummy</string>
     <string name="profile" />
     <string name="pageProfile">profile</string>
+    <string name="weekplan">Week Plan</string>
+    <string name="logout">LogOut</string>
+    <string name="favouritelist">favourite list</string>
 </resources>

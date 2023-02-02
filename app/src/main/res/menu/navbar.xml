@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuItemHome"
+        android:icon="@drawable/outline_home_24"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/menuItemSearch"
+        android:icon="@drawable/round_search_24"
+        android:title="Search" />
+    <item
+        android:id="@+id/menuItemFavourite"
+        android:icon="@drawable/outline_favorite_border_24"
+        android:title="Favourite" />
+    <item
+        android:id="@+id/menuItemWeekPlan"
+        android:icon="@drawable/baseline_edit_calendar_24"
+        android:title="Item" />
+    <item
+        android:id="@+id/menuItemProfile"
+        android:icon="@drawable/outline_person_outline_24"
+        android:title="Profile" />
+</menu>
