@@ -5,4 +5,13 @@
     <string name="weekplan">Week Plan</string>
     <string name="logout">LogOut</string>
     <string name="favouritelist">favourite list</string>
+    <string name="planAway">Plan Away</string>
+    <string name="password">Password</string>
+    <string name="signin">Sign in</string>
+    <string name="signInUL"><u>Sign in</u></string>
+    <string name="noAcc">Don\'t Have An Account ...</string>
+    <string name="signup">Sign Up</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="SignUpUL"><u>Sign up</u></string>
+    <string name="haveAcc">Already Have An Account ...</string>
 </resources>

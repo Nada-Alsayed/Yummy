@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".page_splash">
+
+
+
+    <ImageView
+        android:id="@+id/img_taco"
+        android:layout_width="321dp"
+        android:layout_height="309dp"
+        android:layout_marginBottom="668dp"
+        android:alpha=".5"
+        android:rotation="-5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.822"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/taco" />
+
+    <ImageView
+        android:id="@+id/img_cabbage"
+        android:layout_width="249dp"
+        android:layout_height="229dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginBottom="236dp"
+        android:alpha=".5"
+        android:rotation="-20"
+        app:layout_constraintBottom_toTopOf="@+id/img_lettuce"
+        app:layout_constraintStart_toEndOf="@+id/img_pepper"
+        app:srcCompat="@drawable/cabbage" />
+
+    <ImageView
+        android:id="@+id/img_pepper"
+        android:layout_width="221dp"
+        android:layout_height="189dp"
+        android:layout_marginEnd="284dp"
+        android:layout_marginBottom="732dp"
+        android:alpha=".5"
+        android:rotation="60"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/pepper" />
+
+    <ImageView
+        android:id="@+id/img_sashimi"
+        android:layout_width="280dp"
+        android:layout_height="322dp"
+        android:layout_marginEnd="212dp"
+        android:layout_marginBottom="384dp"
+        android:alpha=".3"
+        android:rotation="14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/sashimi" />
+
+    <ImageView
+        android:id="@+id/img_sushi"
+        android:layout_width="336dp"
+        android:layout_height="332dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginBottom="284dp"
+        android:alpha=".3"
+        android:rotation="190"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_taco"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/sushi" />
+
+    <ImageView
+        android:id="@+id/img_pasta"
+        android:layout_width="316dp"
+        android:layout_height="423dp"
+        android:layout_marginEnd="208dp"
+        android:layout_marginBottom="72dp"
+        android:alpha=".5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/pasta" />
+
+    <ImageView
+        android:id="@+id/img_lettuce"
+        android:layout_width="384dp"
+        android:layout_height="290dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginBottom="52dp"
+        android:alpha=".5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/lettuce" />
+
+    <ImageView
+        android:id="@+id/img_pancake"
+        android:layout_width="311dp"
+        android:layout_height="378dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="116dp"
+        android:alpha=".4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_lettuce"
+        app:srcCompat="@drawable/pancake" />
+
+    <ImageView
+        android:id="@+id/img_tomato"
+        android:layout_width="182dp"
+        android:layout_height="321dp"
+        android:layout_marginTop="276dp"
+        android:layout_marginEnd="308dp"
+        android:alpha=".5"
+        android:rotation="-30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_pasta"
+        app:srcCompat="@drawable/tomato" />
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.404"
+        app:srcCompat="@drawable/logosmaller" />
+
+    <TextView
+        android:id="@+id/txt_slogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/aguafina_script"
+        android:text="@string/planAway"
+        android:textColor="#000000"
+        android:textSize="50sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintStart_toStartOf="@+id/img_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.487" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_main"
+        android:layout_width="240dp"
+        android:layout_height="197dp"
+        android:layout_marginTop="412dp"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="fork.json"
+        app:lottie_loop="true"
+        app:lottie_speed="1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

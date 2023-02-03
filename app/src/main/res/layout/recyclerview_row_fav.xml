@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTop3"
@@ -54,7 +54,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="376dp"
+        android:layout_width ="@dimen/_290sdp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft3"
         app:layout_constraintTop_toTopOf="@+id/guidelineTop3">
@@ -64,13 +64,13 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/image_view_fav"
                 android:layout_width="150dp"
                 android:layout_height="120dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                tools:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
                 android:id="@+id/txtMealName"
@@ -80,7 +80,7 @@
                 android:layout_marginTop="18dp"
                 android:text="TextView"
                 android:textSize="20dp"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/image_view_fav"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -95,7 +95,7 @@
                 app:layout_constraintVertical_bias="0.29" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/image_view_delete"
                 android:layout_width="38dp"
                 android:layout_height="36dp"
                 android:layout_gravity="right"
