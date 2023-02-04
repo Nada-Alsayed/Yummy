@@ -49,4 +49,7 @@ dependencies {
     // lotti
     implementation 'com.airbnb.android:lottie:3.4.0'
 
+    //video player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
+
 }

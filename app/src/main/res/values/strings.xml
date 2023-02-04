@@ -11,7 +11,21 @@
     <string name="signInUL"><u>Sign in</u></string>
     <string name="noAcc">Don\'t Have An Account ...</string>
     <string name="signup">Sign Up</string>
+    <string name="item1">Item 1</string>
+    <string name="item2">Item 2</string>
+    <string name="item3">Item 3</string>
+    <string name="item4">Item 4</string>
+    <string name="item5">Item 5</string>
+    <string name="item6">Item 6</string>
+    <string name="pasta">Chicken Alfredo</string>
+    <string name="italy">Italy</string>
+    <string name="addToFav">Add to favorites</string>
+    <string name="addToPlan">Add to my plan</string>
+    <string name="itemDetail">Item Details</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="SignUpUL"><u>Sign up</u></string>
+    <string name="ingredients"><u>Ingredients</u></string>
+    <string name="directions"><u>Directions</u></string>
+    <string name="videoDirections"><u>Video Directions</u></string>
     <string name="haveAcc">Already Have An Account ...</string>
 </resources>
