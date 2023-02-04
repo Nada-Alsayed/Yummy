@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navgraph"
+    app:startDestination="@id/page_Home">
+
+    <fragment
+        android:id="@+id/page_Home"
+        android:name="eg.gov.iti.yummy.fragments.Page_Home"
+        android:label="fragment_page__home"
+        tools:layout="@layout/fragment_page__home" />
+    <fragment
+        android:id="@+id/page_Search"
+        android:name="eg.gov.iti.yummy.fragments.Page_Search"
+        android:label="fragment_page__search"
+        tools:layout="@layout/fragment_page__search" />
+    <fragment
+        android:id="@+id/page_Favourite"
+        android:name="eg.gov.iti.yummy.fragments.favourite.Page_Favourite"
+        android:label="fragment_page__favourite"
+        tools:layout="@layout/fragment_page__favourite" />
+    <fragment
+        android:id="@+id/page_Week_Plan"
+        android:name="eg.gov.iti.yummy.fragments.Page_Week_Plan"
+        android:label="fragment_page__week__plan"
+        tools:layout="@layout/fragment_page__week__plan" />
+    <fragment
+        android:id="@+id/page_Profile"
+        android:name="eg.gov.iti.yummy.fragments.Page_Profile"
+        android:label="fragment_page__profile"
+        tools:layout="@layout/fragment_page__profile" />
+    <fragment
+        android:id="@+id/page_Country"
+        android:name="eg.gov.iti.yummy.fragments.country.Page_Country"
+        android:label="Page_Country" />
+</navigation>

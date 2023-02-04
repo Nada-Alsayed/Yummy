@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <ImageView
-        android:id="@+id/imgback2"
+        android:id="@+id/imgback4"
         android:layout_width="71dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop4"
         app:srcCompat="@drawable/arrow_back" />
 
     <TextView
-        android:id="@+id/txtPageName2"
+        android:id="@+id/txtPageName4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/favouritelist"
+        android:text="@string/pagedishdetail"
         android:textColor="#131313"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imgback2"
-        app:layout_constraintStart_toEndOf="@+id/imgback2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop2" />
-
+        app:layout_constraintBottom_toBottomOf="@+id/imgback4"
+        app:layout_constraintStart_toEndOf="@+id/imgback4"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop4" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -39,20 +36,7 @@
         app:menu="@menu/navbar" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineBottom2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="699dp"
-        android:layout_marginBottom="44dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_begin="699dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineTop2"
+        android:id="@+id/guidelineTop4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="44dp"
@@ -65,37 +49,34 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineRight2"
+        android:id="@+id/guidelineBottom4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="395dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="vertical"
+        android:layout_marginTop="699dp"
+        android:layout_marginBottom="44dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_begin="395dp"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintGuide_begin="699dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineLeft2"
+        android:id="@+id/guidelineleft4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="395dp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintGuide_begin="16dp"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewpp"
-        android:layout_width="0dp"
-        android:layout_height="571dp"
-        android:layout_marginTop="12dp"
-
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineRight2"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/guidelineLeft2"
-        app:layout_constraintTop_toBottomOf="@+id/imgback2"
-        tools:listitem="@layout/recyclerview_row_fav" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineright4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintGuide_end="16dp"
+        app:layout_constraintStart_toEndOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
