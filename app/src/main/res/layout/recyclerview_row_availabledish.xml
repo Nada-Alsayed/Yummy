@@ -2,12 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="170dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:cardElevation="5dp"
@@ -15,29 +15,31 @@
         app:cardCornerRadius="20dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:id="@+id/cardAvailableDish"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <com.google.android.material.imageview.ShapeableImageView
                 app:shapeAppearanceOverlay="@style/roundedimg"
                 android:scaleType="fitXY"
-                android:id="@+id/imageView2"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/imageavailabledish"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/cardAvailableDish"
+                app:layout_constraintEnd_toEndOf="@+id/cardAvailableDish"
+                app:layout_constraintStart_toStartOf="@id/cardAvailableDish"
+                app:layout_constraintTop_toTopOf="@id/cardAvailableDish"
                 app:srcCompat="@drawable/cook" />
 
             <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/imglove"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:elevation="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toTopOf="@+id/imageView2"
+                app:layout_constraintEnd_toEndOf="@+id/imageavailabledish"
+                app:layout_constraintTop_toTopOf="@+id/imageavailabledish"
                 app:srcCompat="@drawable/baseline_favorite_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

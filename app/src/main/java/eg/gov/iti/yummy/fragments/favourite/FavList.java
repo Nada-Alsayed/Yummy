@@ -18,6 +18,11 @@ public class FavList {
         this.imgId2 = imgId2;
     }
 
+    public FavList(int imgId,int imgId2) {
+        this.imgId = imgId;
+        this.imgId2 = imgId2;
+    }
+
     public int getImgId2() {
         return imgId2;
     }

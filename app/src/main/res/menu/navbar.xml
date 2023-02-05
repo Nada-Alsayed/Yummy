@@ -15,7 +15,7 @@
         android:icon="@drawable/outline_favorite_border_24"
         android:title="Favourite" />
     <item
-        android:id="@+id/page_Week_Plan"
+        android:id="@+id/page_Available_Dishes"
         android:icon="@drawable/baseline_edit_calendar_24"
         android:title="Item" />
     <item

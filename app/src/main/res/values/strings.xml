@@ -1,13 +1,17 @@
 <resources>
     <string name="app_name">Yummy</string>
     <string name="profile" />
-    <string name="pageProfile">profile</string>
+    <string name="pageProfile">Profile</string>
     <string name="weekplan">Week Plan</string>
     <string name="logout">LogOut</string>
-    <string name="favouritelist">favourite list</string>
+    <string name="favouritelist">Favourite List</string>
     <string name="pageavailabledishes">Available Dishes</string>
     <string name="pagedishdetail">Dish Detail</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="country">Country</string>
+    <string name="AvailableDIshes">Available DIshes</string>
+    <string name="Ingredients">Ingredients</string>
+    <string name="SeeAll">See All</string>
+    <string name="DishType">Dish Type</string>
 </resources>

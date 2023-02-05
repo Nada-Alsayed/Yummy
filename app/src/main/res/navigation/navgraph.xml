@@ -34,4 +34,8 @@
         android:id="@+id/page_Country"
         android:name="eg.gov.iti.yummy.fragments.country.Page_Country"
         android:label="Page_Country" />
+    <fragment
+        android:id="@+id/page_Available_Dishes"
+        android:name="eg.gov.iti.yummy.fragments.available_dishes.Page_Available_Dishes"
+        android:label="Page_Available_Dishes" />
 </navigation>
