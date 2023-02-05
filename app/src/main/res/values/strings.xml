@@ -36,4 +36,8 @@
     <string name="wednesday">Wednesday</string>
     <string name="thursday">Thursday</string>
     <string name="friday">Friday</string>
+    <string name="forYou">For You</string>
+    <string name="trending">Trending</string>
+    <string name="history">History</string>
+    <string name="newDishes">New Dishes</string>
 </resources>
