@@ -1,14 +1,277 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Page_Week_Plan">
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
+        android:id="@+id/scroll1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="w" />
 
-</FrameLayout>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <ImageView
+                android:id="@+id/weeklyPlanBackButton"
+                android:layout_width="71dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/arrow_back" />
+
+            <TextView
+                android:id="@+id/weeklyPlanTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weeklyPlan"
+                android:textColor="#000000"
+                android:textSize="28sp"
+                app:layout_constraintBottom_toBottomOf="@+id/weeklyPlanBackButton"
+                app:layout_constraintStart_toEndOf="@+id/weeklyPlanBackButton"
+                app:layout_constraintTop_toTopOf="@+id/weeklyPlanBackButton"
+                app:layout_constraintVertical_bias="1.0" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="401dp" />
+
+            <TextView
+                android:id="@+id/saturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/saturday"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/weeklyPlanTitle" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="379dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/saturday"
+                app:layout_constraintTop_toBottomOf="@+id/saturday" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle1"
+                android:layout_width="409dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+
+            <TextView
+                android:id="@+id/sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/sunday"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/saturday"
+                app:layout_constraintTop_toBottomOf="@+id/recycle1" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="379dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/sunday"
+                app:layout_constraintTop_toBottomOf="@+id/sunday" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle2"
+                android:layout_width="409dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/view3"/>
+
+            <TextView
+                android:id="@+id/monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/monday"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/sunday"
+                app:layout_constraintTop_toBottomOf="@+id/recycle2" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="379dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/monday"
+                app:layout_constraintTop_toBottomOf="@+id/monday" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle3"
+                android:layout_width="409dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/view4"/>
+
+            <TextView
+                android:id="@+id/tuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/tuesday"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/monday"
+                app:layout_constraintTop_toBottomOf="@+id/recycle3" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="379dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/tuesday"
+                app:layout_constraintTop_toBottomOf="@+id/tuesday" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle4"
+                android:layout_width="409dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/view5"/>
+
+            <TextView
+                android:id="@+id/wednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/wednesday"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/tuesday"
+                app:layout_constraintTop_toBottomOf="@+id/recycle4" />
+
+            <View
+                android:id="@+id/view6"
+                android:layout_width="379dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/wednesday"
+                app:layout_constraintTop_toBottomOf="@+id/wednesday" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle5"
+                android:layout_width="409dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/view6"/>
+
+            <TextView
+                android:id="@+id/thursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/thursday"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/wednesday"
+                app:layout_constraintTop_toBottomOf="@+id/recycle5" />
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="379dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/thursday"
+                app:layout_constraintTop_toBottomOf="@+id/thursday" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle6"
+                android:layout_width="409dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/view7"/>
+
+            <TextView
+                android:id="@+id/friday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/friday"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/thursday"
+                app:layout_constraintTop_toBottomOf="@+id/recycle6" />
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="379dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/friday"
+                app:layout_constraintTop_toBottomOf="@+id/friday" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycle7"
+                android:layout_width="409dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/view8"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+
+
+</RelativeLayout>

@@ -7,7 +7,7 @@
         android:title="Home" />
 
     <item
-        android:id="@+id/page_Country"
+        android:id="@+id/page_Search"
         android:icon="@drawable/round_search_24"
         android:title="Search" />
     <item
@@ -15,7 +15,7 @@
         android:icon="@drawable/outline_favorite_border_24"
         android:title="Favourite" />
     <item
-        android:id="@+id/page_Available_Dishes"
+        android:id="@+id/page_Week_Plan"
         android:icon="@drawable/baseline_edit_calendar_24"
         android:title="Item" />
     <item
