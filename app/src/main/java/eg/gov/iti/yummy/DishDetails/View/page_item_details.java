@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy;
+package eg.gov.iti.yummy.DishDetails.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.os.Bundle;
 
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+
+import eg.gov.iti.yummy.R;
 
 public class page_item_details extends AppCompatActivity {
 

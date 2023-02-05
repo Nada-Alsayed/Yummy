@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy;
+package eg.gov.iti.yummy.Home.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -11,6 +11,10 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import eg.gov.iti.yummy.R;
+import eg.gov.iti.yummy.weeklyPlan.View.WeeklyPlanAdapter;
+import eg.gov.iti.yummy.Model.planListItem;
+
 public class page_home extends AppCompatActivity {
 
     ViewPager viewPager;
@@ -21,9 +25,9 @@ public class page_home extends AppCompatActivity {
 
     ArrayList<planListItem> data;
 
-    homeAdapter ha;
+    homeAdapter homeAdapter;
 
-    WeeklyPlanAdapter wa;
+    WeeklyPlanAdapter weeklyPlanAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,22 +47,22 @@ public class page_home extends AppCompatActivity {
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
         data = addData();
-        wa = new WeeklyPlanAdapter(this, data);
-        recyclerView.setAdapter(wa);
+        weeklyPlanAdapter = new WeeklyPlanAdapter(this, data);
+        recyclerView.setAdapter(weeklyPlanAdapter);
 
         recyclerView1 = findViewById(R.id.myRecView1);
         recyclerView1.setHasFixedSize(true);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(this);
         layoutManager1.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView1.setLayoutManager(layoutManager1);
-        recyclerView1.setAdapter(wa);
+        recyclerView1.setAdapter(weeklyPlanAdapter);
 
         recyclerView2 = findViewById(R.id.myRecView2);
         recyclerView2.setHasFixedSize(true);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(this);
         layoutManager2.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView2.setLayoutManager(layoutManager2);
-        recyclerView2.setAdapter(wa);
+        recyclerView2.setAdapter(weeklyPlanAdapter);
     }
 
     private ArrayList<Integer> numberImage()

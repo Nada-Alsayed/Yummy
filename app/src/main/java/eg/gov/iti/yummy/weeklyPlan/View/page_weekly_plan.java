@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy;
+package eg.gov.iti.yummy.weeklyPlan.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -9,6 +9,9 @@ import android.os.Bundle;
 
 import java.util.Arrays;
 import java.util.List;
+
+import eg.gov.iti.yummy.R;
+import eg.gov.iti.yummy.Model.planListItem;
 
 public class page_weekly_plan extends AppCompatActivity {
 

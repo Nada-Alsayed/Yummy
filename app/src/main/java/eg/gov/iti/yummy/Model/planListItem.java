@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy;
+package eg.gov.iti.yummy.Model;
 
 public class planListItem {
 

@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy;
+package eg.gov.iti.yummy.Splash.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import eg.gov.iti.yummy.Home.View.page_home;
+import eg.gov.iti.yummy.R;
+import eg.gov.iti.yummy.SignUp.View.page_sign_up;
+import eg.gov.iti.yummy.weeklyPlan.View.page_weekly_plan;
 
 public class page_splash extends AppCompatActivity {
 
@@ -54,7 +58,7 @@ public class page_splash extends AppCompatActivity {
                 Intent intent = new Intent(page_splash.this, page_sign_up.class);
                 startActivity(intent);
             }
-        }, 5000);
+        }, 3000);
     }
 
 

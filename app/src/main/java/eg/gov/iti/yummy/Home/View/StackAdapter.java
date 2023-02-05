@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy;
+package eg.gov.iti.yummy.Home.View;
 
 import android.content.Context;
 import android.util.Log;
@@ -15,6 +15,8 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import eg.gov.iti.yummy.R;
 
 public class StackAdapter extends PagerAdapter {
     List<Integer> list;
