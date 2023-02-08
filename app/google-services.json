@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "559535824116",
+    "project_id": "yummy-7d6e4",
+    "storage_bucket": "yummy-7d6e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559535824116:android:9f32220dfe7d9595ee92a1",
+        "android_client_info": {
+          "package_name": "eg.gov.iti.yummy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "559535824116-0cgv2a2e20v9ci0te8lrnm4uovl9km5t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPI0h39kx_kXLV3E_Ft3NNUg-zfm-QKpQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "559535824116-0cgv2a2e20v9ci0te8lrnm4uovl9km5t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
