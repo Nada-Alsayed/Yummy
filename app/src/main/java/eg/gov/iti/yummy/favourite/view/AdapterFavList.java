@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.fragments.favourite;
+package eg.gov.iti.yummy.favourite.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
+import eg.gov.iti.yummy.favourite.FavList;
 
 public class AdapterFavList extends RecyclerView.Adapter<AdapterFavList.Holder> {
     private List<FavList> listdata;

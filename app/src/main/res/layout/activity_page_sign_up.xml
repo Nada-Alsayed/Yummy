@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Page_Sign_Up">
+    tools:context=".SignUp.view.Page_Sign_Up">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextConfirmPassword"
@@ -144,25 +144,6 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/txtViewAlreadyHaveAcc"
         app:layout_constraintStart_toEndOf="@+id/txtViewAlreadyHaveAcc" />
-
-    <ImageView
-        android:id="@+id/imgGoogle"
-        android:layout_width="78dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewAlreadyHaveAcc"
-        app:srcCompat="@drawable/google" />
-
-    <ImageView
-        android:id="@+id/imgFacebook"
-        android:layout_width="78dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="88dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imgGoogle"
-        app:layout_constraintStart_toEndOf="@+id/imgGoogle"
-        app:srcCompat="@drawable/facebook" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

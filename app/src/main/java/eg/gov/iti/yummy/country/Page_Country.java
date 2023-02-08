@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.fragments.country;
+package eg.gov.iti.yummy.country;
 
 import android.os.Bundle;
 
@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -17,8 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
-import eg.gov.iti.yummy.fragments.favourite.AdapterFavList;
-import eg.gov.iti.yummy.fragments.favourite.FavList;
+import eg.gov.iti.yummy.favourite.FavList;
 
 public class Page_Country extends Fragment {
     RecyclerView recyclerView;

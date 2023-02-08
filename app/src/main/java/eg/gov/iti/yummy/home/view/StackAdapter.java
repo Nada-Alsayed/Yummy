@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.fragments.home;
+package eg.gov.iti.yummy.home.view;
 
 import android.content.Context;
 import android.util.Log;

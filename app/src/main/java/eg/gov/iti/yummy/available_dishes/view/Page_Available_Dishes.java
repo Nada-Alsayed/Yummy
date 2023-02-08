@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.fragments.available_dishes;
+package eg.gov.iti.yummy.available_dishes.view;
 
 import android.os.Bundle;
 
@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
-import eg.gov.iti.yummy.fragments.favourite.FavList;
+import eg.gov.iti.yummy.favourite.FavList;
 
 
 public class Page_Available_Dishes extends Fragment {

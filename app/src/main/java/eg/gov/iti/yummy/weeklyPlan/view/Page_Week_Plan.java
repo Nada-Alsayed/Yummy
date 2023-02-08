@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.fragments;
+package eg.gov.iti.yummy.weeklyPlan.view;
 
 import android.os.Bundle;
 
@@ -16,8 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
-import eg.gov.iti.yummy.fragments.home.WeeklyPlanAdapter;
-import eg.gov.iti.yummy.fragments.home.planListItem;
+import eg.gov.iti.yummy.weeklyPlan.view.WeeklyPlanAdapter;
+import eg.gov.iti.yummy.weeklyPlan.view.planListItem;
 
 public class Page_Week_Plan extends Fragment {
     RecyclerView recyclerView1,recyclerView2,recyclerView3,recyclerView4,recyclerView5,recyclerView6,recyclerView7;

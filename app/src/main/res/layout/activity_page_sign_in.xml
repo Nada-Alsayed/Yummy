@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Page_Sign_In">
+    tools:context=".SignIn.view.Page_Sign_In">
 
     <ImageView
         android:id="@+id/img_logo"
@@ -116,7 +116,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:fontFamily="@font/aguafina_script"
         android:text="@string/SignUpUL"
         android:textColor="#563CF9"
         android:textSize="16sp"

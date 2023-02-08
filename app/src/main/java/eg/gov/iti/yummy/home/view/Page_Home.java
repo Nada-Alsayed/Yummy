@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.fragments.home;
+package eg.gov.iti.yummy.home.view;
 
 import android.os.Bundle;
 
@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import eg.gov.iti.yummy.R;
+import eg.gov.iti.yummy.weeklyPlan.view.WeeklyPlanAdapter;
+import eg.gov.iti.yummy.weeklyPlan.view.planListItem;
 
 public class Page_Home extends Fragment {
     ViewPager viewPager;

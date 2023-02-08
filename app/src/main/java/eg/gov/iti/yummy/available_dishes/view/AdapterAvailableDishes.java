@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.fragments.available_dishes;
+package eg.gov.iti.yummy.available_dishes.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
-import eg.gov.iti.yummy.fragments.favourite.FavList;
+import eg.gov.iti.yummy.favourite.FavList;
 
 public class AdapterAvailableDishes extends RecyclerView.Adapter<AdapterAvailableDishes.Holder>{
     private List<FavList> listdata;

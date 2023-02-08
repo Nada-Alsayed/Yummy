@@ -12,12 +12,12 @@
         android:theme="@style/Theme.Yummy"
         tools:targetApi="31">
         <activity
-            android:name=".Page_Sign_Up"
+            android:name=".SignUp.view.Page_Sign_Up"
             android:exported="false"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".Page_Sign_In"
+            android:name=".SignIn.view.Page_Sign_In"
             android:exported="false"
             android:screenOrientation="portrait"/>
 
@@ -27,7 +27,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Splash.view.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

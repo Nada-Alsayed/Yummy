@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy;
+package eg.gov.iti.yummy.Splash.view;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,9 @@ import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import eg.gov.iti.yummy.R;
+import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
 
 public class MainActivity extends AppCompatActivity {
     Animation animationRight, animationLeft , animationDown , animationUp , animationCornerUp,animationCornerDown;
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, Page_Sign_Up.class);
+                Intent intent = new Intent(MainActivity.this, Page_Sign_In.class);
                 startActivity(intent);
             }
         }, 3000);

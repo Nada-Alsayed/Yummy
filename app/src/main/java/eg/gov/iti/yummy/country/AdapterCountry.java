@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.fragments.country;
+package eg.gov.iti.yummy.country;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,8 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
-import eg.gov.iti.yummy.fragments.favourite.AdapterFavList;
-import eg.gov.iti.yummy.fragments.favourite.FavList;
+import eg.gov.iti.yummy.favourite.FavList;
 
 public class AdapterCountry extends RecyclerView.Adapter<AdapterCountry.Holder>{
     private List<FavList> listdata;

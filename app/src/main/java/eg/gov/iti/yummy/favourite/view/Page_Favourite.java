@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.fragments.favourite;
+package eg.gov.iti.yummy.favourite.view;
 
 import android.os.Bundle;
 
@@ -16,8 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
-import eg.gov.iti.yummy.fragments.favourite.AdapterFavList;
-import eg.gov.iti.yummy.fragments.favourite.FavList;
+import eg.gov.iti.yummy.favourite.FavList;
 
 public class Page_Favourite extends Fragment {
 RecyclerView recyclerView;

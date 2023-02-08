@@ -1,11 +1,10 @@
-package eg.gov.iti.yummy.fragments.home;
+package eg.gov.iti.yummy.home.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,13 +12,12 @@ import java.util.List;
 
 import eg.gov.iti.yummy.R;
 
-
-public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.ViewHolder>{
+public class homeAdapter extends RecyclerView.Adapter<homeAdapter.ViewHolder>{
 
     private final Context context;
-    private List<planListItem> values;
+    private List<Integer> values;
 
-    public WeeklyPlanAdapter(Context _context , List<planListItem> myDataset){
+    public homeAdapter(Context _context , List<Integer> myDataset){
         values = myDataset;
         context = _context;
     }
@@ -35,8 +33,7 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.txtTitle.setText(values.get(position).getTitle());
-        holder.imageView.setImageResource(values.get(position).getImageID());
+        holder.imageView.setImageResource(values.get(position));
     }
 
     @Override
@@ -45,18 +42,17 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView txtTitle;
         public ImageView imageView;
+
         public View layout;
 
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
-            txtTitle = v.findViewById(R.id.textView1);
-            imageView = v.findViewById(R.id.imageView1);
-
+            imageView = v.findViewById(R.id.stackImage);
         }
     }
+
+
 }
