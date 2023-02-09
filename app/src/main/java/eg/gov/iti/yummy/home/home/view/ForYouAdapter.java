@@ -1,30 +1,34 @@
-package eg.gov.iti.yummy.home.view;
+package eg.gov.iti.yummy.home.home.view;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 
-import java.util.ArrayList;
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
+import eg.gov.iti.yummy.model.Category;
+import eg.gov.iti.yummy.model.MealDetail;
 
-public class StackAdapter extends PagerAdapter {
-    List<Integer> list;
+public class ForYouAdapter extends PagerAdapter {
+    List<MealDetail> list;
     Context context;
+    private static final String TAG="hi";
 
-    public StackAdapter(List<Integer> list, Context context) {
+    public ForYouAdapter(List<MealDetail> list, Context context) {
         this.list = list;
         this.context = context;
+    }
+    public void setList(List<MealDetail> list) {
+        this.list = list;
     }
 
     @Override
@@ -43,7 +47,10 @@ public class StackAdapter extends PagerAdapter {
         View view = inflater.inflate(R.layout.stackviewitem,container,false);
         container.addView(view);
         ImageView iv = view.findViewById(R.id.stackImage);
-        iv.setImageResource(list.get(position));
+        Glide.with(context)
+                .load(list.get(position).strMealThumb)
+                .into(iv);
+//        iv.setImageResource(list.get(position).);
         return view;
     }
 
@@ -51,4 +58,5 @@ public class StackAdapter extends PagerAdapter {
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View)object);
     }
+
 }
