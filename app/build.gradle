@@ -73,4 +73,7 @@ dependencies {
     implementation "androidx.room:room-rxjava3:$room_version"
     implementation "androidx.room:room-rxjava3:$room_version"
 
+    //video player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
+
 }

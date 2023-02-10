@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.search;
+package eg.gov.iti.yummy.search.view;
 
 import android.os.Bundle;
 

@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_page__home" />
     <fragment
         android:id="@+id/page_Search"
-        android:name="eg.gov.iti.yummy.search.Page_Search"
+        android:name="eg.gov.iti.yummy.search.view.Page_Search"
         android:label="fragment_page__search"
         tools:layout="@layout/fragment_page__search" />
     <fragment
