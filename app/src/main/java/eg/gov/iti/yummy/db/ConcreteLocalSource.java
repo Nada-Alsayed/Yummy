@@ -40,4 +40,90 @@ public class ConcreteLocalSource implements LocalSource {
 //       }).start();
         return userDao.login(userName, password);
     }
+
+    @Override
+    public LiveData<UserEntity> getData(String username) {
+        return userDao.getData(username);
+    }
+
+    @Override
+    public void updateSaturday(String saturday) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                userDao.updateSaturday(saturday);
+            }
+        }).start();
+    }
+
+    @Override
+    public void updateSunday(String sunday) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userDao.updateSunday(sunday);
+            }
+        }).start();
+    }
+
+    @Override
+    public void updateMonday(String monday) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userDao.updateMonday(monday);
+            }
+        }).start();
+    }
+
+    @Override
+    public void updateTuesday(String tuesday) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userDao.updateTuesday(tuesday);
+            }
+        }).start();
+    }
+
+    @Override
+    public void updateWednesday(String wednesday) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userDao.updateWednesday(wednesday);
+            }
+        }).start();
+    }
+
+    @Override
+    public void updateThursday(String thursday) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userDao.updateThursday(thursday);
+            }
+        }).start();
+    }
+
+    @Override
+    public void updateFriday(String friday) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userDao.updateFriday(friday);
+            }
+        }).start();
+    }
+
+    @Override
+    public void updateFavourite(String favourite) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userDao.updateFavourite(favourite);
+            }
+        }).start();
+    }
 }
