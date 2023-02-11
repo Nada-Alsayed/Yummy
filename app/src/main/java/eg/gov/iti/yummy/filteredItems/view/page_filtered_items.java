@@ -66,7 +66,7 @@ public class page_filtered_items extends Fragment implements FilterViewInterface
         originList = page_filtered_itemsArgs.fromBundle(getArguments()).getFilterType();
         header.setText(pageName);
 
-        filterPresenterInterface = new FilterPresenter(Repository.getInstance(API_Client.getInstance(),getContext()),this);
+        filterPresenterInterface = new FilterPresenter(Repository.getInstance(API_Client.getInstance(getContext()),getContext()),this);
         if(originList==1)filterPresenterInterface.getAllMealsFilterByIngredient(pageName);
         else if(originList==2)filterPresenterInterface.getAllMealsFilterByCategory(pageName);
         else filterPresenterInterface.getAllMealsFilterByCountry(pageName);

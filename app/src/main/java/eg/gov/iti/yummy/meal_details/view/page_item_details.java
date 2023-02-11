@@ -50,7 +50,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         String mealName = intent.getStringExtra("MealName");
         youTubePlayerView = findViewById(R.id.videoView);
 
-        mealPresenterInterface = new MealPresenter(Repository.getInstance(API_Client.getInstance(),getApplicationContext()),this);
+        mealPresenterInterface = new MealPresenter(Repository.getInstance(API_Client.getInstance(getApplicationContext()),getApplicationContext()),this);
         mealPresenterInterface.getSpecificMeal(mealName);
 
         MealName = findViewById(R.id.mealName);

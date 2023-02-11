@@ -56,7 +56,7 @@ public class Page_Country extends Fragment implements SearchViewInterface {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        searchPresenterInterface = new SearchPresenter(Repository.getInstance(API_Client.getInstance(), getContext()), this);
+        searchPresenterInterface = new SearchPresenter(Repository.getInstance(API_Client.getInstance(getContext()), getContext()), this);
         searchPresenterInterface.getAllIngredients();
         searchPresenterInterface.getAllCategories();
         searchPresenterInterface.getAllCountries();
