@@ -10,5 +10,6 @@ public interface RemoteSource {
     void filterByIngredient(FilterNetworkDelegate filterNetworkDelegate,String ingredient);
     void filterByCategory(FilterNetworkDelegate filterNetworkDelegate,String category);
     void filterByCountry(FilterNetworkDelegate filterNetworkDelegate,String country);
+    void specificItem(DetailsNetworkDelegate detailsNetworkDelegate,String meal);
 
 }

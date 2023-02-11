@@ -6,9 +6,8 @@
     android:elevation="10dp"
     android:layout_margin="8dp"
     app:cardBackgroundColor="@color/grey"
+    android:id="@+id/homeAndPlanListItem"
     app:cardCornerRadius="20dp">
-
-
 
 
         <ImageView

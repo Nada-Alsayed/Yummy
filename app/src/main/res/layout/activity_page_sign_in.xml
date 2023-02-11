@@ -62,7 +62,7 @@
         android:backgroundTint="#D9D9D9"
         android:hint="User Name"
         android:outlineProvider="none"
-        android:padding="16dp"
+        android:paddingLeft="16dp"
         android:shadowColor="#D9D9D9"
         app:barrierMargin="@dimen/material_emphasis_disabled"
         app:layout_constraintStart_toEndOf="@+id/imgViewSignInUserName"
@@ -77,8 +77,9 @@
         android:backgroundTint="#D9D9D9"
         android:hint="@string/password"
         android:outlineProvider="none"
-        android:padding="16dp"
+        android:paddingLeft="16dp"
         android:shadowColor="#D9D9D9"
+        android:inputType="textPassword"
         app:barrierMargin="@dimen/material_emphasis_disabled"
         app:layout_constraintEnd_toEndOf="@+id/editTxtSignInUserName"
         app:layout_constraintTop_toBottomOf="@+id/editTxtSignInUserName" />
@@ -126,21 +127,13 @@
         android:id="@+id/googleImgSignIn"
         android:layout_width="78dp"
         android:layout_height="66dp"
-        android:layout_marginStart="92dp"
+        android:layout_marginStart="164dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewDontHaveAccount"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/google" />
-
-    <ImageView
-        android:id="@+id/imgViewFacebookSingIn"
-        android:layout_width="78dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="88dp"
-        app:layout_constraintBottom_toBottomOf="@+id/googleImgSignIn"
-        app:layout_constraintStart_toEndOf="@+id/googleImgSignIn"
-        app:srcCompat="@drawable/facebook" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

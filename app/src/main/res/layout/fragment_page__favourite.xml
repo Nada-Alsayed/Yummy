@@ -6,25 +6,17 @@
     android:layout_height="match_parent">
 
 
-    <ImageView
-        android:id="@+id/imgback2"
-        android:layout_width="71dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop2"
-        app:srcCompat="@drawable/arrow_back" />
-
     <TextView
         android:id="@+id/txtPageName2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="@string/favouritelist"
-        android:textColor="#0C0B0B"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imgback2"
-        app:layout_constraintStart_toEndOf="@+id/imgback2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop2" />
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft2"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -64,11 +56,10 @@
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight2"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft2"
-        app:layout_constraintTop_toBottomOf="@+id/imgback2"
+        app:layout_constraintTop_toBottomOf="@+id/txtPageName2"
         tools:listitem="@layout/recyclerview_row_fav" />
 </androidx.constraintlayout.widget.ConstraintLayout>

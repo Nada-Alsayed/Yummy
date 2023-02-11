@@ -5,24 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imgback"
-        android:layout_width="71dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop"
-        app:srcCompat="@drawable/arrow_back" />
-
     <TextView
         android:id="@+id/txtPageName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="@string/pageProfile"
-        android:textColor="#131313"
+        android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/imgback"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgProfile"

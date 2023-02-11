@@ -110,21 +110,21 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleIngredient"
                 android:layout_width="match_parent"
-                android:layout_height="198dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtIngredient" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleCategory"
                 android:layout_width="match_parent"
-                android:layout_height="198dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtDishType" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleCountry"
                 android:layout_width="match_parent"
-                android:layout_height="198dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtCountry" />
 

@@ -1,5 +1,6 @@
 package eg.gov.iti.yummy.network;
 
+import android.content.Context;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,6 +25,8 @@ public class API_Client implements RemoteSource {
     private static Retrofit retrofit=null;
     private static Gson gson =null;
     API_Service APIService;
+
+    Context context;
 
     public API_Client() {
     }
@@ -195,5 +198,22 @@ public class API_Client implements RemoteSource {
                         error -> error.printStackTrace()
                 );
     }
+
+    @Override
+    public void specificItem(DetailsNetworkDelegate detailsNetworkDelegate, String meal) {
+        APIService = retrofit.create(API_Service.class);
+
+        Observable<RootMealDetail> rootSingle = APIService.getSpecificMeal(meal);
+        rootSingle.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->{
+                            Log.e(TAG, "ingredient"+item.getMeals().size());
+                            detailsNetworkDelegate.onSuccessFindingMeal(item);
+                        },
+                        error -> error.printStackTrace()
+                );
+    }
+
 
 }

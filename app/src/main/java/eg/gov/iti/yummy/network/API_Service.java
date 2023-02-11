@@ -23,6 +23,9 @@ public interface API_Service {
     @GET("filter.php")
     Observable<RootMealDetail> getMealByCountry(@Query("a") String country);
 
+    @GET("search.php")
+    Observable<RootMealDetail> getSpecificMeal(@Query("s") String meal);
+
     @GET("random.php")
     Observable<RootMealDetail> getRandomMeal();
 

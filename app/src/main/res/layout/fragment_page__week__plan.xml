@@ -25,27 +25,18 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="16dp" />
 
-            <ImageView
-                android:id="@+id/weeklyPlanBackButton"
-                android:layout_width="71dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="32dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/arrow_back" />
 
             <TextView
                 android:id="@+id/weeklyPlanTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:text="@string/weeklyPlan"
-                android:textColor="#000000"
-                android:textSize="28sp"
-                app:layout_constraintBottom_toBottomOf="@+id/weeklyPlanBackButton"
-                app:layout_constraintStart_toEndOf="@+id/weeklyPlanBackButton"
-                app:layout_constraintTop_toTopOf="@+id/weeklyPlanBackButton"
-                app:layout_constraintVertical_bias="1.0" />
-
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline3"

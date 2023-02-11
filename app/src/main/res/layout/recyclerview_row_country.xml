@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="185dp"
     android:layout_height="100dp"
-    android:backgroundTint="#C6C5C5"
     app:cardCornerRadius="20dp"
+    android:backgroundTint="@color/grey"
     app:cardElevation="8dp"
     android:layout_margin="4dp"
     android:id="@+id/listCard">
@@ -13,6 +13,7 @@
     <ImageView
         android:id="@+id/imageSearchList"
         android:padding="1dp"
+        android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srcCompat="@drawable/egyptpng" />

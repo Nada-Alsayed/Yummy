@@ -1,5 +1,6 @@
 package eg.gov.iti.yummy.model;
 
+import eg.gov.iti.yummy.network.DetailsNetworkDelegate;
 import eg.gov.iti.yummy.network.FilterNetworkDelegate;
 import eg.gov.iti.yummy.network.NetworkDelegate;
 import eg.gov.iti.yummy.network.SearchNetworkDelegate;
@@ -14,5 +15,6 @@ public interface RepositoryInterface {
     public void filterByIngredientFromRetrofit(FilterNetworkDelegate filterNetworkDelegate,String ingredient);
     public void filterByCategoryFromRetrofit(FilterNetworkDelegate filterNetworkDelegate,String category);
     public void filterByCountryFromRetrofit(FilterNetworkDelegate filterNetworkDelegate,String country);
+    public void getMealFromRetrofit(DetailsNetworkDelegate detailsNetworkDelegate, String meal);
 
 }
