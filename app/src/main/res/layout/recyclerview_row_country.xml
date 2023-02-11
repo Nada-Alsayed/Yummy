@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="185dp"
+    android:layout_height="100dp"
+    android:backgroundTint="#C6C5C5"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp"
+    android:layout_margin="4dp"
+    android:id="@+id/listCard">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="180dp"
-        android:layout_height="170dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="5dp"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <ImageView
+        android:id="@+id/imageSearchList"
+        android:padding="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/egyptpng" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cardcountry"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/textSearchList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:padding="6dp"
+        android:textSize="16sp"
+        android:background="#99141414"
+        android:textColor="@color/white"
+        android:layout_gravity="bottom"
+        android:gravity="center"/>
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imagecoun"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/egyptpng"
-                app:layout_constraintBottom_toBottomOf="@id/cardcountry"
-                app:layout_constraintEnd_toEndOf="@+id/cardcountry"
-                app:layout_constraintStart_toStartOf="@id/cardcountry"
-                app:layout_constraintTop_toTopOf="@id/cardcountry"
-                app:shapeAppearanceOverlay="@style/roundedimg" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

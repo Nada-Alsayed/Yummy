@@ -2,8 +2,10 @@ package eg.gov.iti.yummy.model;
 
 import android.content.Context;
 
+import eg.gov.iti.yummy.network.FilterNetworkDelegate;
 import eg.gov.iti.yummy.network.NetworkDelegate;
 import eg.gov.iti.yummy.network.RemoteSource;
+import eg.gov.iti.yummy.network.SearchNetworkDelegate;
 
 public class Repository implements RepositoryInterface{
     Context context;
@@ -41,5 +43,35 @@ public class Repository implements RepositoryInterface{
     public void getNewDishesMeals(NetworkDelegate networkDelegate) {
         remoteSource.randomMealNewDishes(networkDelegate);
     }
+
+    @Override
+    public void getAllIngredientsFromRetrofit(SearchNetworkDelegate searchNetworkDelegate) {
+        remoteSource.allIngredients(searchNetworkDelegate);
+    }
+
+    @Override
+    public void getAllCategoriesFromRetrofit(SearchNetworkDelegate searchNetworkDelegate) {
+        remoteSource.allCategories(searchNetworkDelegate);
+    }
+
+    @Override
+    public void getAllCountriesFromRetrofit(SearchNetworkDelegate searchNetworkDelegate) {
+        remoteSource.allCountries(searchNetworkDelegate);
+    }
+    @Override
+    public void filterByIngredientFromRetrofit(FilterNetworkDelegate filterNetworkDelegate,String ingredient) {
+        remoteSource.filterByIngredient(filterNetworkDelegate,ingredient);
+    }
+
+    @Override
+    public void filterByCategoryFromRetrofit(FilterNetworkDelegate filterNetworkDelegate,String category) {
+        remoteSource.filterByCategory(filterNetworkDelegate,category);
+    }
+
+    @Override
+    public void filterByCountryFromRetrofit(FilterNetworkDelegate filterNetworkDelegate,String country) {
+        remoteSource.filterByCountry(filterNetworkDelegate,country);
+    }
+
 
 }

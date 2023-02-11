@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -36,9 +37,10 @@ public class Page_Profile extends Fragment {
 
     TextView logout;
 
+    ImageView profilePic;
+
     ImageView logOutImg;
 
-    Group logOut;
 
     FirebaseAuth firebaseAuth;
 
@@ -56,11 +58,15 @@ public class Page_Profile extends Fragment {
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(getContext(),gso);
         name = view.findViewById(R.id.txtName);
+        profilePic = view.findViewById(R.id.imgProfile);
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getContext());
         if(acct!=null){
             String personName = acct.getDisplayName();
             String personEmail = acct.getEmail();
             name.setText(personName);
+            Glide.with(getContext())
+                    .load(acct.getPhotoUrl())
+                    .into(profilePic);
         }
         logout = view.findViewById(R.id.txtlogout);
         logOutImg = view.findViewById(R.id.imglogout);

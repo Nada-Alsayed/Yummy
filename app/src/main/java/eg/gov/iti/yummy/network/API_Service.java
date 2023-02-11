@@ -1,6 +1,10 @@
 package eg.gov.iti.yummy.network;
 
+import java.util.ArrayList;
+
 import eg.gov.iti.yummy.model.RootCategory;
+import eg.gov.iti.yummy.model.RootCountry;
+import eg.gov.iti.yummy.model.RootIngredient;
 import eg.gov.iti.yummy.model.RootMealDetail;
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;
@@ -8,14 +12,7 @@ import retrofit2.http.Query;
 
 public interface API_Service {
     @GET("categories.php")
-    Observable<RootCategory> getAllCategories();
-
-    @GET("list.php?i=list")
-    Observable<RootCategory> getIngredients();
-
-    @GET("list.php?a=list")
-    Observable<RootCategory> getAllCountries();
-
+    Observable<RootCategory> getCategories();
 
     @GET("filter.php")
     Observable<RootMealDetail> getMealByIngredient(@Query("i") String ingredient);
@@ -28,4 +25,12 @@ public interface API_Service {
 
     @GET("random.php")
     Observable<RootMealDetail> getRandomMeal();
+
+    @GET("list.php?i=list")
+    Observable<RootIngredient> getAllIngredients();
+
+    @GET("list.php?a=list")
+    Observable<RootCountry> getAllCountries();
+
+
 }

@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".filteredItems.view.page_filtered_items">
 
     <ImageView
-        android:id="@+id/imgback5"
+        android:id="@+id/imgBackFilteredList"
         android:layout_width="33dp"
         android:layout_height="32dp"
-        app:layout_constraintStart_toStartOf="@+id/guidelineleft5"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop5"
+        app:layout_constraintStart_toStartOf="@+id/guideLineLeftFilteredList"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTopFilteredList"
         app:srcCompat="@drawable/arrow_back" />
 
     <TextView
-        android:id="@+id/allHeader"
+        android:id="@+id/filteredListHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/country"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imgback5"
-        app:layout_constraintStart_toEndOf="@+id/imgback5"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTop5" />
+        app:layout_constraintBottom_toBottomOf="@+id/imgBackFilteredList"
+        app:layout_constraintStart_toEndOf="@+id/imgBackFilteredList"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTopFilteredList" />
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewCountry"
+        android:id="@+id/recyclerViewFilteredList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineright5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineleft5"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSearch"
+        app:layout_constraintEnd_toStartOf="@+id/guideLineRightFilteredList"
+        app:layout_constraintStart_toStartOf="@+id/guideLineLeftFilteredList"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSearchFilteredList"
         tools:listitem="@layout/recyclerview_row_country" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineTop5"
+        android:id="@+id/guidelineTopFilteredList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="44dp"
@@ -51,7 +52,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineBottom5"
+        android:id="@+id/guidelineBottomFilteredList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="699dp"
@@ -64,7 +65,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineleft5"
+        android:id="@+id/guideLineLeftFilteredList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="18dp"
@@ -73,7 +74,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineright5"
+        android:id="@+id/guideLineRightFilteredList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -83,7 +84,7 @@
         />
 
     <EditText
-        android:id="@+id/editTextSearch"
+        android:id="@+id/editTextSearchFilteredList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -91,18 +92,19 @@
         android:hint="@string/Search"
         android:padding="12dp"
         android:background="@drawable/rounded_button"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineright5"
-        app:layout_constraintStart_toStartOf="@+id/guidelineleft5"
-        app:layout_constraintTop_toBottomOf="@+id/allHeader" />
+        app:layout_constraintEnd_toStartOf="@+id/guideLineRightFilteredList"
+        app:layout_constraintStart_toStartOf="@+id/guideLineLeftFilteredList"
+        app:layout_constraintTop_toBottomOf="@+id/filteredListHeader" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/searchImage2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextSearch"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineright5"
-        app:layout_constraintTop_toTopOf="@+id/editTextSearch"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextSearchFilteredList"
+        app:layout_constraintEnd_toStartOf="@+id/guideLineRightFilteredList"
+        app:layout_constraintTop_toTopOf="@+id/editTextSearchFilteredList"
         app:srcCompat="@drawable/baseline_search_24"
         android:layout_marginEnd="8dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

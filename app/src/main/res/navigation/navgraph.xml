@@ -14,7 +14,14 @@
         android:id="@+id/page_Search"
         android:name="eg.gov.iti.yummy.search.view.Page_Search"
         android:label="fragment_page__search"
-        tools:layout="@layout/fragment_page__search" />
+        tools:layout="@layout/fragment_page__search" >
+        <action
+            android:id="@+id/action_page_Search_to_page_Country"
+            app:destination="@id/page_Country" />
+        <action
+            android:id="@+id/action_page_Search_to_page_filtered_items"
+            app:destination="@id/page_filtered_items" />
+    </fragment>
     <fragment
         android:id="@+id/page_Favourite"
         android:name="eg.gov.iti.yummy.favourite.view.Page_Favourite"
@@ -33,9 +40,36 @@
     <fragment
         android:id="@+id/page_Country"
         android:name="eg.gov.iti.yummy.country.Page_Country"
-        android:label="Page_Country" />
+        android:label="Page_Country" >
+        <argument
+            android:name="header"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_page_Country_to_page_Search"
+            app:destination="@id/page_Search" />
+        <action
+            android:id="@+id/action_page_Country_to_page_filtered_items"
+            app:destination="@id/page_filtered_items" />
+    </fragment>
     <fragment
-        android:id="@+id/page_Available_Dishes"
-        android:name="eg.gov.iti.yummy.available_dishes.view.Page_Available_Dishes"
-        android:label="Page_Available_Dishes" />
+        android:id="@+id/page_filtered_items"
+        android:name="eg.gov.iti.yummy.filteredItems.view.page_filtered_items"
+        android:label="fragment_page_filtered_items"
+        tools:layout="@layout/fragment_page_filtered_items" >
+        <argument
+            android:name="filterBy"
+            app:argType="string" />
+        <argument
+            android:name="filterType"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_page_filtered_items_to_page_Country"
+            app:destination="@id/page_Country" />
+        <action
+            android:id="@+id/action_page_filtered_items_to_page_Search"
+            app:destination="@id/page_Search" />
+        <argument
+            android:name="originFragment"
+            app:argType="integer" />
+    </fragment>
 </navigation>

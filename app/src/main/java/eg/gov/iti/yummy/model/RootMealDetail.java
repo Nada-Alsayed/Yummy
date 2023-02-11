@@ -10,7 +10,6 @@ public class RootMealDetail {
     }
 
     public ArrayList<MealDetail> getMeals() {
-
         return meals;
     }
 }

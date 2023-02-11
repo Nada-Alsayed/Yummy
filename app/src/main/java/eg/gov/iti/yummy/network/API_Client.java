@@ -5,6 +5,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import eg.gov.iti.yummy.model.MealDetail;
+import eg.gov.iti.yummy.model.RootCategory;
+import eg.gov.iti.yummy.model.RootCountry;
+import eg.gov.iti.yummy.model.RootIngredient;
 import eg.gov.iti.yummy.model.RootMealDetail;
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -96,6 +99,101 @@ public class API_Client implements RemoteSource {
                             error -> error.printStackTrace()
                     );
         }
+    }
+
+    @Override
+    public void allCategories(SearchNetworkDelegate searchNetworkDelegate) {
+        APIService = retrofit.create(API_Service.class);
+
+        Observable<RootCategory> rootSingle = APIService.getCategories();
+        rootSingle.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->{
+                            Log.e(TAG, "category"+item.getCategories().size());
+                            searchNetworkDelegate.onSuccessAllCategories(item);
+                        },
+                        error -> error.printStackTrace()
+                );
+    }
+
+    @Override
+    public void allCountries(SearchNetworkDelegate searchNetworkDelegate) {
+        APIService = retrofit.create(API_Service.class);
+
+        Observable<RootCountry> rootSingle = APIService.getAllCountries();
+        rootSingle.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->{
+                            Log.e(TAG, "country"+item.getCountries().size());
+                            searchNetworkDelegate.onSuccessAllCountries(item);
+                        },
+                        error -> error.printStackTrace()
+                );
+    }
+    @Override
+    public void allIngredients(SearchNetworkDelegate searchNetworkDelegate) {
+        APIService = retrofit.create(API_Service.class);
+
+        Observable<RootIngredient> rootSingle = APIService.getAllIngredients();
+        rootSingle.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->{
+                            Log.e(TAG, "ingredient"+item.getMeals().size());
+                            searchNetworkDelegate.onSuccessAllIngredients(item);
+                        },
+                        error -> error.printStackTrace()
+                );
+    }
+
+    @Override
+    public void filterByIngredient(FilterNetworkDelegate filterNetworkDelegate,String ingredient) {
+        APIService = retrofit.create(API_Service.class);
+
+        Observable<RootMealDetail> rootSingle = APIService.getMealByIngredient(ingredient);
+        rootSingle.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->{
+                            Log.e(TAG, "ingredient"+item.getMeals().size());
+                            filterNetworkDelegate.onSuccessFilterByIngredient(item);
+                        },
+                        error -> error.printStackTrace()
+                );
+    }
+
+    @Override
+    public void filterByCategory(FilterNetworkDelegate filterNetworkDelegate,String category) {
+        APIService = retrofit.create(API_Service.class);
+
+        Observable<RootMealDetail> rootSingle = APIService.getMealByCategory(category);
+        rootSingle.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->{
+                            Log.e(TAG, "ingredient"+item.getMeals().size());
+                            filterNetworkDelegate.onSuccessFilterByCategory(item);
+                        },
+                        error -> error.printStackTrace()
+                );
+    }
+
+    @Override
+    public void filterByCountry(FilterNetworkDelegate filterNetworkDelegate,String country) {
+        APIService = retrofit.create(API_Service.class);
+
+        Observable<RootMealDetail> rootSingle = APIService.getMealByCountry(country);
+        rootSingle.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->{
+                            Log.e(TAG, "ingredient"+item.getMeals().size());
+                            filterNetworkDelegate.onSuccessFilterByCountry(item);
+                        },
+                        error -> error.printStackTrace()
+                );
     }
 
 }

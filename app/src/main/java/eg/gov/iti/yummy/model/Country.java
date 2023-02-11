@@ -1,6 +1,9 @@
 package eg.gov.iti.yummy.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Country {
+
     private String strArea;
 
     public Country(){}

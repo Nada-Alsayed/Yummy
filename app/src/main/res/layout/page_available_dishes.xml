@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/arrow_back" />
 
     <TextView
-        android:id="@+id/txtPageName5"
+        android:id="@+id/allHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/pageavailabledishes"
