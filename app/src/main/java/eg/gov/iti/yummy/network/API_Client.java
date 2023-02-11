@@ -1,6 +1,7 @@
 package eg.gov.iti.yummy.network;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,6 +15,11 @@ import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.Cache;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -26,18 +32,21 @@ public class API_Client implements RemoteSource {
     private static Gson gson =null;
     API_Service APIService;
 
-    Context context;
-
     public API_Client() {
     }
 
-    public static API_Client getInstance() {
+    public static API_Client getInstance(Context context) {
         if (APIClient == null) {
             APIClient = new API_Client();
             gson = new GsonBuilder().create();
-
-             retrofit = new Retrofit.Builder()
+            //source=new ConctreteRemoteSource();
+            Cache cache=new Cache(context.getCacheDir(),1000*1024*1024);
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .cache(cache)
+                    .build();
+            retrofit = new Retrofit.Builder()
                     .baseUrl(Base_Url)
+                    .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .build();
@@ -45,6 +54,54 @@ public class API_Client implements RemoteSource {
         }
         return APIClient;
     }
+
+//    //++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//
+//    public static Cache cache=new Cache(context.getCacheDir(),10*1024*1024);
+//
+//    //check if device connected with network
+//    public static boolean isNetworkAvailable(Context context) {
+//        ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+//        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+//    }
+//
+//    public static Interceptor onlineInterceptor=new Interceptor() {
+//        @Override
+//        public Response intercept(Chain chain) throws IOException {
+//            okhttp3.Response response = chain.proceed(chain.request());
+//            int maxAge = 60; // read from cache for 60 seconds even if there is internet connection
+//            return response.newBuilder()
+//                    .header("Cache-Control", "public, max-age=" + maxAge)
+//                    .removeHeader("Pragma")
+//                    .build();
+//        }
+//    };
+//
+//    static Interceptor offlineInterceptor= new Interceptor() {
+//        @Override
+//        public okhttp3.Response intercept(Chain chain) throws IOException {
+//            Request request = chain.request();
+//            if (!isNetworkAvailable(context)) {
+//                int maxStale = 60 * 60 * 24 * 30; // Offline cache available for 30 days
+//                request = request.newBuilder()
+//                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+//                        .removeHeader("Pragma")
+//                        .build();
+//            }
+//            return chain.proceed(request);
+//        }
+//    };
+//
+//    static public OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//            // .addInterceptor(provideHttpLoggingInterceptor()) // For HTTP request & Response data logging
+//            .addInterceptor(offlineInterceptor)
+//            .addNetworkInterceptor(onlineInterceptor)
+//            .cache(cache)
+//            .build();
+//    //++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
 
     @Override
     public void randomMealForYou(NetworkDelegate networkDelegate) {

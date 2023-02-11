@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
+import eg.gov.iti.yummy.SignUp.view.Page_Sign_Up;
 import eg.gov.iti.yummy.meal_details.view.page_item_details;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, Page_Sign_In.class);
+                Intent intent = new Intent(MainActivity.this, Page_Sign_Up.class);
                 startActivity(intent);
             }
         }, 3000);
