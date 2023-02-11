@@ -39,7 +39,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_slogan"
         app:srcCompat="@drawable/user" />
@@ -61,8 +61,9 @@
         android:background="@drawable/rounded_button"
         android:backgroundTint="#D9D9D9"
         android:hint="User Name"
+        android:inputType="textPassword"
         android:outlineProvider="none"
-        android:padding="16dp"
+        android:padding="6dp"
         android:shadowColor="#D9D9D9"
         app:barrierMargin="@dimen/material_emphasis_disabled"
         app:layout_constraintStart_toEndOf="@+id/imgViewSignInUserName"
@@ -77,7 +78,8 @@
         android:backgroundTint="#D9D9D9"
         android:hint="@string/password"
         android:outlineProvider="none"
-        android:padding="16dp"
+        android:inputType="textPassword"
+        android:padding="6dp"
         android:shadowColor="#D9D9D9"
         app:barrierMargin="@dimen/material_emphasis_disabled"
         app:layout_constraintEnd_toEndOf="@+id/editTxtSignInUserName"
@@ -87,16 +89,16 @@
         android:id="@+id/btnSignIn"
         android:layout_width="130dp"
         android:layout_height="60dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="48dp"
         android:backgroundTint="#D9D9D9"
         android:shadowColor="#D9D9D9"
         android:text="@string/signin"
         android:textColor="#020202"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:textStyle="bold"
         app:cornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSignInPassword" />
 
@@ -104,10 +106,13 @@
         android:id="@+id/txtViewDontHaveAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="24dp"
         android:text="@string/noAcc"
         android:textColor="#000000"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.303"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
 
@@ -126,21 +131,19 @@
         android:id="@+id/googleImgSignIn"
         android:layout_width="78dp"
         android:layout_height="66dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="75dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewDontHaveAccount"
         app:srcCompat="@drawable/google" />
 
-    <ImageView
-        android:id="@+id/imgViewFacebookSingIn"
-        android:layout_width="78dp"
-        android:layout_height="66dp"
-        android:layout_marginStart="88dp"
-        app:layout_constraintBottom_toBottomOf="@+id/googleImgSignIn"
-        app:layout_constraintStart_toEndOf="@+id/googleImgSignIn"
-        app:srcCompat="@drawable/facebook" />
+    <!--    <ImageView-->
+    <!--        android:id="@+id/imgViewFacebookSingIn"-->
+    <!--        android:layout_width="78dp"-->
+    <!--        android:layout_height="66dp"-->
+
+    <!--        app:srcCompat="@drawable/facebook"-->
+    <!--        tools:layout_editor_absoluteX="61dp"-->
+    <!--        tools:layout_editor_absoluteY="637dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

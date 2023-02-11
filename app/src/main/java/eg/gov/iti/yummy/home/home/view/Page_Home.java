@@ -1,5 +1,7 @@
 package eg.gov.iti.yummy.home.home.view;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +26,9 @@ import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.network.API_Client;
 import eg.gov.iti.yummy.weeklyPlan.view.WeeklyPlanAdapter;
+import okhttp3.Interceptor;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class Page_Home extends Fragment implements HomeViewInterface {
     ViewPager viewPager;
@@ -53,7 +59,7 @@ public class Page_Home extends Fragment implements HomeViewInterface {
 
         viewPager = view.findViewById(R.id.stack_view);
         forYouAdapter = new ForYouAdapter(new ArrayList<>(), getContext());
-        PresenterInterface = new HomePresenter(Repository.getInstance(API_Client.getInstance(), getContext()), this);
+        PresenterInterface = new HomePresenter(Repository.getInstance(API_Client.getInstance(getContext()), getContext()), this);
         viewPager.setPageTransformer(true, new ViewPagerStack());
         viewPager.setOffscreenPageLimit(3);
         //viewPager.setAdapter(forYouAdapter);
@@ -84,6 +90,7 @@ public class Page_Home extends Fragment implements HomeViewInterface {
 //__________________________
 
     }
+
     @Override
     public void showDataForYou(List<MealDetail> Categories) {
         forYouAdapter.setList(Categories);

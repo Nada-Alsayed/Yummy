@@ -1,15 +1,17 @@
 package eg.gov.iti.yummy.SignIn.view;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -26,35 +28,55 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
 import eg.gov.iti.yummy.MainActivity2;
-import eg.gov.iti.yummy.SignUp.view.Page_Sign_Up;
 import eg.gov.iti.yummy.R;
+import eg.gov.iti.yummy.SignUp.view.Page_Sign_Up;
+import eg.gov.iti.yummy.db.ConcreteLocalSource;
+import eg.gov.iti.yummy.db.UserEntity;
 import eg.gov.iti.yummy.users;
 
 public class Page_Sign_In extends AppCompatActivity {
-
     private GoogleSignInClient client;
     FirebaseAuth auth;
     FirebaseDatabase database;
     ImageView googleImg;
-    TextView signUp ;
-    Button signIn;
+    TextView txtSignUp;
+    Button btnSignIn;
+    ConcreteLocalSource concreteLocalSource;
+    EditText nameUser, passwordUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_sign_in);
-        signUp = findViewById(R.id.txtViewSignUpHL);
-        signUp.setOnClickListener(v -> {
+        concreteLocalSource = new ConcreteLocalSource(getApplicationContext());
+        txtSignUp = findViewById(R.id.txtViewSignUpHL);
+        nameUser = findViewById(R.id.editTxtSignInUserName);
+        passwordUser = findViewById(R.id.editTextSignInPassword);
+
+        txtSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), Page_Sign_Up.class);
             startActivity(intent);
         });
-
-        signIn = findViewById(R.id.btnSignIn);
-        signIn.setOnClickListener(new View.OnClickListener() {
+        btnSignIn = findViewById(R.id.btnSignIn);
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
-                startActivity(intent);
+                String name = nameUser.getText().toString();
+                String password = passwordUser.getText().toString();
+                if (name.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(Page_Sign_In.this, "Fill The Required Data", Toast.LENGTH_SHORT).show();
+                } else {
+                    LiveData<UserEntity> userEntity = concreteLocalSource.login(name, password);
+                    if (userEntity == null) {
+                        Toast.makeText(Page_Sign_In.this, "Failed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Page_Sign_In.this, "Succeeded", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                        startActivity(intent);
+                    }
+                }
             }
+
         });
 
         auth = FirebaseAuth.getInstance();
@@ -64,13 +86,13 @@ public class Page_Sign_In extends AppCompatActivity {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        client = GoogleSignIn.getClient(this,options);
+        client = GoogleSignIn.getClient(this, options);
         googleImg = findViewById(R.id.googleImgSignIn);
         googleImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = client.getSignInIntent();
-                startActivityForResult(i,123);
+                startActivityForResult(i, 123);
             }
         });
     }
@@ -78,15 +100,15 @@ public class Page_Sign_In extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 123){
+        if (requestCode == 123) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try{
+            try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
+                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
                 auth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             FirebaseUser user = auth.getCurrentUser();
                             users user1 = new users();
                             assert user1 != null;
@@ -97,13 +119,13 @@ public class Page_Sign_In extends AppCompatActivity {
                             database.getReference().child("users").child(user.getUid()).setValue(user1);
                             Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
                             startActivity(intent);
-                        }else {
-                            Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
-            }catch (ApiException e){
+            } catch (ApiException e) {
                 e.printStackTrace();
             }
         }

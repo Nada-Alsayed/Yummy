@@ -1,6 +1,7 @@
 package eg.gov.iti.yummy.home.home.view;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +13,22 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
 
+import java.io.IOException;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.model.Category;
 import eg.gov.iti.yummy.model.MealDetail;
+import okhttp3.Cache;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class ForYouAdapter extends PagerAdapter {
     List<MealDetail> list;
-    Context context;
+    static Context context;
+
     private static final String TAG="hi";
 
     public ForYouAdapter(List<MealDetail> list, Context context) {
