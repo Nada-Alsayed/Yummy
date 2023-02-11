@@ -47,82 +47,82 @@ public class ConcreteLocalSource implements LocalSource {
     }
 
     @Override
-    public void updateSaturday(String saturday) {
+    public void updateSaturday(String saturday , String username) {
         new Thread(new Runnable() {
             @Override
             public void run() {
 
-                userDao.updateSaturday(saturday);
+                userDao.updateSaturday(saturday,username);
             }
         }).start();
     }
 
     @Override
-    public void updateSunday(String sunday) {
+    public void updateSunday(String sunday,String username) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                userDao.updateSunday(sunday);
+                userDao.updateSunday(sunday,username);
             }
         }).start();
     }
 
     @Override
-    public void updateMonday(String monday) {
+    public void updateMonday(String monday,String username) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                userDao.updateMonday(monday);
+                userDao.updateMonday(monday,username);
             }
         }).start();
     }
 
     @Override
-    public void updateTuesday(String tuesday) {
+    public void updateTuesday(String tuesday,String username) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                userDao.updateTuesday(tuesday);
+                userDao.updateTuesday(tuesday,username);
             }
         }).start();
     }
 
     @Override
-    public void updateWednesday(String wednesday) {
+    public void updateWednesday(String wednesday,String username) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                userDao.updateWednesday(wednesday);
+                userDao.updateWednesday(wednesday,username);
             }
         }).start();
     }
 
     @Override
-    public void updateThursday(String thursday) {
+    public void updateThursday(String thursday,String username) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                userDao.updateThursday(thursday);
+                userDao.updateThursday(thursday,username);
             }
         }).start();
     }
 
     @Override
-    public void updateFriday(String friday) {
+    public void updateFriday(String friday,String username) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                userDao.updateFriday(friday);
+                userDao.updateFriday(friday,username);
             }
         }).start();
     }
 
     @Override
-    public void updateFavourite(String favourite) {
+    public void updateFavourite(String favourite,String username) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                userDao.updateFavourite(favourite);
+                userDao.updateFavourite(favourite,username);
             }
         }).start();
     }

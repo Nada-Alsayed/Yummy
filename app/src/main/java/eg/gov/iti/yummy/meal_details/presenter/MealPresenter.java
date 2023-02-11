@@ -14,12 +14,10 @@ public class MealPresenter implements MealPresenterInterface, DetailsNetworkDele
         this.repository = repository;
         this.mealViewInterface = mealViewInterface;
     }
-
     @Override
     public void getSpecificMeal(String meal) {
         repository.getMealFromRetrofit(this,meal);
     }
-
     @Override
     public void onSuccessFindingMeal(RootMealDetail meal) {
         mealViewInterface.showSpecificItem(meal);

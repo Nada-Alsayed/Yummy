@@ -37,8 +37,8 @@ public class AdapterAvailableDishes extends RecyclerView.Adapter<AdapterAvailabl
     @Override
     public void onBindViewHolder(@NonNull AdapterAvailableDishes.Holder holder,@SuppressLint("RecyclerView") int position) {
 
-        holder.imageView1.setImageResource( listdata.get(position).getImgId());
-        holder.imageView2.setImageResource( listdata.get(position).getImgId2());
+//        holder.imageView1.setImageResource( listdata.get(position).getImgId());
+//        holder.imageView2.setImageResource( listdata.get(position).getImgId2());
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -10,25 +10,24 @@ import androidx.room.Update;
 public interface UserDao {
     @Insert
     void registerUser(UserEntity userEntity);
-    @Query("Select * from UserData where userName=(:username) and password=(:password)")
+    @Query("Select * from UserData where userName=:username and password=:password")
     LiveData<UserEntity> login(String username, String password);
-    @Query("Select * from UserData where userName=(:username)")
+    @Query("Select * from UserData where userName=:username")
     LiveData<UserEntity> getData(String username);
-    @Query("Update UserData set saturday=(:saturday)")
-    void updateSaturday(String saturday);
-    @Query("Update UserData set sunday=(:sunday)")
-    void updateSunday(String sunday);
-    @Query("Update UserData set monday=(:monday)")
-    void updateMonday(String monday);
-    @Query("Update UserData set tuesday=(:tuesday)")
-    void updateTuesday(String tuesday);
-    @Query("Update UserData set wednesday=(:wednesday)")
-    void updateWednesday(String wednesday);
-    @Query("Update UserData set thursday=(:thursday)")
-    void updateThursday(String thursday);
-    @Query("Update UserData set friday=(:friday)")
-    void updateFriday(String friday);
-    @Query("Update UserData set favourite=(:favourite)")
-    void updateFavourite(String favourite);
-
+    @Query("Update UserData set saturday=(:saturday) where userName=(:username)")
+    void updateSaturday(String saturday , String username);
+    @Query("Update UserData set sunday=(:sunday) where userName=(:username)")
+    void updateSunday(String sunday , String username);
+    @Query("Update UserData set monday=(:monday) where userName=(:username)")
+    void updateMonday(String monday , String username);
+    @Query("Update UserData set tuesday=(:tuesday) where userName=(:username)")
+    void updateTuesday(String tuesday , String username);
+    @Query("Update UserData set wednesday=(:wednesday) where userName=(:username)")
+    void updateWednesday(String wednesday , String username);
+    @Query("Update UserData set thursday=(:thursday) where userName=(:username)")
+    void updateThursday(String thursday , String username);
+    @Query("Update UserData set friday=(:friday) where userName=(:username)")
+    void updateFriday(String friday , String username);
+    @Query("Update UserData set favourite=(:favourite) where userName=(:username)")
+    void updateFavourite(String favourite , String username);
 }

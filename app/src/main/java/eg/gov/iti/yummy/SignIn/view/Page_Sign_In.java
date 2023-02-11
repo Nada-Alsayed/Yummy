@@ -1,6 +1,8 @@
 package eg.gov.iti.yummy.SignIn.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -44,6 +47,8 @@ public class Page_Sign_In extends AppCompatActivity {
     ConcreteLocalSource concreteLocalSource;
     EditText nameUser, passwordUser;
 
+    public static final String PREF_NAME = "PREF";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +75,13 @@ public class Page_Sign_In extends AppCompatActivity {
                     if (userEntity == null) {
                         Toast.makeText(Page_Sign_In.this, "Failed", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(Page_Sign_In.this, "Succeeded", Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(Page_Sign_In.this, "Succeeded", Toast.LENGTH_SHORT).show();
+
+                        SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("USERNAME",nameUser.getText().toString());
+                        editor.commit();
+
                         Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
                         startActivity(intent);
                     }

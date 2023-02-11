@@ -7,11 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -19,12 +19,16 @@ import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.favourite.FavList;
 
 public class AdapterFavList extends RecyclerView.Adapter<AdapterFavList.Holder> {
-    private List<FavList> listdata;
+    private List<FavList> listData;
+
+    public void setListData(List<FavList> listData) {
+        this.listData = listData;
+    }
+
     private Context context;
-    // RecyclerView recyclerView;
-    public AdapterFavList(Context context, List<FavList> listdata) {
+    public AdapterFavList(Context context, List<FavList> listData) {
         this.context = context;
-        this.listdata = listdata;
+        this.listData = listData;
     }
     @NonNull
     @Override
@@ -37,37 +41,28 @@ public class AdapterFavList extends RecyclerView.Adapter<AdapterFavList.Holder> 
 
     @Override
     public void onBindViewHolder(@NonNull AdapterFavList.Holder holder,@SuppressLint("RecyclerView") int position) {
-        holder.textView1.setText( listdata.get(position).getTitle());
-        holder.textView2.setText( listdata.get(position).getDesc());
-        holder.imageView1.setImageResource( listdata.get(position).getImgId());
-        holder.imageView2.setImageResource( listdata.get(position).getImgId2());
-        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context.getApplicationContext(), listdata.get(position).getTitle(),Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.title.setText( listData.get(position).getName());
+        holder.origin.setText( listData.get(position).getOrigin());
+        Glide.with(context)
+                .load(listData.get(position).getThumbnail())
+                .into(holder.thumb);
     }
 
     @Override
     public int getItemCount() {
-        return listdata.size();
+        return listData.size();
     }
 
     class Holder extends RecyclerView.ViewHolder {
-        ImageView imageView1;
-        ImageView imageView2;
-        TextView textView1;
-        TextView textView2;
-    ConstraintLayout constraintLayout;
+        TextView title;
+        TextView origin;
+        ImageView thumb;
+
         public Holder(View itemView) {
             super(itemView);
-            this.imageView1 = (ImageView) itemView.findViewById(R.id.imageViewFav);
-            this.imageView2 = (ImageView) itemView.findViewById(R.id.imageViewDel);
-            this.textView1 = (TextView) itemView.findViewById(R.id.txtMealName);
-            this.textView2 = (TextView) itemView.findViewById(R.id.txtMealOrigin);
-            this.constraintLayout = (ConstraintLayout) itemView.findViewById(R.id.card);
-
+            this.thumb = (ImageView) itemView.findViewById(R.id.imageViewFav);
+            this.title = (TextView) itemView.findViewById(R.id.txtMealName);
+            this.origin = (TextView) itemView.findViewById(R.id.txtMealOrigin);
         }
 
     }
