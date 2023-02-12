@@ -12,8 +12,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
@@ -40,8 +42,9 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     IngredientsAdapter adapter;
     ConcreteLocalSource cls;
     RootMealDetail rootMealDetail;
-    String fav;
-    Button btnAddToFav;
+    String fav,sat,sun,mon,tue,wed,thu,fri;
+    Button btnAddToFav,btnAddToWeekPlan;
+    CheckBox satBox,sunBox,monBox,tueBox,wedBox,thuBox,friBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +52,15 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         setContentView(R.layout.activity_page_item_details);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        myIngredients = new ArrayList<>();
+        satBox = findViewById(R.id.radioButtonSat);
+        sunBox = findViewById(R.id.radioButtonSun);
+        monBox = findViewById(R.id.radioButtonMon);
+        tueBox = findViewById(R.id.radioButtonTue);
+        wedBox = findViewById(R.id.radioButtonWed);
+        thuBox = findViewById(R.id.radioButtonThu);
+        friBox = findViewById(R.id.radioButtonFri);
 
+        myIngredients = new ArrayList<>();
         rootMealDetail = new RootMealDetail();
 
         Intent intent = getIntent();
@@ -71,6 +81,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         recyclerView.setLayoutManager(gridLayoutManager);
 
         btnAddToFav = findViewById(R.id.btnAddToFav);
+        btnAddToWeekPlan = findViewById(R.id.btnAddToMyPlan);
         cls = ConcreteLocalSource.getInstance(getApplicationContext());
         SharedPreferences pref = getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
         String shP =pref.getString("USERNAME","N/A");
@@ -80,16 +91,108 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
                 if(userEntity.getFavourite()!=null){
                     fav = userEntity.getFavourite();
                 }
+                if(userEntity.getSaturday()!=null){
+                    sat = userEntity.getSaturday();
+                }
+                if(userEntity.getSunday()!=null){
+                    sun = userEntity.getSunday();
+                }
+                if(userEntity.getMonday()!=null){
+                    mon = userEntity.getMonday();
+                }
+                if(userEntity.getTuesday()!=null){
+                    tue = userEntity.getTuesday();
+                }
+                if(userEntity.getWednesday()!=null){
+                    wed = userEntity.getWednesday();
+                }
+                if(userEntity.getThursday()!=null){
+                    thu = userEntity.getThursday();
+                }
+                if(userEntity.getFriday()!=null){
+                    fri = userEntity.getFriday();
+                }
             }
         });
         btnAddToFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!fav.contains(rootMealDetail.getMeals().get(0).strMeal)) {
+                    if (fav == null) fav = rootMealDetail.getMeals().get(0).strMeal + ",";
+                    else fav += rootMealDetail.getMeals().get(0).strMeal + ",";
+                    cls.updateFavourite(fav, shP);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Already in your favourites",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
-
-                if(fav==null)fav = rootMealDetail.getMeals().get(0).strMeal+",";
-                else fav += rootMealDetail.getMeals().get(0).strMeal+",";
-                cls.updateFavourite(fav,shP);
+        btnAddToWeekPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(satBox.isChecked()) {
+    //                if (satAdd==true) {
+                        if (sat == null) sat = rootMealDetail.getMeals().get(0).strMeal + ",";
+                        else sat += rootMealDetail.getMeals().get(0).strMeal + ",";
+                        cls.updateSaturday(sat, shP);
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Saturday", Toast.LENGTH_LONG).show();
+//                    }
+                }
+                if(sunBox.isChecked()) {
+      //              if (!sun.contains(rootMealDetail.getMeals().get(0).strMeal)) {
+                        if (sun == null) sun = rootMealDetail.getMeals().get(0).strMeal + ",";
+                        else sun += rootMealDetail.getMeals().get(0).strMeal + ",";
+                        cls.updateSunday(sun, shP);
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Sunday", Toast.LENGTH_LONG).show();
+//                    }
+                }
+                if(monBox.isChecked()) {
+//              if (!mon.contains(rootMealDetail.getMeals().get(0).strMeal)) {
+                        if (mon == null) mon = rootMealDetail.getMeals().get(0).strMeal + ",";
+                        else mon += rootMealDetail.getMeals().get(0).strMeal + ",";
+                        cls.updateMonday(mon, shP);
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Monday", Toast.LENGTH_LONG).show();
+//                    }
+                }
+                if(tueBox.isChecked()) {
+//                    if (!tue.contains(rootMealDetail.getMeals().get(0).strMeal)) {
+                        if (tue == null) tue = rootMealDetail.getMeals().get(0).strMeal + ",";
+                        else tue += rootMealDetail.getMeals().get(0).strMeal + ",";
+                        cls.updateTuesday(tue, shP);
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Tuesday", Toast.LENGTH_LONG).show();
+//                    }
+                }
+                if(wedBox.isChecked()) {
+//                    if (!wed.contains(rootMealDetail.getMeals().get(0).strMeal)) {
+                        if (wed == null) wed = rootMealDetail.getMeals().get(0).strMeal + ",";
+                        else wed += rootMealDetail.getMeals().get(0).strMeal + ",";
+                        cls.updateWednesday(wed, shP);
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Wednesday", Toast.LENGTH_LONG).show();
+//                    }
+                }
+                if(thuBox.isChecked()) {
+//                    if (!thu.contains(rootMealDetail.getMeals().get(0).strMeal)) {
+                        if (thu == null) thu = rootMealDetail.getMeals().get(0).strMeal + ",";
+                        else thu += rootMealDetail.getMeals().get(0).strMeal + ",";
+                        cls.updateThursday(thu, shP);
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Thursday", Toast.LENGTH_LONG).show();
+//                    }
+                }
+                if(friBox.isChecked()) {
+//                    if (!fri.contains(rootMealDetail.getMeals().get(0).strMeal)) {
+                        if (fri == null) fri = rootMealDetail.getMeals().get(0).strMeal + ",";
+                        else fri += rootMealDetail.getMeals().get(0).strMeal + ",";
+                        cls.updateFriday(fri, shP);
+//                    } else {
+//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Friday", Toast.LENGTH_LONG).show();
+//                    }
+                }
             }
         });
     }

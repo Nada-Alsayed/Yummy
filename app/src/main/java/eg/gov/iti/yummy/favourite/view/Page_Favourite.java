@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,12 +29,15 @@ import eg.gov.iti.yummy.meal_details.presenter.MealPresenter;
 import eg.gov.iti.yummy.meal_details.presenter.MealPresenterInterface;
 import eg.gov.iti.yummy.meal_details.view.MealViewInterface;
 import eg.gov.iti.yummy.meal_details.view.page_item_details;
+import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.model.RootMealDetail;
 import eg.gov.iti.yummy.network.API_Client;
 
-public class Page_Favourite extends Fragment implements MealViewInterface {
+public class Page_Favourite extends Fragment implements MealViewInterface , onFavouriteClickListener {
     RecyclerView recyclerView;
+
+    ImageView delete;
 
     MealPresenterInterface mealPresenterInterface;
     ConcreteLocalSource cls;
@@ -65,10 +69,11 @@ public class Page_Favourite extends Fragment implements MealViewInterface {
         SharedPreferences pref = getActivity().getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
         String shP = pref.getString("USERNAME", "N/A");
         recyclerView = view.findViewById(R.id.recyclerView);
+        delete = view.findViewById(R.id.imageViewDel);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        adapterFavList = new AdapterFavList(getContext(), input);
+        adapterFavList = new AdapterFavList(getContext(), this);
         recyclerView.setLayoutManager(linearLayoutManager);
         mealPresenterInterface = new MealPresenter(Repository.getInstance(API_Client.getInstance(getContext()), getContext()), Page_Favourite.this);
         cls.getData(shP).observe(getActivity(), new Observer<UserEntity>() {
@@ -81,6 +86,13 @@ public class Page_Favourite extends Fragment implements MealViewInterface {
                         mealPresenterInterface.getSpecificMeal(favs[i]);
                     }
                 }
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newFav;
             }
         });
     }
@@ -97,5 +109,10 @@ public class Page_Favourite extends Fragment implements MealViewInterface {
             recyclerView.setAdapter(adapterFavList);
             adapterFavList.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void OnClick(FavList Meal) {
+
     }
 }

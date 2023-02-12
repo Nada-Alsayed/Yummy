@@ -76,12 +76,10 @@ public class Page_Sign_In extends AppCompatActivity {
                         Toast.makeText(Page_Sign_In.this, "Failed", Toast.LENGTH_SHORT).show();
                     } else {
                     //    Toast.makeText(Page_Sign_In.this, "Succeeded", Toast.LENGTH_SHORT).show();
-
                         SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
                         editor.putString("USERNAME",nameUser.getText().toString());
                         editor.commit();
-
                         Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
                         startActivity(intent);
                     }

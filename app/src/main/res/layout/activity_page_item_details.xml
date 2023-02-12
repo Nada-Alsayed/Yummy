@@ -169,7 +169,8 @@
             android:id="@+id/btnAddToFav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="36dp"
             android:background="@drawable/rounded_button"
             android:text="@string/addToFav"
             android:textSize="15sp"
@@ -180,13 +181,14 @@
             android:id="@+id/btnAddToMyPlan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:background="@drawable/rounded_button"
             android:text="@string/addToPlan"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/btnAddToFav"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="@+id/btnAddToFav"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintEnd_toEndOf="@+id/btnAddToFav"
+            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintStart_toStartOf="@+id/btnAddToFav"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddToFav" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewIngredients"
@@ -195,7 +197,83 @@
             android:layout_height="420dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/textView4" >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+
+        <CheckBox
+            android:id="@+id/radioButtonSat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/sat"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddToMyPlan" />
+
+        <CheckBox
+            android:id="@+id/radioButtonSun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="@string/sun"
+            app:layout_constraintBottom_toBottomOf="@+id/radioButtonSat"
+            app:layout_constraintStart_toEndOf="@+id/radioButtonSat"
+            app:layout_constraintTop_toTopOf="@+id/radioButtonSat"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <CheckBox
+            android:id="@+id/radioButtonMon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text="@string/Mon"
+            app:layout_constraintBottom_toBottomOf="@+id/radioButtonSun"
+            app:layout_constraintStart_toEndOf="@+id/radioButtonSun"
+            app:layout_constraintTop_toTopOf="@+id/radioButtonSun"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <CheckBox
+            android:id="@+id/radioButtonTue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:text="@string/Tues"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/radioButtonSat" />
+
+        <CheckBox
+            android:id="@+id/radioButtonWed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/Wed"
+            app:layout_constraintBottom_toBottomOf="@+id/radioButtonTue"
+            app:layout_constraintStart_toEndOf="@+id/radioButtonTue"
+            app:layout_constraintTop_toTopOf="@+id/radioButtonTue" />
+
+        <CheckBox
+            android:id="@+id/radioButtonThu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/Thur"
+            app:layout_constraintBottom_toBottomOf="@+id/radioButtonWed"
+            app:layout_constraintStart_toEndOf="@+id/radioButtonWed"
+            app:layout_constraintTop_toTopOf="@+id/radioButtonWed" />
+
+        <CheckBox
+            android:id="@+id/radioButtonFri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/Fri"
+            app:layout_constraintBottom_toBottomOf="@+id/radioButtonThu"
+            app:layout_constraintStart_toEndOf="@+id/radioButtonThu"
+            app:layout_constraintTop_toTopOf="@+id/radioButtonMon"
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

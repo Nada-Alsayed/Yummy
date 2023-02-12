@@ -15,6 +15,13 @@
     <string name="SeeAll"><u>See All</u></string>
     <string name="DishType">Dish Type</string>
     <string name="Search">Search</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+    <string name="Mon">Mon</string>
+    <string name="Tues">Tue</string>
+    <string name="Wed">Wed</string>
+    <string name="Thur">Thur</string>
+    <string name="Fri">Fri</string>
     <string name="Category">Categories</string>
     <string name="planAway">Plan Away</string>
     <string name="password">Password</string>

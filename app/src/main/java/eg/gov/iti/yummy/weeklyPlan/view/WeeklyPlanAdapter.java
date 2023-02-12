@@ -23,14 +23,9 @@ import eg.gov.iti.yummy.model.MealDetail;
 public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.ViewHolder> {
 
     private final Context context;
-    private List<planListItem> values;
+
     private List<MealDetail> list;
 
-
-    public WeeklyPlanAdapter(Context _context, List<planListItem> myDataset) {
-        values = myDataset;
-        context = _context;
-    }
 
     public WeeklyPlanAdapter( List<MealDetail>list,Context context) {
         this.context = context;
