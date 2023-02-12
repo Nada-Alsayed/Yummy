@@ -66,8 +66,10 @@ public class Page_Favourite extends Fragment implements MealViewInterface {
         String shP = pref.getString("USERNAME", "N/A");
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+
         adapterFavList = new AdapterFavList(getContext(), input);
         recyclerView.setLayoutManager(linearLayoutManager);
         mealPresenterInterface = new MealPresenter(Repository.getInstance(API_Client.getInstance(getContext()), getContext()), Page_Favourite.this);

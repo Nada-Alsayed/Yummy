@@ -85,8 +85,6 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         btnAddToFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if(fav==null)fav = rootMealDetail.getMeals().get(0).strMeal+",";
                 else fav += rootMealDetail.getMeals().get(0).strMeal+",";
                 cls.updateFavourite(fav,shP);

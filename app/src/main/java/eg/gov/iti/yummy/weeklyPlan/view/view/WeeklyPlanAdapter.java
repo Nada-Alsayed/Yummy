@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.weeklyPlan.view;
+package eg.gov.iti.yummy.weeklyPlan.view.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -47,6 +47,9 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
 
     public void setList(List<MealDetail> list) {
         this.list = list;
+    }
+    public void setListData(List<planListItem> list) {
+        this.values = list;
     }
 
     @Override
