@@ -2,9 +2,12 @@ package eg.gov.iti.yummy.db;
 
 import androidx.lifecycle.LiveData;
 
+import io.reactivex.rxjava3.core.Observable;
+
 public interface LocalSource {
     void registerUser(UserEntity userEntity);
-    LiveData<UserEntity> login(String userName, String password);
+    Observable<Boolean> login(String userName, String password);
+    Observable<Boolean> is_Taken(String name);
     LiveData<UserEntity> getData(String username);
     void updateSaturday(String saturday,String username);
     void updateSunday(String sunday,String username);

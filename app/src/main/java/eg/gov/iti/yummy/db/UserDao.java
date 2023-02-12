@@ -6,12 +6,18 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import io.reactivex.rxjava3.core.Observable;
+
 @Dao
 public interface UserDao {
     @Insert
     void registerUser(UserEntity userEntity);
-    @Query("Select * from UserData where userName=:username and password=:password")
-    LiveData<UserEntity> login(String username, String password);
+    @Query("Select exists(Select * from UserData where userName=:username and password=:password)")
+    Observable<Boolean> login(String username, String password);
+
+    @Query("Select exists(Select * from UserData where userName=:username )")
+    Observable<Boolean> is_Taken(String username);
+
     @Query("Select * from UserData where userName=:username")
     LiveData<UserEntity> getData(String username);
     @Query("Update UserData set saturday=(:saturday) where userName=(:username)")

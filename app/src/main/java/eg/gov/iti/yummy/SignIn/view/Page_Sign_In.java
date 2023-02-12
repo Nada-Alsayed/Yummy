@@ -36,6 +36,8 @@ import eg.gov.iti.yummy.SignUp.view.Page_Sign_Up;
 import eg.gov.iti.yummy.db.ConcreteLocalSource;
 import eg.gov.iti.yummy.db.UserEntity;
 import eg.gov.iti.yummy.users;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
 
 public class Page_Sign_In extends AppCompatActivity {
     private GoogleSignInClient client;
@@ -71,18 +73,22 @@ public class Page_Sign_In extends AppCompatActivity {
                 if (name.isEmpty() || password.isEmpty()) {
                     Toast.makeText(Page_Sign_In.this, "Fill The Required Data", Toast.LENGTH_SHORT).show();
                 } else {
-                    LiveData<UserEntity> userEntity = concreteLocalSource.login(name, password);
-                    if (userEntity == null) {
-                        Toast.makeText(Page_Sign_In.this, "Failed", Toast.LENGTH_SHORT).show();
-                    } else {
-                    //    Toast.makeText(Page_Sign_In.this, "Succeeded", Toast.LENGTH_SHORT).show();
-                        SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = pref.edit();
-                        editor.putString("USERNAME",nameUser.getText().toString());
-                        editor.commit();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
-                        startActivity(intent);
-                    }
+                    Observable<Boolean> userEntity = concreteLocalSource.login(name, password);
+                    userEntity.observeOn(AndroidSchedulers.mainThread()).subscribe(
+                            item->{
+                                if (item==false) {
+                                    Toast.makeText(Page_Sign_In.this, "Failed", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = pref.edit();
+                                    editor.putString("USERNAME",nameUser.getText().toString());
+                                    editor.commit();
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                                    startActivity(intent);
+                                }
+                            }
+                    );
+
                 }
             }
 

@@ -17,6 +17,8 @@ import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
 import eg.gov.iti.yummy.db.ConcreteLocalSource;
 import eg.gov.iti.yummy.db.UserEntity;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
 
 public class Page_Sign_Up extends AppCompatActivity {
     TextView txtSignIn;
@@ -51,22 +53,22 @@ public class Page_Sign_Up extends AppCompatActivity {
 
                 if (validateUser(userEntity) && !confirm.isEmpty()) {
                     if (userEntity.getPassword().equals(confirm)) {
-
-//                        UserEntity user = concreteLocalSource.login(userName.getText().toString(), password.getText().toString());
-//                        if (user == null) {
-//
                             if (isValidUserName(userEntity) && isValidUserPassword(userEntity)) {
-                                concreteLocalSource.registerUser(userEntity);
-                                Toast.makeText(Page_Sign_Up.this, "Registered", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), Page_Sign_In.class);
-                                startActivity(intent);
+                                Observable<Boolean> is=concreteLocalSource.is_Taken(userName.getText().toString());
+                                is.observeOn(AndroidSchedulers.mainThread()).subscribe(item->{
+                                    if(item==false){
+                                        concreteLocalSource.registerUser(userEntity);
+                                        Toast.makeText(Page_Sign_Up.this, "Registered", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), Page_Sign_In.class);
+                                        startActivity(intent);
+                                    }else{
+                                        Toast.makeText(Page_Sign_Up.this, "repeated", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             } else {
                                 Toast.makeText(Page_Sign_Up.this, "Not Valid input Use chars and numbers", Toast.LENGTH_SHORT).show();
                             }
-//                        }
-//                        else {
-//                            Toast.makeText(Page_Sign_Up.this, "Repeated User", Toast.LENGTH_SHORT).show();
-//                        }
+
                     } else {
                         Toast.makeText(Page_Sign_Up.this, "Password Not Matched Confirm Password", Toast.LENGTH_SHORT).show();
                     }

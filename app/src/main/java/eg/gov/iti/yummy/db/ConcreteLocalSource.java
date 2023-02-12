@@ -4,6 +4,8 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 
+import io.reactivex.rxjava3.core.Observable;
+
 public class ConcreteLocalSource implements LocalSource {
     private final UserDao userDao;
     private static ConcreteLocalSource concreteLocalSource=null;
@@ -31,14 +33,14 @@ public class ConcreteLocalSource implements LocalSource {
     }
 
     @Override
-    public LiveData<UserEntity> login(String userName, String password) {
-//        new Thread(new Runnable() {
-//           @Override
-//           public void run() {
-//
-//           }
-//       }).start();
+    public Observable<Boolean> login(String userName, String password) {
+
         return userDao.login(userName, password);
+    }
+
+    @Override
+    public Observable<Boolean> is_Taken(String name) {
+        return userDao.is_Taken(name);
     }
 
     @Override
