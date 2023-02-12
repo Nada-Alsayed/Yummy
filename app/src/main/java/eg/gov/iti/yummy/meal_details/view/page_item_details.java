@@ -117,13 +117,13 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         btnAddToFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!fav.contains(rootMealDetail.getMeals().get(0).strMeal)) {
+               // if(!fav.contains(rootMealDetail.getMeals().get(0).strMeal)) {
                     if (fav == null) fav = rootMealDetail.getMeals().get(0).strMeal + ",";
                     else fav += rootMealDetail.getMeals().get(0).strMeal + ",";
                     cls.updateFavourite(fav, shP);
-                }else{
-                    Toast.makeText(getApplicationContext(),"Already in your favourites",Toast.LENGTH_LONG).show();
-                }
+//                }else{
+//                    Toast.makeText(getApplicationContext(),"Already in your favourites",Toast.LENGTH_LONG).show();
+//                }
             }
         });
 

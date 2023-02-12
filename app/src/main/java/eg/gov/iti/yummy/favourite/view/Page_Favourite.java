@@ -89,12 +89,6 @@ public class Page_Favourite extends Fragment implements MealViewInterface , onFa
             }
         });
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String newFav;
-            }
-        });
     }
 
     @Override

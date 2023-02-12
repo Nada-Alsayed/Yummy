@@ -12,10 +12,10 @@ import io.reactivex.rxjava3.core.Observable;
 public interface UserDao {
     @Insert
     void registerUser(UserEntity userEntity);
-    @Query("Select exists(Select * from UserData where userName=:username and password=:password)")
+    @Query("Select exists(Select userName from UserData where userName=:username and password=:password)")
     Observable<Boolean> login(String username, String password);
 
-    @Query("Select exists(Select * from UserData where userName=:username )")
+    @Query("Select exists(Select userName from UserData where userName=:username )")
     Observable<Boolean> is_Taken(String username);
 
     @Query("Select * from UserData where userName=:username")
