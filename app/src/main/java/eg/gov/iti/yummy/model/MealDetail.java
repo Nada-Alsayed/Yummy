@@ -2,7 +2,6 @@ package eg.gov.iti.yummy.model;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 import org.jetbrains.annotations.NotNull;
 
 @Entity(tableName="MealData")

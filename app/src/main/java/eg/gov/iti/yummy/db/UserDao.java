@@ -4,12 +4,15 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
+import eg.gov.iti.yummy.model.MealDetail;
 import io.reactivex.rxjava3.core.Observable;
 
 @Dao
 public interface UserDao {
+
+    @Insert
+    void insertMeal(MealDetail Meal);
     @Insert
     void registerUser(UserEntity userEntity);
     @Query("Select exists(Select userName from UserData where userName=:username and password=:password)")
