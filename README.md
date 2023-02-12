@@ -5,16 +5,27 @@ Yummy is a food planner app that allows the user to view diffent types of meals 
 General Features:
 ===================
 1- Login with Google Account
+
 2- Login with Local Account
+
 3- Login as a guest with limited feature
+
 4- recommendation meals for the user 
+
 5- Showing list of countries so that user can view popular meals in each one.
+
 6- browsing meals by ingredients
+
 7- browsing meals by category
+
 8- browsing meals by country
+
 9- adding meals to favourite list
+
 10- adding meals to week plan
+
 11- show each meal details with ingredients and written and video Steps to prepare the meal
+
 
 The GUI
 ========
