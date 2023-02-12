@@ -235,13 +235,12 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface , onWe
                     break;
                 }
             }
-            if(!flag)
+            if(!flag) {
                 input1.add(meals.getMeals().get(0));
-            if (sats.length == input1.size()) {
+            }
                 adapter1.setList(input1);
                 recyclerView1.setAdapter(adapter1);
                 adapter1.notifyDataSetChanged();
-            }
         }
         if(sun.contains(meals.getMeals().get(0).strMeal)){
             boolean flag = false;
@@ -251,13 +250,12 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface , onWe
                     break;
                 }
             }
-            if(!flag)
-                 input2.add(meals.getMeals().get(0));
-            if (suns!=null&&suns.length == input2.size()) {
+            if(!flag) {
+                input2.add(meals.getMeals().get(0));
+            }
                 adapter2.setList(input2);
                 recyclerView2.setAdapter(adapter2);
                 adapter2.notifyDataSetChanged();
-            }
        }
         if(mon.contains(meals.getMeals().get(0).strMeal)){
             boolean flag = false;
@@ -267,13 +265,12 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface , onWe
                     break;
                 }
             }
-            if(!flag)
+            if(!flag) {
                 input3.add(meals.getMeals().get(0));
-            if (mons!=null&&mons.length == input3.size()) {
+            }
                 adapter3.setList(input3);
                 recyclerView3.setAdapter(adapter3);
                 adapter3.notifyDataSetChanged();
-            }
         }
         if(tue.contains(meals.getMeals().get(0).strMeal)){
             boolean flag = false;
@@ -283,13 +280,12 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface , onWe
                     break;
                 }
             }
-            if(!flag)
+            if(!flag){
                 input4.add(meals.getMeals().get(0));
-            if (tues!=null&&tues.length == input4.size()) {
+            }
                 adapter4.setList(input4);
                 recyclerView4.setAdapter(adapter4);
                 adapter4.notifyDataSetChanged();
-            }
         }
 
         if(wed.contains(meals.getMeals().get(0).strMeal)){
@@ -300,13 +296,12 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface , onWe
                     break;
                 }
             }
-            if(!flag)
+            if(!flag) {
                 input5.add(meals.getMeals().get(0));
-            if (weds!=null&&weds.length == input5.size()) {
+            }
                 adapter5.setList(input5);
                 recyclerView5.setAdapter(adapter5);
                 adapter5.notifyDataSetChanged();
-            }
         }
 
         if(thu.contains(meals.getMeals().get(0).strMeal)){
@@ -317,13 +312,12 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface , onWe
                     break;
                 }
             }
-            if(!flag)
+            if(!flag) {
                 input6.add(meals.getMeals().get(0));
-            if (thus!=null&&thus.length == input6.size()) {
+            }
                 adapter6.setList(input6);
                 recyclerView6.setAdapter(adapter6);
                 adapter6.notifyDataSetChanged();
-            }
         }
 
         if(fri.contains(meals.getMeals().get(0).strMeal)){
@@ -334,13 +328,12 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface , onWe
                     break;
                 }
             }
-            if(!flag)
+            if(!flag) {
                 input7.add(meals.getMeals().get(0));
-            if (fris!=null&&fris.length == input7.size()) {
+            }
                 adapter7.setList(input7);
                 recyclerView7.setAdapter(adapter7);
                 adapter7.notifyDataSetChanged();
-            }
         }
     }
 
