@@ -3,51 +3,38 @@ package eg.gov.iti.yummy.favourite.view;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
 import eg.gov.iti.yummy.db.ConcreteLocalSource;
-import eg.gov.iti.yummy.db.UserEntity;
-import eg.gov.iti.yummy.favourite.FavList;
-import eg.gov.iti.yummy.meal_details.presenter.MealPresenter;
-import eg.gov.iti.yummy.meal_details.presenter.MealPresenterInterface;
-import eg.gov.iti.yummy.meal_details.view.MealViewInterface;
-import eg.gov.iti.yummy.meal_details.view.page_item_details;
+import eg.gov.iti.yummy.favourite.presenter.FavMealPresenter;
+import eg.gov.iti.yummy.favourite.presenter.FavMealPresenterInterface;
 import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
-import eg.gov.iti.yummy.model.RootMealDetail;
 import eg.gov.iti.yummy.network.API_Client;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class Page_Favourite extends Fragment implements MealViewInterface , onFavouriteClickListener {
+public class Page_Favourite extends Fragment implements FavViewInterface, onFavouriteClickListener {
     RecyclerView recyclerView;
-
-    ImageView delete;
-
-    MealPresenterInterface mealPresenterInterface;
-    ConcreteLocalSource cls;
-    List<FavList> input;
-    FavList favListItem;
+    FavMealPresenterInterface favMealPresenterInterface;
     AdapterFavList adapterFavList;
-
-    String[] favs;
-
-    String fav;
+    LinearLayoutManager linearLayoutManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,49 +51,60 @@ public class Page_Favourite extends Fragment implements MealViewInterface , onFa
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        input = new ArrayList<>();
-        cls = ConcreteLocalSource.getInstance(getContext());
         SharedPreferences pref = getActivity().getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
         String shP = pref.getString("USERNAME", "N/A");
-        recyclerView = view.findViewById(R.id.recyclerView);
-        delete = view.findViewById(R.id.imageViewDel);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView=view.findViewById(R.id.recyclerView);
+        linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        adapterFavList = new AdapterFavList(getContext(), this);
+        favMealPresenterInterface = new FavMealPresenter(Page_Favourite.this, Repository.getInstance(API_Client.getInstance(getContext()), ConcreteLocalSource.getInstance(getContext()), getContext()));
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        mealPresenterInterface = new MealPresenter(Repository.getInstance(API_Client.getInstance(getContext()), getContext()), Page_Favourite.this);
-        cls.getData(shP).observe(getActivity(), new Observer<UserEntity>() {
-            @Override
-            public void onChanged(UserEntity userEntity) {
-                fav = userEntity.getFavourite();
-                if (fav != null) {
-                    favs = fav.split(",");
-                    for (int i = 0; i < favs.length; i++) {
-                        mealPresenterInterface.getSpecificMeal(favs[i]);
+
+        adapterFavList = new AdapterFavList(new ArrayList<>(), this, getContext());
+
+        recyclerView.setAdapter(adapterFavList);
+
+        favMealPresenterInterface.getStoredMeals().subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<MealDetail>>() {
+
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        Log.i("LO", "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
                     }
-                }
-            }
-        });
+
+                    @Override
+                    public void onNext(@NonNull List<MealDetail> mealDetails) {
+                        adapterFavList.setList(mealDetails);
+                        adapterFavList.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("LO", "888888888888888888888888888888888888888888888888888888");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.e("LO", "7777777777777777777777777777777777777777777777");
+                    }
+                });
+        recyclerView.setAdapter(adapterFavList);
 
     }
 
     @Override
-    public void showSpecificItem(RootMealDetail meals) {
-        favListItem = new FavList();
-        favListItem.setName(meals.getMeals().get(0).strMeal);
-        favListItem.setOrigin(meals.getMeals().get(0).strArea);
-        favListItem.setThumbnail(meals.getMeals().get(0).strMealThumb);
-        input.add(favListItem);
-        if (favs.length == input.size()) {
-            adapterFavList.setListData(input);
-            recyclerView.setAdapter(adapterFavList);
-            adapterFavList.notifyDataSetChanged();
-        }
+    public void showStoredData(List<MealDetail> meals) {
+        adapterFavList.setList(meals);
     }
 
     @Override
-    public void OnClick(FavList Meal) {
-
+    public void deleteProduct(MealDetail meal) {
+        favMealPresenterInterface.deleteMeal(meal);
     }
+
+    @Override
+    public void OnClick(MealDetail meal) {
+        deleteProduct(meal);
+    }
+
 }

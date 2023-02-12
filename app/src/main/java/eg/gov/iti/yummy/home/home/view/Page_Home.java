@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
+import eg.gov.iti.yummy.db.ConcreteLocalSource;
 import eg.gov.iti.yummy.home.home.presenter.HomePresenter;
 import eg.gov.iti.yummy.home.home.presenter.HomePresenterInterface;
 import eg.gov.iti.yummy.model.MealDetail;
@@ -59,7 +60,7 @@ public class Page_Home extends Fragment implements HomeViewInterface {
 
         viewPager = view.findViewById(R.id.stack_view);
         forYouAdapter = new ForYouAdapter(new ArrayList<>(), getContext());
-        PresenterInterface = new HomePresenter(Repository.getInstance(API_Client.getInstance(getContext()), getContext()), this);
+        PresenterInterface = new HomePresenter(Repository.getInstance(API_Client.getInstance(getContext()),ConcreteLocalSource.getInstance(getContext()),getContext()), this);
         viewPager.setPageTransformer(true, new ViewPagerStack());
         viewPager.setOffscreenPageLimit(3);
         //viewPager.setAdapter(forYouAdapter);

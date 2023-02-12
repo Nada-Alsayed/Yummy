@@ -1,9 +1,14 @@
 package eg.gov.iti.yummy.model;
 
+import androidx.lifecycle.LiveData;
+
+import java.util.List;
+
 import eg.gov.iti.yummy.network.DetailsNetworkDelegate;
 import eg.gov.iti.yummy.network.FilterNetworkDelegate;
 import eg.gov.iti.yummy.network.NetworkDelegate;
 import eg.gov.iti.yummy.network.SearchNetworkDelegate;
+import io.reactivex.rxjava3.core.Observable;
 
 public interface RepositoryInterface {
     public void getForYouMeals(NetworkDelegate networkDelegate);
@@ -16,5 +21,8 @@ public interface RepositoryInterface {
     public void filterByCategoryFromRetrofit(FilterNetworkDelegate filterNetworkDelegate,String category);
     public void filterByCountryFromRetrofit(FilterNetworkDelegate filterNetworkDelegate,String country);
     public void getMealFromRetrofit(DetailsNetworkDelegate detailsNetworkDelegate, String meal);
-
+    public Observable<List<MealDetail>> getStoredMeals();
+    public void deleteMeal(MealDetail meal);
+    public void insertMeal(MealDetail meal);
+    public LiveData<MealDetail> getOfflineMeal(String name);
 }

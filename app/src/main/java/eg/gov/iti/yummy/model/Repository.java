@@ -2,19 +2,28 @@ package eg.gov.iti.yummy.model;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
+
+import java.util.List;
+
+import eg.gov.iti.yummy.db.LocalSource;
 import eg.gov.iti.yummy.network.DetailsNetworkDelegate;
 import eg.gov.iti.yummy.network.FilterNetworkDelegate;
 import eg.gov.iti.yummy.network.NetworkDelegate;
 import eg.gov.iti.yummy.network.RemoteSource;
 import eg.gov.iti.yummy.network.SearchNetworkDelegate;
+import io.reactivex.rxjava3.core.Observable;
 
 public class Repository implements RepositoryInterface{
     Context context;
     RemoteSource remoteSource;
+    LocalSource localSource;
+
     private static Repository repository = null;
 
-    public Repository(RemoteSource remoteSource, Context context) {
+    public Repository(RemoteSource remoteSource, LocalSource localSource,Context context) {
         this.context=context;
+        this.localSource=localSource;
         this.remoteSource=remoteSource;
     }
 
@@ -22,10 +31,10 @@ public class Repository implements RepositoryInterface{
         this.context = context;
     }
 
-    public static Repository getInstance(RemoteSource remoteSource, Context context)
+    public static Repository getInstance(RemoteSource remoteSource, LocalSource localSource,Context context)
     {
         if (repository == null) {
-            repository = new Repository(remoteSource, context);
+            repository = new Repository(remoteSource,localSource, context);
         }
         return repository;
     }
@@ -53,6 +62,26 @@ public class Repository implements RepositoryInterface{
     @Override
     public void getMealFromRetrofit(DetailsNetworkDelegate detailsNetworkDelegate,String meal) {
         remoteSource.specificItem(detailsNetworkDelegate,meal);
+    }
+
+    @Override
+    public Observable<List<MealDetail>> getStoredMeals() {
+        return localSource.getAllStoredMeals();
+    }
+
+    @Override
+    public void deleteMeal(MealDetail meal) {
+        localSource.deleteMeal(meal);
+    }
+
+    @Override
+    public void insertMeal(MealDetail meal) {
+        localSource.insertMeal(meal);
+    }
+
+    @Override
+    public LiveData<MealDetail> getOfflineMeal(String name) {
+       return localSource.getOfflineMeal(name);
     }
 
     @Override

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
-import eg.gov.iti.yummy.favourite.FavList;
+import eg.gov.iti.yummy.favourite.view.FavList;
 
 public class AdapterAvailableDishes extends RecyclerView.Adapter<AdapterAvailableDishes.Holder>{
     private List<FavList> listdata;

@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.favourite;
+package eg.gov.iti.yummy.favourite.view;
 
 public class FavList {
     String Name;

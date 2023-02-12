@@ -18,29 +18,34 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
-import eg.gov.iti.yummy.favourite.FavList;
 import eg.gov.iti.yummy.meal_details.view.page_item_details;
 import eg.gov.iti.yummy.model.MealDetail;
 
 
 public class AdapterFavList extends RecyclerView.Adapter<AdapterFavList.Holder> {
 
-    private List<FavList> listData;
+     List<FavList> listData;
+    List<MealDetail> list;
 
-    private onFavouriteClickListener listener;
+    onFavouriteClickListener listener;
 
 
     public void setListData(List<FavList> listData) {
+
         this.listData = listData;
+    }
+    public void setList(List<MealDetail> mealDetails) {
+
+        this.list = mealDetails;
     }
 
     private Context context;
-    public AdapterFavList(Context context, onFavouriteClickListener _listener) {
+
+    public AdapterFavList(List<MealDetail> list, onFavouriteClickListener listener, Context context) {
+        this.list = list;
+        this.listener = listener;
         this.context = context;
-        this.listener = _listener;
     }
-
-
 
     @NonNull
     @Override
@@ -53,11 +58,11 @@ public class AdapterFavList extends RecyclerView.Adapter<AdapterFavList.Holder> 
 
     @Override
     public void onBindViewHolder(@NonNull AdapterFavList.Holder holder,@SuppressLint("RecyclerView") int position) {
-        FavList meal = listData.get(position);
-        holder.title.setText( listData.get(position).getName());
-        holder.origin.setText( listData.get(position).getOrigin());
+        MealDetail meal = list.get(position);
+        holder.title.setText( list.get(position).strMeal);
+        holder.origin.setText( list.get(position).strArea);
         Glide.with(context)
-                .load(listData.get(position).getThumbnail())
+                .load(list.get(position).strMealThumb)
                 .into(holder.thumb);
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +83,8 @@ public class AdapterFavList extends RecyclerView.Adapter<AdapterFavList.Holder> 
 
     @Override
     public int getItemCount() {
-        return listData.size();
+
+        return list.size();
     }
 
     class Holder extends RecyclerView.ViewHolder {
@@ -88,7 +94,7 @@ public class AdapterFavList extends RecyclerView.Adapter<AdapterFavList.Holder> 
         ImageView delete;
         ConstraintLayout layout;
 
-        public Holder(View itemView) {
+        public Holder(@NonNull View itemView) {
             super(itemView);
             this.thumb = (ImageView) itemView.findViewById(R.id.imageViewFav);
             this.title = (TextView) itemView.findViewById(R.id.txtMealName);

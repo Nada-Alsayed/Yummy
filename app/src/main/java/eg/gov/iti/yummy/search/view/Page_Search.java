@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import eg.gov.iti.yummy.country.AdapterCountry;
+import eg.gov.iti.yummy.db.ConcreteLocalSource;
 import eg.gov.iti.yummy.search.view.Page_SearchDirections.ActionPageSearchToPageCountry;
 import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.model.Repository;
@@ -48,7 +49,7 @@ public class Page_Search extends Fragment implements SearchViewInterface{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        searchPresenterInterface = new SearchPresenter(Repository.getInstance(API_Client.getInstance(getContext()), getContext()), this);
+        searchPresenterInterface = new SearchPresenter(Repository.getInstance(API_Client.getInstance(getContext()), ConcreteLocalSource.getInstance(getContext()), getContext()), this);
         searchPresenterInterface.getAllIngredients();
         searchPresenterInterface.getAllCategories();
         searchPresenterInterface.getAllCountries();

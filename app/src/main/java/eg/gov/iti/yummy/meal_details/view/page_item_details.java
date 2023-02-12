@@ -3,12 +3,14 @@ package eg.gov.iti.yummy.meal_details.view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,11 +29,13 @@ import eg.gov.iti.yummy.db.ConcreteLocalSource;
 import eg.gov.iti.yummy.db.UserEntity;
 import eg.gov.iti.yummy.meal_details.presenter.MealPresenter;
 import eg.gov.iti.yummy.meal_details.presenter.MealPresenterInterface;
+import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.model.RootMealDetail;
 import eg.gov.iti.yummy.network.API_Client;
+import io.reactivex.rxjava3.core.Observable;
 
-public class page_item_details extends AppCompatActivity implements MealViewInterface {
+public class page_item_details extends AppCompatActivity implements MealViewInterface ,OnClick{
 
     YouTubePlayerView youTubePlayerView;
     ImageView mealPic;
@@ -67,9 +71,16 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         String mealName = intent.getStringExtra("MealName");
         youTubePlayerView = findViewById(R.id.videoView);
 
-        mealPresenterInterface = new MealPresenter(Repository.getInstance(API_Client.getInstance(getApplicationContext()),getApplicationContext()),this);
-        mealPresenterInterface.getSpecificMeal(mealName);
+        mealPresenterInterface = new MealPresenter(Repository.getInstance(API_Client.getInstance(getApplicationContext()),ConcreteLocalSource.getInstance(getApplicationContext()),getApplicationContext()),this);
 
+        if(isNetworkAvailable(getApplicationContext())) {
+            mealPresenterInterface.getSpecificMeal(mealName);
+            Toast.makeText(this, " connected", Toast.LENGTH_SHORT).show();
+        }else{
+            mealPresenterInterface.getOffMeal(mealName);
+            Toast.makeText(this, "not connected", Toast.LENGTH_SHORT).show();
+
+        }
         MealName = findViewById(R.id.mealName);
         MealOrigin = findViewById(R.id.mealOrigin);
         mealPic = findViewById(R.id.mealImage);
@@ -83,119 +94,32 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         btnAddToFav = findViewById(R.id.btnAddToFav);
         btnAddToWeekPlan = findViewById(R.id.btnAddToMyPlan);
         cls = ConcreteLocalSource.getInstance(getApplicationContext());
+
         SharedPreferences pref = getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
         String shP =pref.getString("USERNAME","N/A");
-        cls.getData(shP).observe(page_item_details.this, new Observer<UserEntity>() {
-            @Override
-            public void onChanged(UserEntity userEntity) {
-                if(userEntity.getFavourite()!=null){
-                    fav = userEntity.getFavourite();
-                }
-                if(userEntity.getSaturday()!=null){
-                    sat = userEntity.getSaturday();
-                }
-                if(userEntity.getSunday()!=null){
-                    sun = userEntity.getSunday();
-                }
-                if(userEntity.getMonday()!=null){
-                    mon = userEntity.getMonday();
-                }
-                if(userEntity.getTuesday()!=null){
-                    tue = userEntity.getTuesday();
-                }
-                if(userEntity.getWednesday()!=null){
-                    wed = userEntity.getWednesday();
-                }
-                if(userEntity.getThursday()!=null){
-                    thu = userEntity.getThursday();
-                }
-                if(userEntity.getFriday()!=null){
-                    fri = userEntity.getFriday();
-                }
-            }
-        });
+
         btnAddToFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // if(!fav.contains(rootMealDetail.getMeals().get(0).strMeal)) {
-                    if (fav == null) fav = rootMealDetail.getMeals().get(0).strMeal + ",";
-                    else fav += rootMealDetail.getMeals().get(0).strMeal + ",";
-                    cls.updateFavourite(fav, shP);
-//                }else{
-//                    Toast.makeText(getApplicationContext(),"Already in your favourites",Toast.LENGTH_LONG).show();
-//                }
+               addMeal(rootMealDetail.meals.get(0));
             }
         });
 
-        btnAddToWeekPlan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(satBox.isChecked()) {
-    //                if (satAdd==true) {
-                        if (sat == null) sat = rootMealDetail.getMeals().get(0).strMeal + ",";
-                        else sat += rootMealDetail.getMeals().get(0).strMeal + ",";
-                        cls.updateSaturday(sat, shP);
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Saturday", Toast.LENGTH_LONG).show();
-//                    }
-                }
-                if(sunBox.isChecked()) {
-      //              if (!sun.contains(rootMealDetail.getMeals().get(0).strMeal)) {
-                        if (sun == null) sun = rootMealDetail.getMeals().get(0).strMeal + ",";
-                        else sun += rootMealDetail.getMeals().get(0).strMeal + ",";
-                        cls.updateSunday(sun, shP);
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Sunday", Toast.LENGTH_LONG).show();
-//                    }
-                }
-                if(monBox.isChecked()) {
-//              if (!mon.contains(rootMealDetail.getMeals().get(0).strMeal)) {
-                        if (mon == null) mon = rootMealDetail.getMeals().get(0).strMeal + ",";
-                        else mon += rootMealDetail.getMeals().get(0).strMeal + ",";
-                        cls.updateMonday(mon, shP);
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Monday", Toast.LENGTH_LONG).show();
-//                    }
-                }
-                if(tueBox.isChecked()) {
-//                    if (!tue.contains(rootMealDetail.getMeals().get(0).strMeal)) {
-                        if (tue == null) tue = rootMealDetail.getMeals().get(0).strMeal + ",";
-                        else tue += rootMealDetail.getMeals().get(0).strMeal + ",";
-                        cls.updateTuesday(tue, shP);
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Tuesday", Toast.LENGTH_LONG).show();
-//                    }
-                }
-                if(wedBox.isChecked()) {
-//                    if (!wed.contains(rootMealDetail.getMeals().get(0).strMeal)) {
-                        if (wed == null) wed = rootMealDetail.getMeals().get(0).strMeal + ",";
-                        else wed += rootMealDetail.getMeals().get(0).strMeal + ",";
-                        cls.updateWednesday(wed, shP);
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Wednesday", Toast.LENGTH_LONG).show();
-//                    }
-                }
-                if(thuBox.isChecked()) {
-//                    if (!thu.contains(rootMealDetail.getMeals().get(0).strMeal)) {
-                        if (thu == null) thu = rootMealDetail.getMeals().get(0).strMeal + ",";
-                        else thu += rootMealDetail.getMeals().get(0).strMeal + ",";
-                        cls.updateThursday(thu, shP);
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Thursday", Toast.LENGTH_LONG).show();
-//                    }
-                }
-                if(friBox.isChecked()) {
-//                    if (!fri.contains(rootMealDetail.getMeals().get(0).strMeal)) {
-                        if (fri == null) fri = rootMealDetail.getMeals().get(0).strMeal + ",";
-                        else fri += rootMealDetail.getMeals().get(0).strMeal + ",";
-                        cls.updateFriday(fri, shP);
-//                    } else {
-//                        Toast.makeText(getApplicationContext(), "Already in your Plan for Friday", Toast.LENGTH_LONG).show();
-//                    }
-                }
-            }
-        });
     }
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
+    @Override
+    public void addMeal(MealDetail meal) {
+        mealPresenterInterface.addToFav(meal);
+    }
+
+    @Override
+    public void getOffMeal(Observable<MealDetail> meal) {
+
+    }
+
 
     @Override
     public void showSpecificItem(RootMealDetail meals) {
@@ -285,5 +209,10 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
             myIngredients.add(new Recipe(meals.getMeals().get(0).strIngredient15,meals.getMeals().get(0).strMeasure15,thumb));
         }
 
+    }
+
+    @Override
+    public void onClick(MealDetail meal) {
+        addMeal(meal);
     }
 }

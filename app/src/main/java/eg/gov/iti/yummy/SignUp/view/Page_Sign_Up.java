@@ -2,6 +2,7 @@ package eg.gov.iti.yummy.SignUp.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,18 +55,16 @@ public class Page_Sign_Up extends AppCompatActivity {
                 if (validateUser(userEntity) && !confirm.isEmpty()) {
                     if (userEntity.getPassword().equals(confirm)) {
                             if (isValidUserName(userEntity) && isValidUserPassword(userEntity)) {
-                                Observable<Boolean> is=concreteLocalSource.is_Taken(userName.getText().toString());
-                                is.observeOn(AndroidSchedulers.mainThread()).subscribe(item->{
-                                    if(item==false){
+       //                         if(concreteLocalSource.is_Taken(userName.getText().toString()).equals("false")){
                                         concreteLocalSource.registerUser(userEntity);
                                         Toast.makeText(Page_Sign_Up.this, "Registered", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(), Page_Sign_In.class);
                                         startActivity(intent);
-                                    }else{
-                                        Toast.makeText(Page_Sign_Up.this, "repeated", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } else {
+                                }
+//                                else{
+//                                    Log.e("HI","jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+//                                }
+                             else {
                                 Toast.makeText(Page_Sign_Up.this, "Not Valid input Use chars and numbers", Toast.LENGTH_SHORT).show();
                             }
 
