@@ -43,6 +43,7 @@ public class Page_Sign_In extends AppCompatActivity {
     FirebaseDatabase database;
     ImageView googleImg;
     TextView txtSignUp;
+    ImageView skip;
     Button btnSignIn;
     ConcreteLocalSource concreteLocalSource;
     EditText nameUser, passwordUser;
@@ -57,6 +58,18 @@ public class Page_Sign_In extends AppCompatActivity {
         txtSignUp = findViewById(R.id.txtViewSignUpHL);
         nameUser = findViewById(R.id.editTxtSignInUserName);
         passwordUser = findViewById(R.id.editTextSignInPassword);
+        skip = findViewById(R.id.signInSkip);
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("USERNAME","Guest");
+                editor.commit();
+                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                startActivity(intent);
+            }
+        });
 
         txtSignUp.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), Page_Sign_Up.class);
@@ -72,21 +85,25 @@ public class Page_Sign_In extends AppCompatActivity {
                     Toast.makeText(Page_Sign_In.this, "Fill The Required Data", Toast.LENGTH_SHORT).show();
                 } else {
                     LiveData<UserEntity> userEntity = concreteLocalSource.login(name, password);
-                    if (userEntity == null) {
-                        Toast.makeText(Page_Sign_In.this, "Failed", Toast.LENGTH_SHORT).show();
-                    } else {
-                    //    Toast.makeText(Page_Sign_In.this, "Succeeded", Toast.LENGTH_SHORT).show();
-                        SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = pref.edit();
-                        editor.putString("USERNAME",nameUser.getText().toString());
-                        editor.commit();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
-                        startActivity(intent);
+                    concreteLocalSource.login(name,password).observe(Page_Sign_In.this, new Observer<UserEntity>() {
+                        @Override
+                        public void onChanged(UserEntity userEntity) {
+                            if(userEntity==null){
+                                Toast.makeText(Page_Sign_In.this, "Wrong User Name or Password", Toast.LENGTH_LONG).show();
+                            }else {
+                                Toast.makeText(Page_Sign_In.this, "Succeeded", Toast.LENGTH_SHORT).show();
+                                SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("USERNAME",nameUser.getText().toString());
+                                editor.commit();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                                startActivity(intent);
+                            }
+                        }
+                    });
                     }
                 }
-            }
-
-        });
+            });
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance("https://yummy-7d6e4-default-rtdb.firebaseio.com/");
@@ -104,6 +121,11 @@ public class Page_Sign_In extends AppCompatActivity {
                 startActivityForResult(i, 123);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishActivity(2);
     }
 
     @Override

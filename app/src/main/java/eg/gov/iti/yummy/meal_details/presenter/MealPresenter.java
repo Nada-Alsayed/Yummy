@@ -1,5 +1,7 @@
 package eg.gov.iti.yummy.meal_details.presenter;
 
+import android.util.Log;
+
 import eg.gov.iti.yummy.meal_details.view.MealViewInterface;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.model.RootMealDetail;
@@ -16,6 +18,7 @@ public class MealPresenter implements MealPresenterInterface, DetailsNetworkDele
     }
     @Override
     public void getSpecificMeal(String meal) {
+        Log.i("MealPresenter", "getSpecificMeal: "+meal);
         repository.getMealFromRetrofit(this,meal);
     }
     @Override

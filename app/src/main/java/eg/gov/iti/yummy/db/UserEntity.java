@@ -63,9 +63,7 @@ public class UserEntity {
         return password;
     }
 
-    public String getFavourite() {
-        return favourite;
-    }
+    public String getFavourite() {return favourite;}
 
     public void setFavourite(String favourite) {
         this.favourite = favourite;

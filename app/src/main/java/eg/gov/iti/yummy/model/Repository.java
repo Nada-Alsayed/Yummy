@@ -1,6 +1,7 @@
 package eg.gov.iti.yummy.model;
 
 import android.content.Context;
+import android.util.Log;
 
 import eg.gov.iti.yummy.network.DetailsNetworkDelegate;
 import eg.gov.iti.yummy.network.FilterNetworkDelegate;
@@ -52,6 +53,7 @@ public class Repository implements RepositoryInterface{
 
     @Override
     public void getMealFromRetrofit(DetailsNetworkDelegate detailsNetworkDelegate,String meal) {
+        Log.i("Repository", "getMealFromRetrofit: "+meal);
         remoteSource.specificItem(detailsNetworkDelegate,meal);
     }
 

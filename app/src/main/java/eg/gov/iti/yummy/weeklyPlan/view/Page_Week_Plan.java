@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,20 +35,20 @@ import eg.gov.iti.yummy.network.API_Client;
 import eg.gov.iti.yummy.weeklyPlan.view.WeeklyPlanAdapter;
 import eg.gov.iti.yummy.weeklyPlan.view.planListItem;
 
-public class Page_Week_Plan extends Fragment implements MealViewInterface {
+public class Page_Week_Plan extends Fragment implements MealViewInterface , onWeeklyPlanClickListener {
     RecyclerView recyclerView1,recyclerView2,recyclerView3,recyclerView4,recyclerView5,recyclerView6,recyclerView7;
     List<MealDetail> input1,input2,input3,input4,input5,input6,input7;
-    WeeklyPlanAdapter adapter;
+    WeeklyPlanAdapter adapter1,adapter2,adapter3,adapter4,adapter5,adapter6,adapter7;
 
     int day=1;
-
-    long threadSat,threadSun;
 
     String[] sats,suns,mons,tues,weds,thus,fris;
 
     String sat,sun,mon,tue,wed,thu,fri;
 
     ConcreteLocalSource cls;
+
+    String shP;
 
     MealPresenterInterface mealPresenterInterface;
 
@@ -72,8 +73,8 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface {
         layoutManager1.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView1.setLayoutManager(layoutManager1);
         input1 = new ArrayList<>();
-        adapter = new WeeklyPlanAdapter(input1,getContext());
-        recyclerView1.setAdapter(adapter);
+        adapter1 = new WeeklyPlanAdapter(getContext(),this,1,input1);
+        recyclerView1.setAdapter(adapter1);
 
 
         recyclerView2 = view.findViewById(R.id.recycle2);
@@ -82,8 +83,8 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface {
         layoutManager2.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView2.setLayoutManager(layoutManager2);
         input2 = new ArrayList<>();
-        adapter = new WeeklyPlanAdapter(input2,getContext());
-        recyclerView2.setAdapter(adapter);
+        adapter2 = new WeeklyPlanAdapter(getContext(),this,2,input2);
+        recyclerView2.setAdapter(adapter2);
 
         recyclerView3 = view.findViewById(R.id.recycle3);
         recyclerView3.setHasFixedSize(true);
@@ -91,8 +92,8 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface {
         layoutManager3.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView3.setLayoutManager(layoutManager3);
         input3=new ArrayList<>();
-        adapter = new WeeklyPlanAdapter(input3,getContext());
-        recyclerView3.setAdapter(adapter);
+        adapter3 = new WeeklyPlanAdapter(getContext(),this,3,input3);
+        recyclerView3.setAdapter(adapter3);
 
         recyclerView4 = view.findViewById(R.id.recycle4);
         recyclerView4.setHasFixedSize(true);
@@ -100,8 +101,8 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface {
         layoutManager4.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView4.setLayoutManager(layoutManager4);
         input4 = new ArrayList<>();
-        adapter = new WeeklyPlanAdapter(input4,getContext());
-        recyclerView4.setAdapter(adapter);
+        adapter4 = new WeeklyPlanAdapter(getContext(),this,4,input4);
+        recyclerView4.setAdapter(adapter4);
 
         recyclerView5 = view.findViewById(R.id.recycle5);
         recyclerView5.setHasFixedSize(true);
@@ -109,8 +110,8 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface {
         layoutManager5.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView5.setLayoutManager(layoutManager5);
         input5 = new ArrayList<>();
-        adapter = new WeeklyPlanAdapter(input5,getContext());
-        recyclerView5.setAdapter(adapter);
+        adapter5 = new WeeklyPlanAdapter(getContext(),this,5,input5);
+        recyclerView5.setAdapter(adapter5);
 
         recyclerView6 = view.findViewById(R.id.recycle6);
         recyclerView6.setHasFixedSize(true);
@@ -118,8 +119,8 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface {
         layoutManager6.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView6.setLayoutManager(layoutManager6);
         input6 = new ArrayList<>();
-        adapter = new WeeklyPlanAdapter(input6,getContext());
-        recyclerView6.setAdapter(adapter);
+        adapter6 = new WeeklyPlanAdapter(getContext(),this,6,input6);
+        recyclerView6.setAdapter(adapter6);
 
         recyclerView7 = view.findViewById(R.id.recycle7);
         recyclerView7.setHasFixedSize(true);
@@ -127,185 +128,320 @@ public class Page_Week_Plan extends Fragment implements MealViewInterface {
         layoutManager7.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView7.setLayoutManager(layoutManager7);
         input7 = new ArrayList<>();
-        adapter = new WeeklyPlanAdapter(input7,getContext());
-        recyclerView7.setAdapter(adapter);
+        adapter7 = new WeeklyPlanAdapter(getContext(),this,7,input7);
+        recyclerView7.setAdapter(adapter7);
 
         cls = ConcreteLocalSource.getInstance(getContext());
         SharedPreferences pref = getActivity().getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
-        String shP = pref.getString("USERNAME", "N/A");
+        shP = pref.getString("USERNAME", "N/A");
         mealPresenterInterface = new MealPresenter(Repository.getInstance(API_Client.getInstance(getContext()), getContext()), Page_Week_Plan.this);
-        cls.getData(shP).observe(getActivity(), new Observer<UserEntity>() {
+        cls.getSaturdayFromDB(shP).observe(getActivity(), new Observer<String>() {
             @Override
-            public void onChanged(UserEntity userEntity) {
-                if(day==1) {
-                    sat = userEntity.getSaturday();
-                    if (sat != null) {
-                        sats = sat.split(",");
-                        for (int i = 0; i < sats.length; i++) {
-                            mealPresenterInterface.getSpecificMeal(sats[i]);
-                            threadSat = Thread.currentThread().getId();
-                            if(i==sats.length-1)day++;
-                        }
+            public void onChanged(String s) {
+                sat = s;
+                if (s != null) {
+                    sats = s.split(",");
+                    for (int i = 0; i < sats.length; i++) {
+                        mealPresenterInterface.getSpecificMeal(sats[i]);
                     }
                 }
             }
         });
-        cls.getData(shP).observe(getActivity(), new Observer<UserEntity>() {
+        cls.getSundayFromDB(shP).observe(getActivity(), new Observer<String>() {
             @Override
-            public void onChanged(UserEntity userEntity) {
-                if(day==2) {
-                    sun = userEntity.getSunday();
-                    if (sun != null) {
-                        suns = sun.split(",");
-                        for (int i = 0; i < suns.length; i++) {
-                            mealPresenterInterface.getSpecificMeal(suns[i]);
-                            threadSun = Thread.currentThread().getId();
-                            if(i==suns.length-1)day++;
-                        }
+            public void onChanged(String s) {
+                sun = s;
+                if(s!=null){
+                    suns = s.split(",");
+                    for(int i=0;i< suns.length;i++){
+                        mealPresenterInterface.getSpecificMeal(suns[i]);
                     }
                 }
             }
         });
 
-        cls.getData(shP).observe(getActivity(), new Observer<UserEntity>() {
+        cls.getMondayFromDB(shP).observe(getActivity(), new Observer<String>() {
             @Override
-            public void onChanged(UserEntity userEntity) {
-                if(day==3) {
-                    mon = userEntity.getMonday();
-                    if (mon != null) {
-                        mons = mon.split(",");
-                        for (int i = 0; i < mons.length; i++) {
-                            mealPresenterInterface.getSpecificMeal(mons[i]);
-                            if(i==mons.length-1)day++;
-                        }
+            public void onChanged(String s) {
+                mon = s;
+                if(s!=null){
+                    mons = s.split(",");
+                    for(int i=0;i< mons.length;i++){
+                        mealPresenterInterface.getSpecificMeal(mons[i]);
                     }
                 }
             }
         });
 
-        cls.getData(shP).observe(getActivity(), new Observer<UserEntity>() {
+        cls.getTuesdayFromDB(shP).observe(getActivity(), new Observer<String>() {
             @Override
-            public void onChanged(UserEntity userEntity) {
-                if(day==4) {
-                    tue = userEntity.getTuesday();
-                    if (tue != null) {
-                        tues = tue.split(",");
-                        for (int i = 0; i < tues.length; i++) {
-                            mealPresenterInterface.getSpecificMeal(tues[i]);
-                            if(i==tues.length-1)day++;
-                        }
+            public void onChanged(String s) {
+                tue = s;
+                if(s!=null){
+                    tues = s.split(",");
+                    for(int i=0;i< tues.length;i++){
+                        mealPresenterInterface.getSpecificMeal(tues[i]);
                     }
                 }
             }
         });
 
-        cls.getData(shP).observe(getActivity(), new Observer<UserEntity>() {
+        cls.getWednesdayFromDB(shP).observe(getActivity(), new Observer<String>() {
             @Override
-            public void onChanged(UserEntity userEntity) {
-                if(day==5) {
-                    wed = userEntity.getWednesday();
-                    if (wed != null) {
-                        weds = wed.split(",");
-                        for (int i = 0; i < weds.length; i++) {
-                            mealPresenterInterface.getSpecificMeal(weds[i]);
-                            if(i==weds.length-1)day++;
-                        }
+            public void onChanged(String s) {
+                wed = s;
+                if(s!=null){
+                    weds = s.split(",");
+                    for(int i=0;i< weds.length;i++){
+                        mealPresenterInterface.getSpecificMeal(weds[i]);
                     }
                 }
             }
         });
 
-        cls.getData(shP).observe(getActivity(), new Observer<UserEntity>() {
+        cls.getThursdayFromDB(shP).observe(getActivity(), new Observer<String>() {
             @Override
-            public void onChanged(UserEntity userEntity) {
-                if(day==6) {
-                    thu = userEntity.getThursday();
-                    if (thu != null) {
-                        thus = thu.split(",");
-                        for (int i = 0; i < thus.length; i++) {
-                            mealPresenterInterface.getSpecificMeal(thus[i]);
-                            if(i==thus.length-1)day++;
-                        }
+            public void onChanged(String s) {
+                thu = s;
+                if(s!=null){
+                    thus = s.split(",");
+                    for(int i=0;i< thus.length;i++){
+                        mealPresenterInterface.getSpecificMeal(thus[i]);
                     }
                 }
             }
         });
-        cls.getData(shP).observe(getActivity(), new Observer<UserEntity>() {
-            @Override
-            public void onChanged(UserEntity userEntity) {
-                if(day==7) {
-                    fri = userEntity.getFriday();
-                    if (fri != null) {
-                        fris = fri.split(",");
-                        for (int i = 0; i < fris.length; i++) {
-                            mealPresenterInterface.getSpecificMeal(fris[i]);
-                            if(i==fris.length-1)day++;
-                        }
-                    }
 
+        cls.getFridayFromDB(shP).observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                fri = s;
+                if(s!=null){
+                    fris = s.split(",");
+                    for(int i=0;i< fris.length;i++){
+                        mealPresenterInterface.getSpecificMeal(fris[i]);
+                    }
                 }
             }
         });
     }
     @Override
     public void showSpecificItem(RootMealDetail meals) {
-        System.out.println(Thread.currentThread().getId()+"============================================================="+threadSat);
-        if(threadSat==Thread.currentThread().getId()){
-            input1.add(meals.getMeals().get(0));
-            System.out.println("+++++++++++++++++++++++++++++++++++++++++");
+        if(sat.contains(meals.getMeals().get(0).strMeal)){
+            boolean flag = false;
+            for(int i=0 ;i<input1.size();i++){
+                if(meals.getMeals().get(0).strMeal.equals(input1.get(i).strMeal)){
+                    flag=true;
+                    break;
+                }
+            }
+            if(!flag)
+                input1.add(meals.getMeals().get(0));
             if (sats.length == input1.size()) {
-                adapter.setList(input1);
-                recyclerView1.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                adapter1.setList(input1);
+                recyclerView1.setAdapter(adapter1);
+                adapter1.notifyDataSetChanged();
             }
         }
-        if(threadSun==Thread.currentThread().getId()){
-            input2.add(meals.getMeals().get(0));
+        if(sun.contains(meals.getMeals().get(0).strMeal)){
+            boolean flag = false;
+            for(int i=0 ;i<input2.size();i++){
+                if(meals.getMeals().get(0).strMeal.equals(input2.get(i).strMeal)){
+                    flag=true;
+                    break;
+                }
+            }
+            if(!flag)
+                 input2.add(meals.getMeals().get(0));
             if (suns!=null&&suns.length == input2.size()) {
-                adapter.setList(input2);
-                recyclerView2.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                adapter2.setList(input2);
+                recyclerView2.setAdapter(adapter2);
+                adapter2.notifyDataSetChanged();
+            }
+       }
+        if(mon.contains(meals.getMeals().get(0).strMeal)){
+            boolean flag = false;
+            for(int i=0 ;i<input3.size();i++){
+                if(meals.getMeals().get(0).strMeal.equals(input3.get(i).strMeal)){
+                    flag=true;
+                    break;
+                }
+            }
+            if(!flag)
+                input3.add(meals.getMeals().get(0));
+            if (mons!=null&&mons.length == input3.size()) {
+                adapter3.setList(input3);
+                recyclerView3.setAdapter(adapter3);
+                adapter3.notifyDataSetChanged();
             }
         }
-    //    if(day==3){
-            input3.add(meals.getMeals().get(0));
-            if (mons!=null&&mons.length == input3.size()) {
-                adapter.setList(input3);
-                recyclerView3.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+        if(tue.contains(meals.getMeals().get(0).strMeal)){
+            boolean flag = false;
+            for(int i=0 ;i<input4.size();i++){
+                if(meals.getMeals().get(0).strMeal.equals(input4.get(i).strMeal)){
+                    flag=true;
+                    break;
+                }
             }
-      //  }
-     //   if(day==4){
-            input4.add(meals.getMeals().get(0));
+            if(!flag)
+                input4.add(meals.getMeals().get(0));
             if (tues!=null&&tues.length == input4.size()) {
-                adapter.setList(input4);
-                recyclerView4.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                adapter4.setList(input4);
+                recyclerView4.setAdapter(adapter4);
+                adapter4.notifyDataSetChanged();
             }
-      //  }
-       // if(day==5){
-            input5.add(meals.getMeals().get(0));
+        }
+
+        if(wed.contains(meals.getMeals().get(0).strMeal)){
+            boolean flag = false;
+            for(int i=0 ;i<input5.size();i++){
+                if(meals.getMeals().get(0).strMeal.equals(input5.get(i).strMeal)){
+                    flag=true;
+                    break;
+                }
+            }
+            if(!flag)
+                input5.add(meals.getMeals().get(0));
             if (weds!=null&&weds.length == input5.size()) {
-                adapter.setList(input5);
-                recyclerView5.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                adapter5.setList(input5);
+                recyclerView5.setAdapter(adapter5);
+                adapter5.notifyDataSetChanged();
             }
-     //   }
-     //   if(day==6){
-            input6.add(meals.getMeals().get(0));
+        }
+
+        if(thu.contains(meals.getMeals().get(0).strMeal)){
+            boolean flag = false;
+            for(int i=0 ;i<input6.size();i++){
+                if(meals.getMeals().get(0).strMeal.equals(input6.get(i).strMeal)){
+                    flag=true;
+                    break;
+                }
+            }
+            if(!flag)
+                input6.add(meals.getMeals().get(0));
             if (thus!=null&&thus.length == input6.size()) {
-                adapter.setList(input6);
-                recyclerView6.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                adapter6.setList(input6);
+                recyclerView6.setAdapter(adapter6);
+                adapter6.notifyDataSetChanged();
             }
-       // }
-      //  if(day==7){
-            input7.add(meals.getMeals().get(0));
+        }
+
+        if(fri.contains(meals.getMeals().get(0).strMeal)){
+            boolean flag = false;
+            for(int i=0 ;i<input7.size();i++){
+                if(meals.getMeals().get(0).strMeal.equals(input7.get(i).strMeal)){
+                    flag=true;
+                    break;
+                }
+            }
+            if(!flag)
+                input7.add(meals.getMeals().get(0));
             if (fris!=null&&fris.length == input7.size()) {
-                adapter.setList(input7);
-                recyclerView7.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                adapter7.setList(input7);
+                recyclerView7.setAdapter(adapter7);
+                adapter7.notifyDataSetChanged();
             }
-        //}
+        }
+    }
+
+    @Override
+    public void OnClick(MealDetail Meal , int source) {
+        if (source == 1) {
+            String s = sat.replaceAll(Meal.strMeal + ",", "");
+            input1.clear();
+            if (s != null) {
+                Arrays.fill(sats, null);
+                sats = s.split(",");
+                for (int i = 0; i < sats.length; i++) {
+                    mealPresenterInterface.getSpecificMeal(sats[i]);
+                }
+                adapter1.notifyDataSetChanged();
+                cls.updateSaturday(s, shP);
+            }
+        }
+
+        else if (source == 2) {
+            String s = sun.replaceAll(Meal.strMeal + ",", "");
+            input2.clear();
+            if (s != null) {
+                Arrays.fill(suns, null);
+                suns = s.split(",");
+                for (int i = 0; i < suns.length; i++) {
+                    mealPresenterInterface.getSpecificMeal(suns[i]);
+                }
+                adapter2.notifyDataSetChanged();
+                cls.updateSunday(s, shP);
+            }
+        }
+
+        else if (source == 3) {
+            String s = mon.replaceAll(Meal.strMeal + ",", "");
+            input3.clear();
+            if (s != null) {
+                Arrays.fill(mons, null);
+                mons = s.split(",");
+                for (int i = 0; i < mons.length; i++) {
+                    mealPresenterInterface.getSpecificMeal(mons[i]);
+                }
+                adapter3.notifyDataSetChanged();
+                cls.updateMonday(s, shP);
+            }
+        }
+
+        else if (source == 4) {
+            String s = tue.replaceAll(Meal.strMeal + ",", "");
+            input4.clear();
+            if (s != null) {
+                Arrays.fill(tues, null);
+                tues = s.split(",");
+                for (int i = 0; i < tues.length; i++) {
+                    mealPresenterInterface.getSpecificMeal(tues[i]);
+                }
+                adapter4.notifyDataSetChanged();
+                cls.updateTuesday(s, shP);
+            }
+        }
+
+        else if (source == 5) {
+            String s = wed.replaceAll(Meal.strMeal + ",", "");
+            input5.clear();
+            if (s != null) {
+                Arrays.fill(weds, null);
+                weds = s.split(",");
+                for (int i = 0; i < weds.length; i++) {
+                    mealPresenterInterface.getSpecificMeal(weds[i]);
+                }
+                adapter5.notifyDataSetChanged();
+                cls.updateWednesday(s, shP);
+            }
+        }
+
+        else if (source == 6) {
+            String s = thu.replaceAll(Meal.strMeal + ",", "");
+            input6.clear();
+            if (s != null) {
+                Arrays.fill(thus, null);
+                thus = s.split(",");
+                for (int i = 0; i < thus.length; i++) {
+                    mealPresenterInterface.getSpecificMeal(thus[i]);
+                }
+                adapter6.notifyDataSetChanged();
+                cls.updateThursday(s, shP);
+            }
+        }
+
+        else if (source == 7) {
+            String s = fri.replaceAll(Meal.strMeal + ",", "");
+            input7.clear();
+            if (s != null) {
+                Arrays.fill(fris, null);
+                fris = s.split(",");
+                for (int i = 0; i < fris.length; i++) {
+                    mealPresenterInterface.getSpecificMeal(fris[i]);
+                }
+                adapter7.notifyDataSetChanged();
+                cls.updateFriday(s, shP);
+            }
+        }
     }
 }

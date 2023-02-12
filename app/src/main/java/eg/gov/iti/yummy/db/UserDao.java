@@ -14,6 +14,29 @@ public interface UserDao {
     LiveData<UserEntity> login(String username, String password);
     @Query("Select * from UserData where userName=:username")
     LiveData<UserEntity> getData(String username);
+
+    @Query("Select saturday from UserData where userName=:username")
+    LiveData<String> getSaturdayFromDB(String username);
+
+    @Query("Select sunday from UserData where userName=:username")
+    LiveData<String> getSundayFromDB(String username);
+
+    @Query("Select monday from UserData where userName=:username")
+    LiveData<String> getMondayFromDB(String username);
+
+    @Query("Select tuesday from UserData where userName=:username")
+    LiveData<String> getTuesdayFromDB(String username);
+
+    @Query("Select wednesday from UserData where userName=:username")
+    LiveData<String> getWednesdayFromDB(String username);
+
+    @Query("Select thursday from UserData where userName=:username")
+    LiveData<String> getThursdayFromDB(String username);
+
+    @Query("Select friday from UserData where userName=:username")
+    LiveData<String> getFridayFromDB(String username);
+
+
     @Query("Update UserData set saturday=(:saturday) where userName=(:username)")
     void updateSaturday(String saturday , String username);
     @Query("Update UserData set sunday=(:sunday) where userName=(:username)")

@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,18 +37,14 @@ import eg.gov.iti.yummy.network.API_Client;
 
 public class Page_Favourite extends Fragment implements MealViewInterface , onFavouriteClickListener {
     RecyclerView recyclerView;
-
     ImageView delete;
-
     MealPresenterInterface mealPresenterInterface;
     ConcreteLocalSource cls;
     List<FavList> input;
     FavList favListItem;
     AdapterFavList adapterFavList;
-
     String[] favs;
-
-    String fav;
+    String fav,shP;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +64,7 @@ public class Page_Favourite extends Fragment implements MealViewInterface , onFa
         input = new ArrayList<>();
         cls = ConcreteLocalSource.getInstance(getContext());
         SharedPreferences pref = getActivity().getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
-        String shP = pref.getString("USERNAME", "N/A");
+        shP = pref.getString("USERNAME", "N/A");
         recyclerView = view.findViewById(R.id.recyclerView);
         delete = view.findViewById(R.id.imageViewDel);
         recyclerView.setHasFixedSize(true);
@@ -80,19 +77,7 @@ public class Page_Favourite extends Fragment implements MealViewInterface , onFa
             @Override
             public void onChanged(UserEntity userEntity) {
                 fav = userEntity.getFavourite();
-                if (fav != null) {
-                    favs = fav.split(",");
-                    for (int i = 0; i < favs.length; i++) {
-                        mealPresenterInterface.getSpecificMeal(favs[i]);
-                    }
-                }
-            }
-        });
-
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String newFav;
+                showFav(fav);
             }
         });
     }
@@ -100,6 +85,7 @@ public class Page_Favourite extends Fragment implements MealViewInterface , onFa
     @Override
     public void showSpecificItem(RootMealDetail meals) {
         favListItem = new FavList();
+        Log.i("ShowSpecificItem", "showSpecificItem: "+meals.getMeals().get(0).strMeal);
         favListItem.setName(meals.getMeals().get(0).strMeal);
         favListItem.setOrigin(meals.getMeals().get(0).strArea);
         favListItem.setThumbnail(meals.getMeals().get(0).strMealThumb);
@@ -110,9 +96,22 @@ public class Page_Favourite extends Fragment implements MealViewInterface , onFa
             adapterFavList.notifyDataSetChanged();
         }
     }
-
     @Override
     public void OnClick(FavList Meal) {
-
+        String newFav = fav.replaceAll(Meal.getName()+",","");
+        input.clear();
+        Arrays.fill(favs, null);
+        showFav(newFav);
+        adapterFavList.notifyDataSetChanged();
+        cls.updateFavourite(newFav,shP);
+    }
+    void showFav(String fav){
+        if (fav != null) {
+            favs = fav.split(",");
+            input.clear();
+            for (int i = 0; i < favs.length; i++) {
+                mealPresenterInterface.getSpecificMeal(favs[i]);
+            }
+        }
     }
 }

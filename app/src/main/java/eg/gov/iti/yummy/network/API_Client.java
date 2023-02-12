@@ -259,7 +259,7 @@ public class API_Client implements RemoteSource {
     @Override
     public void specificItem(DetailsNetworkDelegate detailsNetworkDelegate, String meal) {
         APIService = retrofit.create(API_Service.class);
-
+        Log.i(TAG, "specificItem: "+meal);
         Observable<RootMealDetail> rootSingle = APIService.getSpecificMeal(meal);
         rootSingle.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

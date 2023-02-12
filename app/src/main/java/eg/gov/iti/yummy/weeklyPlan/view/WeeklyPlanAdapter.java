@@ -26,9 +26,20 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
 
     private List<MealDetail> list;
 
+    onWeeklyPlanClickListener listener;
+
+    int source=0;
+
 
     public WeeklyPlanAdapter( List<MealDetail>list,Context context) {
         this.context = context;
+        this.list = list;
+    }
+
+    public WeeklyPlanAdapter( Context context,onWeeklyPlanClickListener _listener,int recSource,List<MealDetail>list) {
+        this.context = context;
+        this.listener = _listener;
+        source = recSource;
         this.list = list;
     }
 
@@ -50,6 +61,14 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
         Glide.with(context)
                 .load(list.get(position).strMealThumb)
                 .into(holder.imageView);
+        if(source==0)
+            holder.delete.setVisibility(View.GONE);
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.OnClick(list.get(position),source);
+            }
+        });
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +88,7 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
 
         public TextView txtTitle;
         public ImageView imageView;
+        public ImageView delete;
         public CardView layout;
 
 
@@ -76,6 +96,7 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
             super(v);
             layout = v.findViewById(R.id.homeAndPlanListItem);
             txtTitle = v.findViewById(R.id.textView1);
+            delete = v.findViewById(R.id.removeWeekPlan);
             imageView = v.findViewById(R.id.imageView1);
 
         }

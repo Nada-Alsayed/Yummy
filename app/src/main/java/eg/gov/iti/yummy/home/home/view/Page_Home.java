@@ -45,7 +45,6 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         super.onCreate(savedInstanceState);
 
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,8 +64,6 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         //viewPager.setAdapter(forYouAdapter);
         PresenterInterface.getRandomMealsForYou();
 
-
-//--------------------------------------------
         recyclerView = view.findViewById(R.id.myRecView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -76,7 +73,6 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         recyclerView.setAdapter(weeklyPlanAdapter);
         PresenterInterface.getRandomMealsTrending();
 
-//________________________________________________
         recyclerView1 = view.findViewById(R.id.myRecView1);
         recyclerView1.setHasFixedSize(true);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getContext());
@@ -85,12 +81,7 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         weeklyPlanAdapter1 = new WeeklyPlanAdapter(new ArrayList<>(),getContext());
         recyclerView1.setAdapter(weeklyPlanAdapter1);
         PresenterInterface.getRandomMealsNewDishes();
-
-
-//__________________________
-
     }
-
     @Override
     public void showDataForYou(List<MealDetail> Categories) {
         forYouAdapter.setList(Categories);
@@ -98,7 +89,6 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         viewPager.setAdapter(forYouAdapter);
         forYouAdapter.notifyDataSetChanged();
     }
-
     @Override
     public void showDataTrending(List<MealDetail> products) {
         weeklyPlanAdapter.setList(products);
@@ -106,7 +96,6 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         recyclerView.setAdapter(weeklyPlanAdapter);
         weeklyPlanAdapter.notifyDataSetChanged();
     }
-
     @Override
     public void showDataNewDishes(List<MealDetail> products2) {
         weeklyPlanAdapter1.setList(products2);
@@ -114,7 +103,6 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         recyclerView1.setAdapter(weeklyPlanAdapter1);
         weeklyPlanAdapter1.notifyDataSetChanged();
     }
-
 
     public class ViewPagerStack implements ViewPager.PageTransformer {
 
@@ -128,6 +116,5 @@ public class Page_Home extends Fragment implements HomeViewInterface {
             }
         }
     }
-
 }
 

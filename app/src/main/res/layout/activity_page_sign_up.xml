@@ -6,42 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".SignUp.view.Page_Sign_Up">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_main"
+        android:layout_width="240dp"
+        android:layout_height="197dp"
+        android:layout_marginTop="88dp"
+        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_logo"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="fork.json"
+        app:lottie_loop="true"
+        app:lottie_speed="1" />
+
     <ImageView
         android:id="@+id/img_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginBottom="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="84dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.179"
         app:srcCompat="@drawable/logosmaller" />
 
     <TextView
         android:id="@+id/txt_slogan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
         android:fontFamily="@font/aguafina_script"
         android:text="@string/planAway"
         android:textColor="#000000"
         android:textSize="50sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintEnd_toEndOf="@+id/img_logo"
+        app:layout_constraintHorizontal_bias="0.211"
         app:layout_constraintStart_toStartOf="@+id/img_logo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.274" />
+        app:layout_constraintTop_toTopOf="@+id/img_logo" />
 
     <ImageView
         android:id="@+id/imgViewUserName"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_slogan"
+        app:layout_constraintTop_toBottomOf="@+id/lottie_main"
         app:srcCompat="@drawable/user" />
 
     <com.google.android.material.textfield.TextInputEditText
@@ -118,7 +129,7 @@
         android:id="@+id/btnSignUp"
         android:layout_width="130dp"
         android:layout_height="55dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="124dp"
         android:backgroundTint="#D9D9D9"
         android:shadowColor="#D9D9D9"
         android:text="@string/signup"
@@ -135,11 +146,11 @@
         android:id="@+id/txtViewAlreadyHaveAcc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/haveAcc"
         android:textColor="#000000"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSignUp" />
 
@@ -155,6 +166,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toEndOf="@+id/txtViewAlreadyHaveAcc" />
+
+    <ImageView
+        android:id="@+id/signUpSkip"
+        android:layout_width="108dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/img_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/skip" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

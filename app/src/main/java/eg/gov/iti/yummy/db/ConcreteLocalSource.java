@@ -32,18 +32,47 @@ public class ConcreteLocalSource implements LocalSource {
 
     @Override
     public LiveData<UserEntity> login(String userName, String password) {
-//        new Thread(new Runnable() {
-//           @Override
-//           public void run() {
-//
-//           }
-//       }).start();
         return userDao.login(userName, password);
     }
 
     @Override
     public LiveData<UserEntity> getData(String username) {
         return userDao.getData(username);
+    }
+
+    @Override
+    public LiveData<String> getSaturdayFromDB(String username) {
+        return userDao.getSaturdayFromDB(username);
+    }
+
+    @Override
+    public LiveData<String> getSundayFromDB(String username) {
+        return userDao.getSundayFromDB(username);
+    }
+
+    @Override
+    public LiveData<String> getMondayFromDB(String username) {
+        return userDao.getMondayFromDB(username);
+    }
+
+    @Override
+    public LiveData<String> getTuesdayFromDB(String username) {
+        return userDao.getTuesdayFromDB(username);
+    }
+
+    @Override
+    public LiveData<String> getWednesdayFromDB(String username) {
+        return userDao.getWednesdayFromDB(username);
+    }
+
+    @Override
+    public LiveData<String> getThursdayFromDB(String username) {
+        return userDao.getThursdayFromDB(username);
+    }
+
+    @Override
+    public LiveData<String> getFridayFromDB(String username) {
+        return userDao.getFridayFromDB(username);
     }
 
     @Override
