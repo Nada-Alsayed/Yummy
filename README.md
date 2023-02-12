@@ -32,39 +32,52 @@ The GUI
 
 First the user is greated with the splash screen
 
-![1](https://user-images.githubusercontent.com/120793640/218337828-055550f2-7f91-4bff-8952-07195d15859c.jpg)
+![1 1](https://user-images.githubusercontent.com/120793640/218339149-d574001f-c766-4bba-b8c2-6aa366971cd7.jpg)
+
 
 then the sign up and sign in screens locally or using google account
 
-![2](https://user-images.githubusercontent.com/120793640/218337875-365f002e-04f7-482c-989f-f7d0b1c99d4c.jpg)![3](https://user-images.githubusercontent.com/120793640/218337880-6fdd54d7-e22b-458b-8b38-fd5f90fd2319.jpg)
+![2 2](https://user-images.githubusercontent.com/120793640/218339449-dc9b69df-47d9-49be-a009-c712dc1c47b4.jpg)                   ![3 3](https://user-images.githubusercontent.com/120793640/218339458-14f5ca74-2a6d-4462-bc91-12ddddce4fc3.jpg)
+
+
 
 then we have the home screen showing some recommended meals , trending and new dishes
 
-![4](https://user-images.githubusercontent.com/120793640/218337956-45a40266-91fb-4aae-9751-27c11c8333a0.jpg)
+![4 4](https://user-images.githubusercontent.com/120793640/218339478-f5527a2b-9d34-4853-8db7-921b7c4a4c4a.jpg)
+
 
 to the right of the home is the search screen showing 3 possible options categories,countries and ingredients
 
-![5](https://user-images.githubusercontent.com/120793640/218338049-ac65e3ae-07c2-42e8-81f7-b3d6a22accf2.jpg)
+![5 5](https://user-images.githubusercontent.com/120793640/218339494-f940210a-49d8-47bd-a091-8e7fdc07c626.jpg)
+
 
 and if we choose see all we get to see the full list of any of them
 
-![6](https://user-images.githubusercontent.com/120793640/218338066-2f243b77-42db-4f42-a9f2-34829a28ff63.jpg)
+![6 6](https://user-images.githubusercontent.com/120793640/218339510-13341cfb-0131-4d6a-82ff-c5043fc0662e.jpg)
 
 and choosing one will get us all the meals of that type
 
-![6 1](https://user-images.githubusercontent.com/120793640/218338206-ff426920-fbee-4e80-841f-ace8c09754ad.jpg)
+![6 11](https://user-images.githubusercontent.com/120793640/218339536-c3282a46-01ea-4f67-a5fb-2e109fd3adb1.jpg)
+
 
 then we can choose a specific meal to check out which would take us to the meal details screen showing the ingridients and the written and video steps to that meal and we can add the meal to the favourite list and to the week plan list to any day of the week
 
-![7](https://user-images.githubusercontent.com/120793640/218338264-30b2220e-cab8-488a-83b4-7f07680798c7.jpg)![8](https://user-images.githubusercontent.com/120793640/218338266-a31ef9f2-8c2c-4ba4-9815-72af2b0e3e71.jpg)![9](https://user-images.githubusercontent.com/120793640/218338270-470427e7-7dd8-42bb-b7b8-0b0bd1d02c54.jpg)
+![7 7](https://user-images.githubusercontent.com/120793640/218339550-092f6f2e-3e28-48b9-bdcf-382a4346eaed.jpg)              ![8 8](https://user-images.githubusercontent.com/120793640/218339554-872fef93-659b-415e-9aa6-fdeb754b07f1.jpg)                   ![9 9](https://user-images.githubusercontent.com/120793640/218339556-f45e270f-2824-4979-b1ee-9b16aea91262.jpg)
 
 then the week plan and the favourite screens showing previously added meals to both
+  
+![10 1](https://user-images.githubusercontent.com/120793640/218339563-b14ba8f2-ab51-4ba8-ada4-c0763fccb821.jpg)                  ![1 11](https://user-images.githubusercontent.com/120793640/218339578-27b487d8-4329-450e-a935-a52f33ab63e9.jpg)
 
-![10](https://user-images.githubusercontent.com/120793640/218338387-a57721b9-abdd-4baa-a08a-1a3fcb3e2aa2.jpg)![11](https://user-images.githubusercontent.com/120793640/218338393-b19d7a59-b7ad-49c6-ba15-a8296683d7cc.jpg)
 
 and finally the profile screen showing user name , picture , favourites and week plans and the log out button
 
-![12](https://user-images.githubusercontent.com/120793640/218338438-a84fd4f9-033b-4af5-be07-e3f1d202df74.jpg)
+
+
+
+![12 1](https://user-images.githubusercontent.com/120793640/218339589-24fb5c5f-ff55-4741-b7db-3b525b04c83c.jpg)
+
+
+
 
 
                         
