@@ -116,8 +116,14 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     }
 
     @Override
-    public void getOffMeal(Observable<MealDetail> meal) {
-
+    public void getOffMeal(LiveData<MealDetail> meal) {
+        meal.observe(new page_item_details(), new Observer<MealDetail>() {
+            @Override
+            public void onChanged(MealDetail mealDetail) {
+//                MealName.setText(meals.getMeals().get(0).strMeal);
+//                MealOrigin.setText(meals.getMeals().get(0).strArea);
+            }
+        });
     }
 
 
