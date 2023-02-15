@@ -342,7 +342,6 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
 
     @Override
     public void onClick(MealDetail meal) {
-
         addMeal(meal);
     }
 }

@@ -7,8 +7,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import eg.gov.iti.yummy.model.MealDetail;
+import eg.gov.iti.yummy.model.WeekPlan;
 
-@Database(entities = {UserEntity.class, MealDetail.class},version = 1)
+@Database(entities = {UserEntity.class, MealDetail.class, WeekPlan.class},version = 1)
 
 public abstract class AppDataBase extends RoomDatabase {
         private static AppDataBase appDataBase=null;

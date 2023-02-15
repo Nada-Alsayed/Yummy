@@ -33,7 +33,47 @@ public interface UserDao {
 
     @Query("Select exists(Select userName from UserData where userName=:username )")
     Observable<Boolean> is_Taken(String username);
-//
+
+    //insert meals in each day
+    @Query("Update WeekPlan set sat=(:saturday) ")
+    void updateSaturday(String saturday );
+    @Query("Update WeekPlan set sun=(:sunday) ")
+    void updateSunday(String sunday );
+
+    @Query("Update weekplan set mon=(:monday) ")
+    void updateMonday(String monday );
+
+    @Query("Update WeekPlan set tues=(:tuesday) ")
+    void updateTuesday(String tuesday);
+
+    @Query("Update WeekPlan set wed=(:wednesday) ")
+    void updateWednesday(String wednesday);
+
+    @Query("Update WeekPlan set thurs=(:thursday) ")
+    void updateThursday(String thursday );
+
+    @Query("Update WeekPlan set fri=(:friday) ")
+    void updateFriday(String friday );
+
+    //get meals by day
+    @Query("Select * From WeekPlan where fri=(:friday)")
+    Observable<List<MealDetail>> getFridayMeals(String friday);
+    @Query("Select * From WeekPlan where sat=(:saturday)")
+    Observable<List<MealDetail>> getSaturdayMeals(String saturday);
+    @Query("Select * From WeekPlan where sun=(:sunday)")
+    Observable<List<MealDetail>> getSundayMeals(String sunday);
+    @Query("Select * From WeekPlan where mon=(:monday)")
+    Observable<List<MealDetail>> getMondayMeals(String monday);
+
+    @Query("Select * From WeekPlan where tues=(:tuesday)")
+    Observable<List<MealDetail>> getTuesdayMeals(String tuesday);
+    @Query("Select * From WeekPlan where wed=(:wedday)")
+    Observable<List<MealDetail>> getWednesdayMeals(String wedday);
+
+    @Query("Select * From WeekPlan where thurs=(:thursday)")
+    Observable<List<MealDetail>> getThursdayMeals(String thursday);
+
+
 //    @Query("Select * from UserData where userName=:username")
 //    LiveData<UserEntity> getData(String username);
 //    @Query("Update UserData set saturday=(:saturday) where userName=(:username)")
