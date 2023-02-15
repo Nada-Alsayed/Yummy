@@ -24,5 +24,5 @@ public interface RepositoryInterface {
     public Observable<List<MealDetail>> getStoredMeals();
     public void deleteMeal(MealDetail meal);
     public void insertMeal(MealDetail meal);
-    public LiveData<MealDetail> getOfflineMeal(String name);
+    public Observable<MealDetail> getOfflineMeal(String name);
 }

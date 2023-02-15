@@ -10,7 +10,7 @@ import io.reactivex.rxjava3.core.Observable;
 public interface LocalSource {
     void insertMeal(MealDetail meal);
     void deleteMeal(MealDetail meal);
-    LiveData<MealDetail> getOfflineMeal(String mealName);
+    Observable<MealDetail> getOfflineMeal(String mealName);
     void registerUser(UserEntity userEntity);
     Observable<List<MealDetail>> getAllStoredMeals();
     String login(String userName, String password);

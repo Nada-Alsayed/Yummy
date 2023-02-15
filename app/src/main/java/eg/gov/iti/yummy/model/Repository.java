@@ -1,6 +1,7 @@
 package eg.gov.iti.yummy.model;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -80,7 +81,8 @@ public class Repository implements RepositoryInterface{
     }
 
     @Override
-    public LiveData<MealDetail> getOfflineMeal(String name) {
+    public Observable<MealDetail> getOfflineMeal(String name) {
+        Log.e("joo", "getOfflineMeal:rebo ");
        return localSource.getOfflineMeal(name);
     }
 

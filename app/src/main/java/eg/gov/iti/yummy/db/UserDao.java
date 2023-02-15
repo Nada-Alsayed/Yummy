@@ -22,7 +22,7 @@ public interface UserDao {
     @Query("Select * From MealData")
     Observable<List<MealDetail>> getAllProducts();
     @Query("Select * From MealData Where strMeal=:mealName")
-    LiveData<MealDetail> getOfflineMeal(String mealName);
+    Observable<MealDetail> getOfflineMeal(String mealName);
 
     @Delete
     void deleteMeal(MealDetail meal);

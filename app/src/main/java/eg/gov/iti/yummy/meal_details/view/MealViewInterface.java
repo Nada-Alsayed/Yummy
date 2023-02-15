@@ -8,6 +8,6 @@ import io.reactivex.rxjava3.core.Observable;
 
 public interface MealViewInterface {
     public void addMeal(MealDetail meal);
-    public void getOffMeal(LiveData<MealDetail> meal);
+    //public void getOffMeal(LiveData<MealDetail> meal);
     public void showSpecificItem(RootMealDetail meals);
 }

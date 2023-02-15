@@ -64,7 +64,8 @@ public class ConcreteLocalSource implements LocalSource {
     }
 
     @Override
-    public LiveData<MealDetail> getOfflineMeal(String mealName) {
+    public Observable<MealDetail> getOfflineMeal(String mealName) {
+        Log.e("joo", "getOfflineMeal:concrete localso ");
         return userDao.getOfflineMeal(mealName);
     }
 
