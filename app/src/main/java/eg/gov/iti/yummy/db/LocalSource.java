@@ -9,6 +9,13 @@ import eg.gov.iti.yummy.model.WeekPlan;
 import io.reactivex.rxjava3.core.Observable;
 
 public interface LocalSource {
+    Observable<List<WeekPlan>>getSundayMeals();
+    Observable<List<WeekPlan>>getMondayMeals();
+    Observable<List<WeekPlan>>getTuesdayMeals();
+    Observable<List<WeekPlan>>getWeddayMeals();
+    Observable<List<WeekPlan>>getThursdayMeals();
+    Observable<List<WeekPlan>>getSatdayMeals();
+    Observable<List<WeekPlan>>getFridayMeals();
     void insertMeal(MealDetail meal);
     void insertMealToWeekPlan(WeekPlan meal);
     void deleteMeal(MealDetail meal);

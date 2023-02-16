@@ -29,7 +29,7 @@
         tools:layout="@layout/fragment_page__favourite" />
     <fragment
         android:id="@+id/page_Week_Plan"
-        android:name="eg.gov.iti.yummy.weeklyPlan.view.Page_Week_Plan"
+        android:name="eg.gov.iti.yummy.weeklyPlan.view.view.Page_Week_Plan"
         android:label="fragment_page__week__plan"
         tools:layout="@layout/fragment_page__week__plan" />
     <fragment

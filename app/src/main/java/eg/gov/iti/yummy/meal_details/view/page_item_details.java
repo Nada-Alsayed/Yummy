@@ -34,6 +34,7 @@ import eg.gov.iti.yummy.meal_details.presenter.MealPresenterInterface;
 import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.model.RootMealDetail;
+import eg.gov.iti.yummy.model.WeekPlan;
 import eg.gov.iti.yummy.network.API_Client;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observer;
@@ -144,36 +145,48 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         btnAddToWeekPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WeekMeals week=new WeekMeals();
+                //WeekMeals week=new WeekMeals();
+                WeekPlan weekPlan=new WeekPlan(
+                        rootMealDetail.meals.get(0).idMeal,
+                        rootMealDetail.meals.get(0).strMeal,
+                        rootMealDetail.meals.get(0).strCategory,
+                        rootMealDetail.meals.get(0).strArea,
+                        rootMealDetail.meals.get(0).strInstructions,
+                        rootMealDetail.meals.get(0).strMealThumb,
+                        rootMealDetail.meals.get(0).strIngredient1,rootMealDetail.meals.get(0).strIngredient2,
+                        rootMealDetail.meals.get(0).strIngredient3,rootMealDetail.meals.get(0).strIngredient4,
+                        rootMealDetail.meals.get(0).strIngredient5,rootMealDetail.meals.get(0).strIngredient6,
+                        rootMealDetail.meals.get(0).strIngredient7,rootMealDetail.meals.get(0).strIngredient8,
+                        rootMealDetail.meals.get(0).strIngredient9,rootMealDetail.meals.get(0).strIngredient10);
                 if(satBox.isChecked())
-                    week.setSat("1");
+                    weekPlan.sat="1";
                 else
-                    week.setSat("0");
+                    weekPlan.sat="0";
                 if(sunBox.isChecked())
-                    week.setSun("1");
+                    weekPlan.sun="1";
                 else
-                    week.setSun("0");
+                    weekPlan.sun="0";
                 if(monBox.isChecked())
-                    week.setMon("1");
+                    weekPlan.mon="1";
                 else
-                    week.setMon("0");
+                    weekPlan.mon="0";
                 if(tueBox.isChecked())
-                    week.setTues("1");
+                    weekPlan.tues="1";
                 else
-                    week.setTues("0");
+                    weekPlan.tues="0";
                 if(thuBox.isChecked())
-                    week.setThurs("1");
+                    weekPlan.thurs="1";
                 else
-                    week.setThurs("0");
+                    weekPlan.thurs="0";
                 if(friBox.isChecked())
-                    week.setFri("1");
+                    weekPlan.fri="1";
                 else
-                    week.setFri("0");
+                    weekPlan.fri="0";
                 if(wedBox.isChecked())
-                    week.setWed("1");
+                    weekPlan.wed="1";
                 else
-                    week.setWed("0");
-                addMealsToWeekPlanOnClick(rootMealDetail.meals.get(0),week);
+                    weekPlan.wed="0";
+                addMealsToWeekPlanOnClick(weekPlan);
             }
         });
 
@@ -188,40 +201,6 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     public void addMealToFav(MealDetail meal) {
         mealPresenterInterface.addToFav(meal);
     }
-
-//    @Override
-//    public void getOffMeal(LiveData<MealDetail> meal) {
-//        meal.observe(new page_item_details(), new Observer<MealDetail>() {
-//            @Override
-//            public void onChanged(MealDetail mealDetail) {
-//                Log.e("TAG", "onChanged: kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk ");
-//                MealName.setText(mealDetail.strMeal);
-//                MealOrigin.setText(mealDetail.strArea);
-//                prepareOffIngredients(mealDetail);
-//                adapter =new IngredientsAdapter(myIngredients,getApplicationContext());
-//                recyclerView.setAdapter(adapter);
-//                String thumb = "https://www.themealdb.com/images/ingredients/"+mealDetail.strIngredient1+".png";
-//                myIngredients.add(new Recipe(mealDetail.strIngredient1,mealDetail.strMeasure1,thumb));
-//                if(!mealDetail.strYoutube.equals("")) {
-//                    String[] arr =mealDetail.strYoutube.split("=");
-//                    youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-//                        @Override
-//                        public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-//                            super.onReady(youTubePlayer);
-//                            youTubePlayer.loadVideo(arr[1], 0);
-//                        }
-//                    });
-//                }
-//                steps.setText(mealDetail.strInstructions);
-//                Glide.with(getApplicationContext())
-//                        .load(mealDetail.strMealThumb)
-//                        .into(mealPic);
-//
-//            }
-//        });
-//    }
-
-
     @Override
     public void showSpecificItem(RootMealDetail meals) {
         rootMealDetail = meals;
@@ -382,11 +361,11 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     }
 
     @Override
-    public void addMealsToWeekPlanOnClick(MealDetail meal,WeekMeals week) {
-        addMealsToWeekPlan(meal,week);
+    public void addMealsToWeekPlanOnClick(WeekPlan meal) {
+        addMealsToWeekPlan(meal);
     }
 
-    private void addMealsToWeekPlan(MealDetail meal,WeekMeals week) {
-        mealPresenterInterface.addToWeekPlan(meal,week);
+    private void addMealsToWeekPlan(WeekPlan meal) {
+        mealPresenterInterface.addToWeekPlan(meal);
     }
 }

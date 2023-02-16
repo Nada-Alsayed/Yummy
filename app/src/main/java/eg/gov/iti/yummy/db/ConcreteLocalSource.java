@@ -36,6 +36,41 @@ public class ConcreteLocalSource implements LocalSource {
 
 
     @Override
+    public Observable<List<WeekPlan>> getSundayMeals() {
+        return userDao.getSundayMeals("1");
+    }
+
+    @Override
+    public Observable<List<WeekPlan>> getMondayMeals() {
+        return userDao.getMondayMeals("1");
+    }
+
+    @Override
+    public Observable<List<WeekPlan>> getTuesdayMeals() {
+        return userDao.getTuesdayMeals("1");
+    }
+
+    @Override
+    public Observable<List<WeekPlan>> getWeddayMeals() {
+        return userDao.getWednesdayMeals("1");
+    }
+
+    @Override
+    public Observable<List<WeekPlan>> getThursdayMeals() {
+        return userDao.getThursdayMeals("1");
+    }
+
+    @Override
+    public Observable<List<WeekPlan>> getSatdayMeals() {
+        return userDao.getSaturdayMeals("1");
+    }
+
+    @Override
+    public Observable<List<WeekPlan>> getFridayMeals() {
+        return userDao.getFridayMeals("1");
+    }
+
+    @Override
     public void insertMeal(MealDetail meal) {
         userDao.insertMeal(meal).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
             @Override

@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.weeklyPlan.view;
+package eg.gov.iti.yummy.weeklyPlan.view.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,18 +18,17 @@ import java.util.List;
 import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.meal_details.view.page_item_details;
 import eg.gov.iti.yummy.model.MealDetail;
+import eg.gov.iti.yummy.model.WeekPlan;
 
 
 public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.ViewHolder> {
 
     private final Context context;
+    private List<WeekPlan> list1;
 
-    private List<MealDetail> list;
-
-
-    public WeeklyPlanAdapter( List<MealDetail>list,Context context) {
+    public WeeklyPlanAdapter(Context context,List<WeekPlan> list1) {
+        this.list1 = list1;
         this.context = context;
-        this.list = list;
     }
 
     @Override
@@ -40,15 +39,15 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
         return vh;
     }
 
-    public void setList(List<MealDetail> list) {
-        this.list = list;
+    public void setListweek(List<WeekPlan> list1) {
+        this.list1 = list1;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.txtTitle.setText(list.get(position).strMeal);
+        holder.txtTitle.setText(list1.get(position).strMeal);
         Glide.with(context)
-                .load(list.get(position).strMealThumb)
+                .load(list1.get(position).strMealThumb)
                 .into(holder.imageView);
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,15 +61,13 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return list.size();
+      return list1.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         public TextView txtTitle;
         public ImageView imageView;
         public CardView layout;
-
 
         public ViewHolder(View v) {
             super(v);

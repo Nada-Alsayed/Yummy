@@ -25,6 +25,15 @@ public interface RepositoryInterface {
     public void deleteMeal(MealDetail meal);
     public void insertMeal(MealDetail meal);
     public void insertMealIntoWeek(WeekPlan meal);
+
+    public Observable<List<WeekPlan>> getStoredFriMeals();
+    public Observable<List<WeekPlan>> getStoredSatMeals();
+    public Observable<List<WeekPlan>> getStoredSunMeals();
+    public Observable<List<WeekPlan>> getStoredMonMeals();
+    public Observable<List<WeekPlan>> getStoredTuesMeals();
+    public Observable<List<WeekPlan>> getStoredWedMeals();
+    public Observable<List<WeekPlan>> getStoredThursMeals();
+
     public void updateSat(String x);
     public void updateSun(String x);
     public void updateMon(String x);

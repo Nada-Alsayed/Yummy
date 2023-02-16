@@ -66,21 +66,21 @@ public interface UserDao {
 
     //get meals by day
     @Query("Select * From WeekPlan where fri=(:friday)")
-    Observable<List<MealDetail>> getFridayMeals(String friday);
+    Observable<List<WeekPlan>> getFridayMeals(String friday);
     @Query("Select * From WeekPlan where sat=(:saturday)")
-    Observable<List<MealDetail>> getSaturdayMeals(String saturday);
+    Observable<List<WeekPlan>>  getSaturdayMeals(String saturday);
     @Query("Select * From WeekPlan where sun=(:sunday)")
-    Observable<List<MealDetail>> getSundayMeals(String sunday);
+    Observable<List<WeekPlan>>  getSundayMeals(String sunday);
     @Query("Select * From WeekPlan where mon=(:monday)")
-    Observable<List<MealDetail>> getMondayMeals(String monday);
+    Observable<List<WeekPlan>>getMondayMeals(String monday);
 
     @Query("Select * From WeekPlan where tues=(:tuesday)")
-    Observable<List<MealDetail>> getTuesdayMeals(String tuesday);
+    Observable<List<WeekPlan>> getTuesdayMeals(String tuesday);
     @Query("Select * From WeekPlan where wed=(:wedday)")
-    Observable<List<MealDetail>> getWednesdayMeals(String wedday);
+    Observable<List<WeekPlan>> getWednesdayMeals(String wedday);
 
     @Query("Select * From WeekPlan where thurs=(:thursday)")
-    Observable<List<MealDetail>> getThursdayMeals(String thursday);
+    Observable<List<WeekPlan>> getThursdayMeals(String thursday);
 
 
 //    @Query("Select * from UserData where userName=:username")

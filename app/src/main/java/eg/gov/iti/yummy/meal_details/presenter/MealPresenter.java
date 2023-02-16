@@ -9,6 +9,7 @@ import eg.gov.iti.yummy.meal_details.view.WeekMeals;
 import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.model.RootMealDetail;
+import eg.gov.iti.yummy.model.WeekPlan;
 import eg.gov.iti.yummy.network.DetailsNetworkDelegate;
 import io.reactivex.rxjava3.core.Observable;
 
@@ -32,16 +33,16 @@ public class MealPresenter implements MealPresenterInterface, DetailsNetworkDele
     }
 
     @Override
-    public void addToWeekPlan(MealDetail meal,WeekMeals week) {
-       // repository.insertMealIntoWeek(meal);
-        Log.e("ee", "addToWeekPlan: "+week.getFri() );
-        repository.updateTues(week.getTues());
+    public void addToWeekPlan(WeekPlan meal) {
+        repository.insertMealIntoWeek(meal);
+        //Log.e("ee", "addToWeekPlan: "+week.getFri() );
+       /* repository.updateTues(week.getTues());
         repository.updateSat(week.getSat());
         repository.updateSun(week.getSun());
         repository.updateMon(week.getMon());
         repository.updateThurs(week.getThurs());
         repository.updateFri(week.getFri());
-        repository.updateWed(week.getWed());
+        repository.updateWed(week.getWed());*/
     }
 
 

@@ -86,6 +86,41 @@ public class Repository implements RepositoryInterface{
     }
 
     @Override
+    public Observable<List<WeekPlan>> getStoredFriMeals() {
+        return localSource.getFridayMeals();
+    }
+
+    @Override
+    public Observable<List<WeekPlan>> getStoredSatMeals() {
+        return localSource.getSatdayMeals();
+    }
+
+    @Override
+    public Observable<List<WeekPlan>> getStoredSunMeals() {
+        return localSource.getSundayMeals();
+    }
+
+    @Override
+    public Observable<List<WeekPlan>> getStoredMonMeals() {
+        return localSource.getMondayMeals();
+    }
+
+    @Override
+    public Observable<List<WeekPlan>> getStoredTuesMeals() {
+        return localSource.getTuesdayMeals();
+    }
+
+    @Override
+    public Observable<List<WeekPlan>> getStoredWedMeals() {
+        return localSource.getWeddayMeals();
+    }
+
+    @Override
+    public Observable<List<WeekPlan>> getStoredThursMeals() {
+        return localSource.getThursdayMeals();
+    }
+
+    @Override
     public void updateSat(String x) {
         localSource.updateSaturday(x);
     }

@@ -1,7 +1,5 @@
 package eg.gov.iti.yummy.home.home.view;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,10 +23,7 @@ import eg.gov.iti.yummy.home.home.presenter.HomePresenterInterface;
 import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.network.API_Client;
-import eg.gov.iti.yummy.weeklyPlan.view.WeeklyPlanAdapter;
-import okhttp3.Interceptor;
-import okhttp3.Request;
-import okhttp3.Response;
+import eg.gov.iti.yummy.weeklyPlan.view.view.WeeklyPlanAdapter;
 
 public class Page_Home extends Fragment implements HomeViewInterface {
     ViewPager viewPager;
@@ -39,7 +33,7 @@ public class Page_Home extends Fragment implements HomeViewInterface {
 
     RecyclerView recyclerView, recyclerView1;
 
-    WeeklyPlanAdapter weeklyPlanAdapter,weeklyPlanAdapter1;
+    HomeAdaptor weeklyPlanAdapter,weeklyPlanAdapter1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,7 +67,7 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-        weeklyPlanAdapter = new WeeklyPlanAdapter(new ArrayList<>(),getContext());
+        weeklyPlanAdapter = new HomeAdaptor(new ArrayList<>(),getContext());
         recyclerView.setAdapter(weeklyPlanAdapter);
         PresenterInterface.getRandomMealsTrending();
 
@@ -83,7 +77,7 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getContext());
         layoutManager1.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView1.setLayoutManager(layoutManager1);
-        weeklyPlanAdapter1 = new WeeklyPlanAdapter(new ArrayList<>(),getContext());
+        weeklyPlanAdapter1 = new HomeAdaptor(new ArrayList<>(),getContext());
         recyclerView1.setAdapter(weeklyPlanAdapter1);
         PresenterInterface.getRandomMealsNewDishes();
 
