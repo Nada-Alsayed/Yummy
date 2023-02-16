@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import eg.gov.iti.yummy.model.MealDetail;
+import eg.gov.iti.yummy.model.WeekPlan;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.CompletableObserver;
 import io.reactivex.rxjava3.core.Observable;
@@ -49,6 +50,25 @@ public class ConcreteLocalSource implements LocalSource {
             @Override
             public void onError(@NonNull Throwable e) {
                 Log.e("HI", "failed insert meal: ++++++++++++++++++++++++concrete localsource ");
+            }
+        });
+    }
+
+    @Override
+    public void insertMealToWeekPlan(WeekPlan meal) {
+        userDao.insertMealToWeekPlan(meal).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+            @Override
+            public void onComplete() {
+                Log.e("HI", "success insert meal into week: +++++++++++++++++++++++concrete localsource ");
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.e("HI", "failed insert meal into week: ++++++++++++++++++++++++concrete localsource ");
             }
         });
     }
@@ -111,6 +131,165 @@ public class ConcreteLocalSource implements LocalSource {
                         error -> error.printStackTrace()).toString();
         return c;
     }
+
+    @Override
+    public void updateSaturday(String saturday) {
+        userDao.updateSaturday(saturday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("HI", "++++++++++++++success insert sat: concrete localsource ");
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.e("HI", "failed insert thurs: concrete localsource ");
+
+            }
+        });
+    }
+
+    @Override
+    public void updateSunday(String sunday) {
+        userDao.updateSunday(sunday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("HI", "++++++++++++++success insert sun: concrete localsource ");
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.e("HI", "failed insert thurs: concrete localsource ");
+
+            }
+        });
+    }
+
+    @Override
+    public void updateMonday(String monday) {
+        userDao.updateMonday(monday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("HI", "++++++++++++++success insert mon: concrete localsource ");
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.e("HI", "failed insert thurs: concrete localsource ");
+
+            }
+        });
+    }
+
+    @Override
+    public void updateTuesday(String tuesday) {
+        userDao.updateTuesday(tuesday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("HI", "++++++++++++++success insert tues: concrete localsource ");
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.e("HI", "failed insert thurs: concrete localsource ");
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Override
+    public void updateWednesday(String wednesday) {
+        userDao.updateWednesday(wednesday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("HI", "++++++++++++++success insert wed: concrete localsource ");
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.e("HI", "failed insert thurs: concrete localsource ");
+
+            }
+        });
+    }
+
+    @Override
+    public void updateThursday(String thursday) {
+        userDao.updateThursday(thursday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("HI", "++++++++++++++success insert thurs: concrete localsource ");
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.e("HI", "failed insert thurs: concrete localsource ");
+
+            }
+        });
+    }
+
+    @Override
+    public void updateFriday(String friday) {
+        userDao.updateFriday(friday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("HI", "++++++++++++++success insert fri: concrete localsource ");
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.e("HI", "failed insert thurs: concrete localsource ");
+
+            }
+        });
+    }
+
+//    @Override
+//    public void updateFavourite(String favourite) {
+//
+//    }
 
 
 //

@@ -51,7 +51,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     IngredientsAdapter adapter;
     ConcreteLocalSource cls;
     RootMealDetail rootMealDetail;
-    String fav, sat, sun, mon, tue, wed, thu, fri;
+    int  sat, sun, mon, tue, wed, thu, fri;
     Button btnAddToFav, btnAddToWeekPlan;
     CheckBox satBox, sunBox, monBox, tueBox, wedBox, thuBox, friBox;
 
@@ -137,7 +137,43 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         btnAddToFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addMeal(rootMealDetail.meals.get(0));
+                addMealToFavOnClick(rootMealDetail.meals.get(0));
+            }
+        });
+
+        btnAddToWeekPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WeekMeals week=new WeekMeals();
+                if(satBox.isChecked())
+                    week.setSat("1");
+                else
+                    week.setSat("0");
+                if(sunBox.isChecked())
+                    week.setSun("1");
+                else
+                    week.setSun("0");
+                if(monBox.isChecked())
+                    week.setMon("1");
+                else
+                    week.setMon("0");
+                if(tueBox.isChecked())
+                    week.setTues("1");
+                else
+                    week.setTues("0");
+                if(thuBox.isChecked())
+                    week.setThurs("1");
+                else
+                    week.setThurs("0");
+                if(friBox.isChecked())
+                    week.setFri("1");
+                else
+                    week.setFri("0");
+                if(wedBox.isChecked())
+                    week.setWed("1");
+                else
+                    week.setWed("0");
+                addMealsToWeekPlanOnClick(rootMealDetail.meals.get(0),week);
             }
         });
 
@@ -149,7 +185,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     }
 
     @Override
-    public void addMeal(MealDetail meal) {
+    public void addMealToFav(MealDetail meal) {
         mealPresenterInterface.addToFav(meal);
     }
 
@@ -341,7 +377,16 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     }
 
     @Override
-    public void onClick(MealDetail meal) {
-        addMeal(meal);
+    public void addMealToFavOnClick(MealDetail meal) {
+        addMealToFav(meal);
+    }
+
+    @Override
+    public void addMealsToWeekPlanOnClick(MealDetail meal,WeekMeals week) {
+        addMealsToWeekPlan(meal,week);
+    }
+
+    private void addMealsToWeekPlan(MealDetail meal,WeekMeals week) {
+        mealPresenterInterface.addToWeekPlan(meal,week);
     }
 }

@@ -24,5 +24,13 @@ public interface RepositoryInterface {
     public Observable<List<MealDetail>> getStoredMeals();
     public void deleteMeal(MealDetail meal);
     public void insertMeal(MealDetail meal);
+    public void insertMealIntoWeek(WeekPlan meal);
+    public void updateSat(String x);
+    public void updateSun(String x);
+    public void updateMon(String x);
+    public void updateTues(String x);
+    public void updateWed(String x);
+    public void updateThurs(String x);
+    public void updateFri(String x);
     public Observable<MealDetail> getOfflineMeal(String name);
 }

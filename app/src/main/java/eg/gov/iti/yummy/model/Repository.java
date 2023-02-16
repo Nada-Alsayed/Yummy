@@ -81,6 +81,46 @@ public class Repository implements RepositoryInterface{
     }
 
     @Override
+    public void insertMealIntoWeek(WeekPlan meal) {
+        localSource.insertMealToWeekPlan(meal);
+    }
+
+    @Override
+    public void updateSat(String x) {
+        localSource.updateSaturday(x);
+    }
+
+    @Override
+    public void updateSun(String x) {
+        localSource.updateSunday(x);
+    }
+
+    @Override
+    public void updateMon(String x) {
+        localSource.updateMonday(x);
+    }
+
+    @Override
+    public void updateTues(String x) {
+        localSource.updateTuesday(x);
+    }
+
+    @Override
+    public void updateWed(String x) {
+        localSource.updateWednesday(x);
+    }
+
+    @Override
+    public void updateThurs(String x) {
+        localSource.updateThursday(x);
+    }
+
+    @Override
+    public void updateFri(String x) {
+        localSource.updateFriday(x);
+    }
+
+    @Override
     public Observable<MealDetail> getOfflineMeal(String name) {
         Log.e("joo", "getOfflineMeal:rebo ");
        return localSource.getOfflineMeal(name);

@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 public class WeekPlan {
     @PrimaryKey(autoGenerate = true)
     @NotNull
-    public String id;
+    public Integer id;
     @ColumnInfo(defaultValue = "")
     public String sat;
     @ColumnInfo(defaultValue = "")
