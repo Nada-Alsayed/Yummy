@@ -25,7 +25,8 @@ public interface UserDao {
     Observable<List<MealDetail>> getAllProducts();
     @Query("Select * From MealData Where strMeal=:mealName")
     Observable<MealDetail> getOfflineMeal(String mealName);
-
+    @Query("Select * From WeekPlan Where strMeal=:mealName")
+    Observable<WeekPlan> getOfflineMealWeek(String mealName);
     @Delete
     void deleteMeal(MealDetail meal);
     @Insert(onConflict = OnConflictStrategy.REPLACE)

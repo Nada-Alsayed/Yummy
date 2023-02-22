@@ -12,4 +12,5 @@ public interface MealPresenterInterface {
     public void getSpecificMeal(String meal);
     public void addToWeekPlan(WeekPlan meal);
     public Observable<MealDetail> getOffMeal(String meal);
+    public Observable<WeekPlan> getOffMealWeek(String meal);
 }

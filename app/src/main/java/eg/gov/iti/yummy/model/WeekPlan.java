@@ -37,25 +37,45 @@ public class WeekPlan {
     public String strMealThumb;
     public String strTags;
     public String strYoutube;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient1;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient2;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient3;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient4;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient5;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient6;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient7;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient8;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient9;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient10;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient11;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient12;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient13;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient14;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient15;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient16;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient17;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient18;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient19;
+    @ColumnInfo(defaultValue = "")
     public String strIngredient20;
     public String strMeasure1;
     public String strMeasure2;
@@ -86,7 +106,19 @@ public class WeekPlan {
     @Ignore
     public Object dateModified;
 
-    public WeekPlan(String idMeal, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6,String strIngredient7,String strIngredient8, String strIngredient9,String strIngredient10) {
+    public WeekPlan(String idMeal, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb,
+                    String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4,
+                    String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8,
+                    String strIngredient9, String strIngredient10, String strIngredient11,
+                    String strIngredient12,
+                    String strIngredient13,
+                    String strIngredient14,
+                    String strIngredient15,
+                    String strIngredient16,
+                    String strIngredient17,
+                    String strIngredient18,
+                    String strIngredient19,
+                    String strIngredient20) {
         this.idMeal = idMeal;
         this.strMeal = strMeal;
         this.strCategory = strCategory;
@@ -103,5 +135,15 @@ public class WeekPlan {
         this.strIngredient8 = strIngredient8;
         this.strIngredient9 = strIngredient9;
         this.strIngredient10 = strIngredient10;
+        this.strIngredient11 = strIngredient11;
+        this.strIngredient12 = strIngredient12;
+        this.strIngredient13 = strIngredient13;
+        this.strIngredient14 = strIngredient14;
+        this.strIngredient15 = strIngredient15;
+        this.strIngredient16 = strIngredient16;
+        this.strIngredient17 = strIngredient17;
+        this.strIngredient18 = strIngredient18;
+        this.strIngredient19 = strIngredient19;
+        this.strIngredient20 = strIngredient20;
     }
 }

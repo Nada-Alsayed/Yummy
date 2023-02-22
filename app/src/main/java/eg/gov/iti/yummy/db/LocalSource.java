@@ -20,6 +20,7 @@ public interface LocalSource {
     void insertMealToWeekPlan(WeekPlan meal);
     void deleteMeal(MealDetail meal);
     Observable<MealDetail> getOfflineMeal(String mealName);
+    Observable<WeekPlan> getOfflineMealWeek(String mealName);
     void registerUser(UserEntity userEntity);
     Observable<List<MealDetail>> getAllStoredMeals();
     String login(String userName, String password);

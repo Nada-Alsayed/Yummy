@@ -125,6 +125,12 @@ public class ConcreteLocalSource implements LocalSource {
     }
 
     @Override
+    public Observable<WeekPlan> getOfflineMealWeek(String mealName) {
+        Log.e("joo", "getOfflineMealWeek:concrete localso ");
+        return userDao.getOfflineMealWeek(mealName);
+    }
+
+    @Override
     public void registerUser(UserEntity userEntity) {
         userDao.registerUser(userEntity).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
             @Override

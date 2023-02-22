@@ -42,4 +42,5 @@ public interface RepositoryInterface {
     public void updateThurs(String x);
     public void updateFri(String x);
     public Observable<MealDetail> getOfflineMeal(String name);
+    public Observable<WeekPlan> getOfflineMealWeek(String name);
 }

@@ -54,6 +54,7 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
             public void onClick(View v) {
                 Intent intent = new Intent(context, page_item_details.class);
                 intent.putExtra("MealName",holder.txtTitle.getText().toString());
+                intent.putExtra("tableType","weekPlan");
                 context.startActivity(intent);
             }
         });

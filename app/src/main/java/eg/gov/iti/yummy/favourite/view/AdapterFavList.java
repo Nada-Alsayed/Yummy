@@ -76,6 +76,7 @@ public class AdapterFavList extends RecyclerView.Adapter<AdapterFavList.Holder> 
             public void onClick(View v) {
                 Intent intent = new Intent(context, page_item_details.class);
                 intent.putExtra("MealName",holder.title.getText().toString());
+                intent.putExtra("tableType","favourite");
                 context.startActivity(intent);
             }
         });

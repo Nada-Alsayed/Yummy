@@ -162,6 +162,12 @@ public class Repository implements RepositoryInterface{
     }
 
     @Override
+    public Observable<WeekPlan> getOfflineMealWeek(String name) {
+        Log.e("joo", "getOfflineMeal:rebo ");
+        return localSource.getOfflineMealWeek(name);
+    }
+
+    @Override
     public void getAllCategoriesFromRetrofit(SearchNetworkDelegate searchNetworkDelegate) {
         remoteSource.allCategories(searchNetworkDelegate);
     }

@@ -79,6 +79,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
 
 
         Intent intent = getIntent();
+        String tableName =intent.getStringExtra("tableType");
         String mealName = intent.getStringExtra("MealName");
         youTubePlayerView = findViewById(R.id.videoView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, GridLayoutManager.HORIZONTAL, false);
@@ -98,14 +99,11 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         if (isNetworkAvailable(getApplicationContext())) {
             mealPresenterInterface.getSpecificMeal(mealName);
             Toast.makeText(this, " connected", Toast.LENGTH_SHORT).show();
-        } else {
+        } else if(tableName.equals("favourite")) {
             mealPresenterInterface.getOffMeal(mealName).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<MealDetail>() {
                 @Override
-                public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
-
-                }
-
+                public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {}
                 @Override
                 public void onNext(@io.reactivex.rxjava3.annotations.NonNull MealDetail mealDetail) {
                     Log.e("TAG", "onChanged: kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk ");
@@ -121,18 +119,44 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
                             .load(mealDetail.strMealThumb)
                             .into(mealPic);
                 }
-
                 @Override
-                public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-
-                }
-
+                public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {}
                 @Override
-                public void onComplete() {
-
-                }
+                public void onComplete() {}
             });
-            Toast.makeText(this, "not connected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "not connected favourite", Toast.LENGTH_SHORT).show();
+        }else{
+            mealPresenterInterface.getOffMealWeek(mealName).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<WeekPlan>() {
+                        @Override
+                        public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {}
+
+                        @Override
+                        public void onNext(@io.reactivex.rxjava3.annotations.NonNull WeekPlan weekPlan) {
+                            Log.e("TAG", "onChanged: kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk ");
+                            MealName.setText(weekPlan.strMeal);
+                            MealOrigin.setText(weekPlan.strArea);
+                            prepareOffIngredientsWeek(weekPlan);
+                            adapter = new IngredientsAdapter(myIngredients, getApplicationContext());
+                            recyclerView.setAdapter(adapter);
+                            String thumb = "https://www.themealdb.com/images/ingredients/" + weekPlan.strIngredient1 + ".png";
+                            myIngredients.add(new Recipe(weekPlan.strIngredient1, weekPlan.strMeasure1, thumb));
+                            steps.setText(weekPlan.strInstructions);
+                            Glide.with(getApplicationContext())
+                                    .load(weekPlan.strMealThumb)
+                                    .into(mealPic);
+                        }
+
+                        @Override
+                        public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {}
+                    });
+
+            Toast.makeText(this, "not connected favourite", Toast.LENGTH_SHORT).show();
         }
 
         btnAddToFav.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +181,12 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
                         rootMealDetail.meals.get(0).strIngredient3,rootMealDetail.meals.get(0).strIngredient4,
                         rootMealDetail.meals.get(0).strIngredient5,rootMealDetail.meals.get(0).strIngredient6,
                         rootMealDetail.meals.get(0).strIngredient7,rootMealDetail.meals.get(0).strIngredient8,
-                        rootMealDetail.meals.get(0).strIngredient9,rootMealDetail.meals.get(0).strIngredient10);
+                        rootMealDetail.meals.get(0).strIngredient9,rootMealDetail.meals.get(0).strIngredient10,
+                        rootMealDetail.meals.get(0).strIngredient11,rootMealDetail.meals.get(0).strIngredient12,
+                        rootMealDetail.meals.get(0).strIngredient13,rootMealDetail.meals.get(0).strIngredient14,
+                        rootMealDetail.meals.get(0).strIngredient15,rootMealDetail.meals.get(0).strIngredient16,
+                        rootMealDetail.meals.get(0).strIngredient17,rootMealDetail.meals.get(0).strIngredient18,
+                        rootMealDetail.meals.get(0).strIngredient19,rootMealDetail.meals.get(0).strIngredient20);
                 if(satBox.isChecked())
                     weekPlan.sat="1";
                 else
@@ -287,6 +316,69 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         if (!meals.getMeals().get(0).strIngredient15.equals("")) {
             String thumb = "https://www.themealdb.com/images/ingredients/" + meals.getMeals().get(0).strIngredient15 + ".png";
             myIngredients.add(new Recipe(meals.getMeals().get(0).strIngredient15, meals.getMeals().get(0).strMeasure15, thumb));
+        }
+
+    }
+    void prepareOffIngredientsWeek(WeekPlan meal) {
+        if (!meal.strIngredient1.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient1 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient1, meal.strMeasure1, thumb));
+        }
+        if (!meal.strIngredient2.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient2 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient2, meal.strMeasure2, thumb));
+        }
+        if (!meal.strIngredient3.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient3 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient3, meal.strMeasure3, thumb));
+        }
+        if (!meal.strIngredient4.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient4 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient4, meal.strMeasure4, thumb));
+        }
+        if (!meal.strIngredient5.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient5 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient5, meal.strMeasure5, thumb));
+        }
+        if (!meal.strIngredient6.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient6 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient6, meal.strMeasure6, thumb));
+        }
+        if (!meal.strIngredient7.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient7 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient7, meal.strMeasure7, thumb));
+        }
+        if (!meal.strIngredient8.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient8 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient8, meal.strMeasure8, thumb));
+        }
+        if (!meal.strIngredient9.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient9 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient9, meal.strMeasure9, thumb));
+        }
+        if (!meal.strIngredient10.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient10 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient10, meal.strMeasure10, thumb));
+        }
+        if (!meal.strIngredient11.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient11 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient11, meal.strMeasure11, thumb));
+        }
+        if (!meal.strIngredient12.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient12 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient12, meal.strMeasure12, thumb));
+        }
+        if (!meal.strIngredient13.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient13 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient13, meal.strMeasure13, thumb));
+        }
+        if (!meal.strIngredient14.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient14 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient14, meal.strMeasure14, thumb));
+        }
+        if (!meal.strIngredient15.equals("")) {
+            String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient15 + ".png";
+            myIngredients.add(new Recipe(meal.strIngredient15, meal.strMeasure15, thumb));
         }
 
     }
