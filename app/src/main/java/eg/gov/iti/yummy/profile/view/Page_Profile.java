@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.Group;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -30,19 +32,11 @@ import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
 
 public class Page_Profile extends Fragment {
-
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
-    TextView name;
-
-    TextView logout;
-
-    ImageView profilePic;
-
-    ImageView logOutImg;
-
-
     FirebaseAuth firebaseAuth;
+    ImageView imgFav,imgWeekPlan,profilePic,logOutImg;
+    TextView txtFav,txtWeekPlan,logout,name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +49,13 @@ public class Page_Profile extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         firebaseAuth = FirebaseAuth.getInstance();
+        logout = view.findViewById(R.id.txtlogout);
+        logOutImg = view.findViewById(R.id.imglogout);
+        imgWeekPlan = view.findViewById(R.id.imgcalendar);
+        txtWeekPlan = view.findViewById(R.id.txtWeekPlan);
+        imgFav = view.findViewById(R.id.imgfav);
+        txtFav = view.findViewById(R.id.txtfav);
+
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(getContext(),gso);
         name = view.findViewById(R.id.txtName);
@@ -68,8 +69,32 @@ public class Page_Profile extends Fragment {
                     .load(acct.getPhotoUrl())
                     .into(profilePic);
         }
-        logout = view.findViewById(R.id.txtlogout);
-        logOutImg = view.findViewById(R.id.imglogout);
+
+        imgFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  Navigation.findNavController(view).navigate(R.id.action_page_Profile_to_page_Favourite);
+            }
+        });
+        txtFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  Navigation.findNavController(view).navigate(R.id.action_page_Profile_to_page_Favourite);
+            }
+        });
+        imgWeekPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Navigation.findNavController(view).navigate(R.id.action_page_Profile_to_page_Week_Plan);
+            }
+        });
+
+        txtWeekPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Navigation.findNavController(view).navigate(R.id.action_page_Profile_to_page_Week_Plan);
+            }
+        });
         logOutImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,15 +108,10 @@ public class Page_Profile extends Fragment {
             }
         });
     }
-
     void signOut(){
-        gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
                 Intent intent = new Intent(getActivity(), Page_Sign_In.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-            }
-        });
     }
+
 }
