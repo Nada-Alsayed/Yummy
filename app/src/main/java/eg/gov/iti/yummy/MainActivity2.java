@@ -27,7 +27,7 @@ import eg.gov.iti.yummy.favourite.view.Page_Favourite;
 import eg.gov.iti.yummy.home.home.view.Page_Home;
 import eg.gov.iti.yummy.profile.view.Page_Profile;
 import eg.gov.iti.yummy.search.view.Page_Search;
-import eg.gov.iti.yummy.weeklyPlan.view.Page_Week_Plan;
+
 
 public class MainActivity2 extends AppCompatActivity {
     ConstraintLayout layout_main;
