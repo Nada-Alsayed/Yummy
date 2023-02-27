@@ -1,10 +1,13 @@
 package eg.gov.iti.yummy.SignUp.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import eg.gov.iti.yummy.MainActivity2;
 import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
 import eg.gov.iti.yummy.db.ConcreteLocalSource;
@@ -31,7 +35,8 @@ public class Page_Sign_Up extends AppCompatActivity {
     Button btnSignUp;
     //String confirm;
     ConcreteLocalSource concreteLocalSource;
-
+    ImageView skip;
+    public static final String PREF_NAME = "PREF";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +47,18 @@ public class Page_Sign_Up extends AppCompatActivity {
         userName = findViewById(R.id.editTextUserName);
         password = findViewById(R.id.editTextPassword);
         confirmPassword = findViewById(R.id.editTextConfirmPassword);
-
+        skip = findViewById(R.id.signUpSkip);
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("USERNAME","Guest");
+                editor.commit();
+                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                startActivity(intent);
+            }
+        });
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

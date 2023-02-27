@@ -5,8 +5,6 @@ import static android.content.ContentValues.TAG;
 import android.content.Context;
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
-
 import java.util.List;
 
 import eg.gov.iti.yummy.model.MealDetail;
@@ -17,7 +15,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class ConcreteLocalSource implements LocalSource {
+public class ConcreteLocalSource implements LocalSource{
     private final UserDao userDao;
     private static ConcreteLocalSource concreteLocalSource = null;
     private Observable<List<MealDetail>> storeMeals;

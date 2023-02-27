@@ -56,7 +56,8 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
         super.onViewCreated(view, savedInstanceState);
         recyclerView1 = view.findViewById(R.id.recycle1);
         recyclerView1.setHasFixedSize(true);
-        weekPlanPresenterInterface = new WeekPlanPresenter(Repository.getInstance(API_Client.getInstance(getContext()),
+        weekPlanPresenterInterface = new WeekPlanPresenter(Repository.getInstance(
+                API_Client.getInstance(getContext()),
                 ConcreteLocalSource.getInstance(getContext()), getContext()), this);
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getContext());
         layoutManager1.setOrientation(RecyclerView.HORIZONTAL);

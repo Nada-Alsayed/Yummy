@@ -51,6 +51,7 @@ public class Page_Sign_In extends AppCompatActivity {
     Button btnSignIn;
     ConcreteLocalSource concreteLocalSource;
     EditText nameUser, passwordUser;
+    ImageView skip;
 
     public static final String PREF_NAME = "PREF";
     @Override
@@ -63,6 +64,18 @@ public class Page_Sign_In extends AppCompatActivity {
         nameUser = findViewById(R.id.editTxtSignInUserName);
         passwordUser = findViewById(R.id.editTextSignInPassword);
         btnSignIn = findViewById(R.id.btnSignIn);
+        skip = findViewById(R.id.signInSkip);
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("USERNAME","Guest");
+                editor.commit();
+                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                startActivity(intent);
+            }
+        });
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
