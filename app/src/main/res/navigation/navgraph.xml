@@ -36,7 +36,14 @@
         android:id="@+id/page_Profile"
         android:name="eg.gov.iti.yummy.profile.view.Page_Profile"
         android:label="fragment_page__profile"
-        tools:layout="@layout/fragment_page__profile" />
+        tools:layout="@layout/fragment_page__profile" >
+        <action
+            android:id="@+id/action_page_Profile_to_page_Week_Plan"
+            app:destination="@id/page_Week_Plan" />
+        <action
+            android:id="@+id/action_page_Profile_to_page_Favourite"
+            app:destination="@id/page_Favourite" />
+    </fragment>
     <fragment
         android:id="@+id/page_Country"
         android:name="eg.gov.iti.yummy.country.Page_Country"

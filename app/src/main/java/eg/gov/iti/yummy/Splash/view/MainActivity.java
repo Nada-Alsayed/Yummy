@@ -12,9 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import eg.gov.iti.yummy.R;
-import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
 import eg.gov.iti.yummy.SignUp.view.Page_Sign_Up;
-import eg.gov.iti.yummy.meal_details.view.page_item_details;
 
 public class MainActivity extends AppCompatActivity {
     Animation animationRight, animationLeft , animationDown , animationUp , animationCornerUp,animationCornerDown;
@@ -22,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile);
+        setContentView(R.layout.splash);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         animationRight = AnimationUtils.loadAnimation(this, R.anim.right_animation);

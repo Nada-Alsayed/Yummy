@@ -62,6 +62,7 @@ public class Repository implements RepositoryInterface{
 
     @Override
     public void getMealFromRetrofit(DetailsNetworkDelegate detailsNetworkDelegate,String meal) {
+        Log.i("Repository", "getMealFromRetrofit: "+meal);
         remoteSource.specificItem(detailsNetworkDelegate,meal);
     }
 
