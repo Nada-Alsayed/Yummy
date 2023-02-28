@@ -43,9 +43,6 @@ import eg.gov.iti.yummy.db.ConcreteLocalSource;
 public class Page_Sign_In extends AppCompatActivity {
     private GoogleSignInClient client;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://yummy-app-f2567-default-rtdb.firebaseio.com/");
-/*
-    FirebaseAuth auth;
-    FirebaseDatabase database;*/
     ImageView googleImg;
     TextView txtSignUp;
     Button btnSignIn;
