@@ -78,10 +78,10 @@ public class Page_Sign_Up extends AppCompatActivity {
                     databaseReference.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.hasChild(passWord)) {
+                            if (snapshot.hasChild(name)) {
                                 Toast.makeText(Page_Sign_Up.this, "User already exist", Toast.LENGTH_SHORT).show();
                             } else {
-                                databaseReference.child("Users").child(passWord).child("UserName").setValue(name);
+                                databaseReference.child("Users").child(name).child("UserPassword").setValue(passWord);
 
                                 //show
                                 Toast.makeText(Page_Sign_Up.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
@@ -118,26 +118,4 @@ public class Page_Sign_Up extends AppCompatActivity {
     }
 }
 
-/*
 
-                if (validateUser(userEntity) && !confirm.isEmpty()) {
-                    if (userEntity.getPassword().equals(confirm)) {
-                            if (isValidUserName(userEntity) && isValidUserPassword(userEntity)) {
-                                        concreteLocalSource.registerUser(userEntity);
-                                        Toast.makeText(Page_Sign_Up.this, "Registered", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), Page_Sign_In.class);
-                                        startActivity(intent);
-                                }
-
-                             else {
-                                Toast.makeText(Page_Sign_Up.this, "Not Valid input Use chars and numbers", Toast.LENGTH_SHORT).show();
-                            }
-
-                    } else {
-                        Toast.makeText(Page_Sign_Up.this, "Password Not Matched Confirm Password", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(Page_Sign_Up.this, "Fill Required Data", Toast.LENGTH_SHORT).show();
-                }
-
-*/
