@@ -39,12 +39,12 @@ public class AdapterAvailableDishes extends RecyclerView.Adapter<AdapterAvailabl
 
 //        holder.imageView1.setImageResource( listdata.get(position).getImgId());
 //        holder.imageView2.setImageResource( listdata.get(position).getImgId2());
-        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context.getApplicationContext(), "available dish",Toast.LENGTH_SHORT).show();
-            }
-        });
+//        holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(context.getApplicationContext(), "available dish",Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     @Override
@@ -55,12 +55,12 @@ public class AdapterAvailableDishes extends RecyclerView.Adapter<AdapterAvailabl
     class Holder extends RecyclerView.ViewHolder {
         ImageView imageView1;
         ImageView imageView2;
-        ConstraintLayout constraintLayout;
+
         public Holder(View itemView) {
             super(itemView);
-            this.imageView1 = (ImageView) itemView.findViewById(R.id.imageavailabledish);
+            this.imageView1 = (ImageView) itemView.findViewById(R.id.imageView1);
             this.imageView2 = (ImageView) itemView.findViewById(R.id.imglove);
-            this.constraintLayout = (ConstraintLayout) itemView.findViewById(R.id.cardAvailableDish);
+
 
         }
 

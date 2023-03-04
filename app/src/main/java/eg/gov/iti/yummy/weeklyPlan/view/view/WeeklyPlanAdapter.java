@@ -20,15 +20,15 @@ import eg.gov.iti.yummy.meal_details.view.page_item_details;
 import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.WeekPlan;
 
-
 public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.ViewHolder> {
-
     private final Context context;
     private List<WeekPlan> list1;
+    private onWeeklyPlanClickListener onWeeklyPlanClickListener;
 
-    public WeeklyPlanAdapter(Context context,List<WeekPlan> list1) {
-        this.list1 = list1;
+    public WeeklyPlanAdapter(Context context, List<WeekPlan> list1, onWeeklyPlanClickListener onWeeklyPlanClickListener) {
         this.context = context;
+        this.list1 = list1;
+        this.onWeeklyPlanClickListener = onWeeklyPlanClickListener;
     }
 
     @Override
@@ -39,22 +39,43 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
         return vh;
     }
 
-    public void setListweek(List<WeekPlan> list1) {
+    public void setListWeek(List<WeekPlan> list1) {
         this.list1 = list1;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        WeekPlan mealDetail=list1.get(position);
         holder.txtTitle.setText(list1.get(position).strMeal);
         Glide.with(context)
                 .load(list1.get(position).strMealThumb)
                 .into(holder.imageView);
+        holder.imageView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //action
+                if(mealDetail.fri.equals(1))
+                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
+                if(mealDetail.sat.equals(1))
+                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
+                if(mealDetail.sun.equals(1))
+                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
+                if(mealDetail.mon.equals(1))
+                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
+                if(mealDetail.tues.equals(1))
+                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
+                if(mealDetail.equals(1))
+                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
+                if(mealDetail.fri.equals(1))
+                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
+            }
+        });
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, page_item_details.class);
-                intent.putExtra("MealName",holder.txtTitle.getText().toString());
-                intent.putExtra("tableType","weekPlan");
+                intent.putExtra("MealName", holder.txtTitle.getText().toString());
+                intent.putExtra("tableType", "weekPlan");
                 context.startActivity(intent);
             }
         });
@@ -62,12 +83,14 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
 
     @Override
     public int getItemCount() {
-      return list1.size();
+        return list1.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView txtTitle;
         public ImageView imageView;
+        public ImageView imageView2;
+
         public CardView layout;
 
         public ViewHolder(View v) {
@@ -75,7 +98,7 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
             layout = v.findViewById(R.id.homeAndPlanListItem);
             txtTitle = v.findViewById(R.id.textView1);
             imageView = v.findViewById(R.id.imageView1);
-
+            imageView2 = v.findViewById(R.id.removeWeekPlan);
         }
     }
 }

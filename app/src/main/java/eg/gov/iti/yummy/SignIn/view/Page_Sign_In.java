@@ -84,15 +84,15 @@ public class Page_Sign_In extends AppCompatActivity {
                     databaseReference.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.hasChild(password)) {
-                                final String fireName = snapshot.child(password).child("UserName").getValue(String.class);
+                            if (snapshot.hasChild(name)) {
+                                final String firePassword = snapshot.child(name).child("UserPassword").getValue(String.class);
 
-                                if (fireName.equals(name)) {
+                                if (firePassword.equals(password)) {
                                     Toast.makeText(Page_Sign_In.this, "Logged In", Toast.LENGTH_SHORT).show();
 
                                     SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = pref.edit();
-                                    editor.putString("USERNAME", fireName);
+                                    editor.putString("USERNAME", name);
                                     editor.commit();
 
                                     Intent intent = new Intent(getApplicationContext(), MainActivity2.class);

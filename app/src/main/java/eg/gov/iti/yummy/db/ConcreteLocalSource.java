@@ -117,6 +117,16 @@ public class ConcreteLocalSource implements LocalSource{
     }
 
     @Override
+    public void deleteMeal(WeekPlan meal2) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userDao.deleteMeal(meal2) ;
+            }
+        }).start();
+    }
+
+    @Override
     public Observable<MealDetail> getOfflineMeal(String mealName) {
         Log.e("joo", "getOfflineMeal:concrete localso ");
         return userDao.getOfflineMeal(mealName);

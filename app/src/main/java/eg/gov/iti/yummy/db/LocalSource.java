@@ -19,6 +19,7 @@ public interface LocalSource {
     void insertMeal(MealDetail meal);
     void insertMealToWeekPlan(WeekPlan meal);
     void deleteMeal(MealDetail meal);
+    void deleteMeal(WeekPlan meal2);
     Observable<MealDetail> getOfflineMeal(String mealName);
 
     abstract Observable<WeekPlan> getOfflineMealWeek(String mealName);
@@ -27,7 +28,7 @@ public interface LocalSource {
     String login(String userName, String password);
     String is_Taken(String name);
 
-//    LiveData<UserEntity> getData(String username);
+//  LiveData<UserEntity> getData(String username);
     void updateSaturday(String saturday);
     void updateSunday(String sunday);
     void updateMonday(String monday);

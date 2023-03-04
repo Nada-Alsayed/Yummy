@@ -3,6 +3,7 @@ package eg.gov.iti.yummy.weeklyPlan.view.presenter;
 import java.util.List;
 
 import eg.gov.iti.yummy.meal_details.view.MealViewInterface;
+import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.model.WeekPlan;
 import eg.gov.iti.yummy.weeklyPlan.view.view.WeekPlanViewInterface;
@@ -15,6 +16,11 @@ public class WeekPlanPresenter implements WeekPlanPresenterInterface{
     public WeekPlanPresenter(Repository repository, WeekPlanViewInterface weekPlanViewInterface) {
         this.repository = repository;
         this.weekPlanViewInterface = weekPlanViewInterface;
+    }
+
+    @Override
+    public void deleteMeal(WeekPlan product) {
+        repository.deleteMeal(product);
     }
 
     @Override

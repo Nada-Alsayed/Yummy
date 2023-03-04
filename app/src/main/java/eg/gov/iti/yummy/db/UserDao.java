@@ -29,6 +29,8 @@ public interface UserDao {
     Observable<WeekPlan> getOfflineMealWeek(String mealName);
     @Delete
     void deleteMeal(MealDetail meal);
+    @Delete
+    void deleteMeal(WeekPlan meal);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Completable registerUser(UserEntity userEntity);
     @Query("Select exists(Select userName from UserData where userName=:username and password=:password)")

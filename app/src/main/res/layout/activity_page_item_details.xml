@@ -202,8 +202,7 @@
         </androidx.recyclerview.widget.RecyclerView>
 
 
-
-        <CheckBox
+        <RadioButton
             android:id="@+id/radioButtonSat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -213,7 +212,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/btnAddToMyPlan" />
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/radioButtonSun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -224,7 +223,7 @@
             app:layout_constraintTop_toTopOf="@+id/radioButtonSat"
             app:layout_constraintVertical_bias="0.0" />
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/radioButtonMon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -235,7 +234,7 @@
             app:layout_constraintTop_toTopOf="@+id/radioButtonSun"
             app:layout_constraintVertical_bias="0.0" />
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/radioButtonTue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -244,7 +243,7 @@
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/radioButtonSat" />
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/radioButtonWed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -254,7 +253,7 @@
             app:layout_constraintStart_toEndOf="@+id/radioButtonTue"
             app:layout_constraintTop_toTopOf="@+id/radioButtonTue" />
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/radioButtonThu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -264,7 +263,7 @@
             app:layout_constraintStart_toEndOf="@+id/radioButtonWed"
             app:layout_constraintTop_toTopOf="@+id/radioButtonWed" />
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/radioButtonFri"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

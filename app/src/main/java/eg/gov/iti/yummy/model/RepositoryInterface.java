@@ -23,6 +23,7 @@ public interface RepositoryInterface {
     public void getMealFromRetrofit(DetailsNetworkDelegate detailsNetworkDelegate, String meal);
     public Observable<List<MealDetail>> getStoredMeals();
     public void deleteMeal(MealDetail meal);
+    public void deleteMeal(WeekPlan meal);
     public void insertMeal(MealDetail meal);
     public void insertMealIntoWeek(WeekPlan meal);
 

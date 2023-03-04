@@ -5,5 +5,7 @@ import eg.gov.iti.yummy.model.WeekPlan;
 
 public interface OnClick {
     void addMealToFavOnClick(MealDetail meal);
-    void addMealsToWeekPlanOnClick(WeekPlan meels);
+    void addMealsToWeekPlanOnClick(WeekPlan meals);
+    void insertMealInFirebase(MealDetail mealDetail,String key);
+    void insertMealInWeekPlanFirebase(WeekPlan mealDetail,String key);
 }

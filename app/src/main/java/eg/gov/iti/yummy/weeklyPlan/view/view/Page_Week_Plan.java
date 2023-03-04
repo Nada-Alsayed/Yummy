@@ -20,6 +20,7 @@ import java.util.List;
 import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
 import eg.gov.iti.yummy.db.ConcreteLocalSource;
+import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.model.WeekPlan;
 import eg.gov.iti.yummy.network.API_Client;
@@ -30,13 +31,10 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
-
+public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface,onWeeklyPlanClickListener {
     RecyclerView recyclerView1, recyclerView2, recyclerView3, recyclerView4, recyclerView5, recyclerView6, recyclerView7;
-    // List<WeekPlan> input1,input2,input3,input4,input5,input6,input7;
     WeeklyPlanAdapter adapter, adapter1, adapter2, adapter3, adapter4, adapter5, adapter6;
     ConcreteLocalSource cls;
-
     WeekPlanPresenterInterface weekPlanPresenterInterface;
 
     @Override
@@ -62,7 +60,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getContext());
         layoutManager1.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView1.setLayoutManager(layoutManager1);
-        adapter = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>());
+        adapter = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>(),this);
         recyclerView1.setAdapter(adapter);
         weekPlanPresenterInterface.getSatdayMeal().subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<WeekPlan>>() {
@@ -73,7 +71,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
 
                     @Override
                     public void onNext(@io.reactivex.rxjava3.annotations.NonNull List<WeekPlan> weekPlans) {
-                        adapter.setListweek(weekPlans);
+                        adapter.setListWeek(weekPlans);
                         adapter.notifyDataSetChanged();
                     }
 
@@ -94,7 +92,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
         layoutManager2.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView2.setLayoutManager(layoutManager2);
-        adapter1 = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>());
+        adapter1 = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>(),this);
         recyclerView2.setAdapter(adapter1);
         weekPlanPresenterInterface.getSundayMeal().subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<WeekPlan>>() {
@@ -105,7 +103,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
 
                     @Override
                     public void onNext(@io.reactivex.rxjava3.annotations.NonNull List<WeekPlan> weekPlans) {
-                        adapter1.setListweek(weekPlans);
+                        adapter1.setListWeek(weekPlans);
                         adapter1.notifyDataSetChanged();
                     }
 
@@ -126,7 +124,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
         LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext());
         layoutManager3.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView3.setLayoutManager(layoutManager3);
-        adapter2 = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>());
+        adapter2 = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>(),this);
         recyclerView3.setAdapter(adapter2);
         weekPlanPresenterInterface.getMondayMeal().subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<WeekPlan>>() {
@@ -137,7 +135,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
 
                     @Override
                     public void onNext(@io.reactivex.rxjava3.annotations.NonNull List<WeekPlan> weekPlans) {
-                        adapter2.setListweek(weekPlans);
+                        adapter2.setListWeek(weekPlans);
                         adapter2.notifyDataSetChanged();
                     }
 
@@ -158,7 +156,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
         LinearLayoutManager layoutManager4 = new LinearLayoutManager(getContext());
         layoutManager4.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView4.setLayoutManager(layoutManager4);
-        adapter3 = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>());
+        adapter3 = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>(),this);
         recyclerView4.setAdapter(adapter3);
         weekPlanPresenterInterface.getTuesdayMeal().subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<WeekPlan>>() {
@@ -169,7 +167,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
 
                     @Override
                     public void onNext(@io.reactivex.rxjava3.annotations.NonNull List<WeekPlan> weekPlans) {
-                        adapter3.setListweek(weekPlans);
+                        adapter3.setListWeek(weekPlans);
                         adapter3.notifyDataSetChanged();
                     }
 
@@ -190,7 +188,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
         LinearLayoutManager layoutManager5 = new LinearLayoutManager(getContext());
         layoutManager5.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView5.setLayoutManager(layoutManager5);
-        adapter4 = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>());
+        adapter4 = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>(),this);
         recyclerView5.setAdapter(adapter4);
         weekPlanPresenterInterface.getWeddayMeal().subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<WeekPlan>>() {
@@ -201,7 +199,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
 
                     @Override
                     public void onNext(@io.reactivex.rxjava3.annotations.NonNull List<WeekPlan> weekPlans) {
-                        adapter4.setListweek(weekPlans);
+                        adapter4.setListWeek(weekPlans);
                         adapter4.notifyDataSetChanged();
                     }
 
@@ -223,7 +221,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
         layoutManager6.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView6.setLayoutManager(layoutManager6);
         // input6 = new ArrayList<>();
-        adapter5 = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>());
+        adapter5 = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>(),this);
         recyclerView6.setAdapter(adapter5);
         weekPlanPresenterInterface.getThursdayMeal().subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<WeekPlan>>() {
@@ -234,7 +232,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
 
                     @Override
                     public void onNext(@io.reactivex.rxjava3.annotations.NonNull List<WeekPlan> weekPlans) {
-                        adapter5.setListweek(weekPlans);
+                        adapter5.setListWeek(weekPlans);
                         adapter5.notifyDataSetChanged();
                     }
 
@@ -256,7 +254,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
         layoutManager7.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView7.setLayoutManager(layoutManager7);
         //  input7 = new ArrayList<>();
-        adapter6 = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>());
+        adapter6 = new WeeklyPlanAdapter(getContext(), new ArrayList<WeekPlan>(),this);
         recyclerView7.setAdapter(adapter6);
         weekPlanPresenterInterface.getFridayMeal().subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<WeekPlan>>() {
@@ -267,7 +265,7 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
 
                     @Override
                     public void onNext(@io.reactivex.rxjava3.annotations.NonNull List<WeekPlan> weekPlans) {
-                        adapter6.setListweek(weekPlans);
+                        adapter6.setListWeek(weekPlans);
                         adapter6.notifyDataSetChanged();
                     }
 
@@ -287,5 +285,15 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface {
         SharedPreferences pref = getActivity().getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
         String shP = pref.getString("USERNAME", "N/A");
 
+    }
+
+    @Override
+    public void deleteMealPlanOnClick(WeekPlan Meal) {
+        deleteMeal(Meal);
+    }
+
+    @Override
+    public void deleteMeal(WeekPlan mealDetail) {
+        weekPlanPresenterInterface.deleteMeal(mealDetail);
     }
 }

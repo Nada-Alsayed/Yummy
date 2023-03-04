@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,9 +53,8 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     IngredientsAdapter adapter;
     ConcreteLocalSource cls;
     RootMealDetail rootMealDetail;
-    int  sat, sun, mon, tue, wed, thu, fri;
     Button btnAddToFav, btnAddToWeekPlan;
-    CheckBox satBox, sunBox, monBox, tueBox, wedBox, thuBox, friBox;
+    RadioButton satBox, sunBox, monBox, tueBox, wedBox, thuBox, friBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,13 +163,13 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
             @Override
             public void onClick(View v) {
                 addMealToFavOnClick(rootMealDetail.meals.get(0));
+                insertMealInFirebase(rootMealDetail.meals.get(0),shP);
             }
         });
 
         btnAddToWeekPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //WeekMeals week=new WeekMeals();
                 WeekPlan weekPlan=new WeekPlan(
                         rootMealDetail.meals.get(0).idMeal,
                         rootMealDetail.meals.get(0).strMeal,
@@ -216,10 +216,13 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
                 else
                     weekPlan.wed="0";
                 addMealsToWeekPlanOnClick(weekPlan);
+                insertMealInWeekPlanFirebase(weekPlan,shP);
             }
         });
 
     }
+
+
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE));
@@ -230,6 +233,12 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     public void addMealToFav(MealDetail meal) {
         mealPresenterInterface.addToFav(meal);
     }
+
+    @Override
+    public void addMealInFirebase(MealDetail mealDetail,String key) {
+        mealPresenterInterface.addMealToFavFirebase(mealDetail,key);
+    }
+
     @Override
     public void showSpecificItem(RootMealDetail meals) {
         rootMealDetail = meals;
@@ -254,6 +263,11 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         Glide.with(getApplicationContext())
                 .load(meals.getMeals().get(0).strMealThumb)
                 .into(mealPic);
+    }
+
+    @Override
+    public void addMealInWeekPlanFirebase(WeekPlan mealDetail, String key) {
+        mealPresenterInterface.addMealToWeekPlanFirebase(mealDetail, key);
     }
 
     void prepareIngredients(RootMealDetail meals) {
@@ -455,6 +469,16 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     @Override
     public void addMealsToWeekPlanOnClick(WeekPlan meal) {
         addMealsToWeekPlan(meal);
+    }
+
+    @Override
+    public void insertMealInFirebase(MealDetail mealDetail,String key) {
+        addMealInFirebase(mealDetail,key);
+    }
+
+    @Override
+    public void insertMealInWeekPlanFirebase(WeekPlan mealDetail, String key) {
+        addMealInWeekPlanFirebase(mealDetail,key);
     }
 
     private void addMealsToWeekPlan(WeekPlan meal) {

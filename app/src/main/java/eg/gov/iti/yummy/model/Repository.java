@@ -77,6 +77,11 @@ public class Repository implements RepositoryInterface{
     }
 
     @Override
+    public void deleteMeal(WeekPlan meal2) {
+        localSource.deleteMeal(meal2);
+    }
+
+    @Override
     public void insertMeal(MealDetail meal) {
         localSource.insertMeal(meal);
     }

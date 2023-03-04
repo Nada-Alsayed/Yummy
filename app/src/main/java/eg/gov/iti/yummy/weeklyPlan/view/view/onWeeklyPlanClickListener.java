@@ -2,8 +2,8 @@ package eg.gov.iti.yummy.weeklyPlan.view.view;
 
 
 import eg.gov.iti.yummy.model.MealDetail;
+import eg.gov.iti.yummy.model.WeekPlan;
 
 public interface onWeeklyPlanClickListener {
-
-    void OnClick(MealDetail Meal,int source);
+    void deleteMealPlanOnClick(WeekPlan Meal);
 }

@@ -9,6 +9,8 @@ import io.reactivex.rxjava3.core.Observable;
 
 public interface MealPresenterInterface {
     public void addToFav(MealDetail meal);
+    void addMealToFavFirebase(MealDetail meal,String key);
+    void addMealToWeekPlanFirebase(WeekPlan meal,String key);
     public void getSpecificMeal(String meal);
     public void addToWeekPlan(WeekPlan meal);
     public Observable<MealDetail> getOffMeal(String meal);

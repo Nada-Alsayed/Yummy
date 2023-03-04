@@ -20,12 +20,14 @@ import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.db.ConcreteLocalSource;
 import eg.gov.iti.yummy.home.home.presenter.HomePresenter;
 import eg.gov.iti.yummy.home.home.presenter.HomePresenterInterface;
+import eg.gov.iti.yummy.meal_details.presenter.MealPresenterInterface;
+import eg.gov.iti.yummy.meal_details.view.OnClick;
 import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.network.API_Client;
 import eg.gov.iti.yummy.weeklyPlan.view.view.WeeklyPlanAdapter;
 
-public class Page_Home extends Fragment implements HomeViewInterface {
+public class Page_Home extends Fragment implements HomeViewInterface,HomeOnClick {
     ViewPager viewPager;
     public static final String TAG="pk";
     ForYouAdapter forYouAdapter;
@@ -64,7 +66,7 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-        weeklyPlanAdapter = new HomeAdaptor(new ArrayList<>(),getContext());
+        weeklyPlanAdapter = new HomeAdaptor(new ArrayList<>(),this,getContext());
         recyclerView.setAdapter(weeklyPlanAdapter);
         PresenterInterface.getRandomMealsTrending();
 
@@ -73,10 +75,17 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getContext());
         layoutManager1.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView1.setLayoutManager(layoutManager1);
-        weeklyPlanAdapter1 = new HomeAdaptor(new ArrayList<>(),getContext());
+        weeklyPlanAdapter1 = new HomeAdaptor(new ArrayList<>(),this,getContext());
         recyclerView1.setAdapter(weeklyPlanAdapter1);
         PresenterInterface.getRandomMealsNewDishes();
     }
+
+
+    @Override
+    public void addMealToFavHome(MealDetail meal) {
+        PresenterInterface.addToFavHome(meal);
+    }
+
     @Override
     public void showDataForYou(List<MealDetail> Categories) {
         forYouAdapter.setList(Categories);
@@ -97,6 +106,11 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         Log.e(TAG, "showDatanew: "+products2.get(0).idMeal);
         recyclerView1.setAdapter(weeklyPlanAdapter1);
         weeklyPlanAdapter1.notifyDataSetChanged();
+    }
+
+    @Override
+    public void addToFavHome(MealDetail mealDetail) {
+        addMealToFavHome(mealDetail);
     }
 
     public class ViewPagerStack implements ViewPager.PageTransformer {

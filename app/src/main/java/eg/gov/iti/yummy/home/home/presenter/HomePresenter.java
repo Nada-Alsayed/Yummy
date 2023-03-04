@@ -20,6 +20,11 @@ public class HomePresenter implements HomePresenterInterface, NetworkDelegate {
     }
 
     @Override
+    public void addToFavHome(MealDetail meal) {
+        repository.insertMeal(meal);
+    }
+
+    @Override
     public void getRandomMealsForYou() {
         Log.e(TAG, "getCate:for you presenter failed");
         repository.getForYouMeals(this);
