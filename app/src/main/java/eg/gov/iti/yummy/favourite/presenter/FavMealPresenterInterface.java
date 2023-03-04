@@ -8,4 +8,5 @@ import io.reactivex.rxjava3.core.Observable;
 public interface FavMealPresenterInterface {
     public Observable<List<MealDetail>> getStoredMeals();
     public void deleteMeal(MealDetail product);
+    void insertMeal(MealDetail meal);
 }

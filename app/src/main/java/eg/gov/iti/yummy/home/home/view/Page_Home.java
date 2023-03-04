@@ -18,6 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 import java.util.ArrayList;
 import java.util.List;
 
+import eg.gov.iti.yummy.DialogLogin;
 import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
 import eg.gov.iti.yummy.db.ConcreteLocalSource;
@@ -122,11 +123,20 @@ public class Page_Home extends Fragment implements HomeViewInterface,HomeOnClick
 
     @Override
     public void addToFavHome(MealDetail mealDetail) {
-        addMealToFavHome(mealDetail);
+        /*if(shP.equals("Guest"))
+        {
+            login();
+        }*/
+//        else
+//        {
+            addMealToFavHome(mealDetail);
+//        }
+
     }
     @Override
     public void addToFavFireOnClick(MealDetail mealDetail) {
         addMealInFirebase(mealDetail,shP);
+
     }
 
     public class ViewPagerStack implements ViewPager.PageTransformer {
@@ -140,6 +150,10 @@ public class Page_Home extends Fragment implements HomeViewInterface,HomeOnClick
                 page.setTranslationY(-20 * position);
             }
         }
+    }
+    void login() {
+        DialogLogin dialogLogin = new DialogLogin();
+        dialogLogin.show(getFragmentManager(), "Test");
     }
 }
 

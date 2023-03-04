@@ -49,7 +49,7 @@ public class HomeAdaptor extends RecyclerView.Adapter<HomeAdaptor.ViewHolder> {
         holder.imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, meal.strMeal + " added to your list", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, meal.strMeal + " added to your list", Toast.LENGTH_SHORT).show();
                 listener.addToFavHome(meal);
                 listener.addToFavFireOnClick(meal);
             }

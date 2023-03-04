@@ -25,4 +25,11 @@ public class FavMealPresenter implements FavMealPresenterInterface{
     public void deleteMeal(MealDetail meal) {
         repository.deleteMeal(meal);
     }
+
+
+    @Override
+    public void insertMeal(MealDetail meal) {
+        repository.insertMeal(meal);
+    }
+
 }

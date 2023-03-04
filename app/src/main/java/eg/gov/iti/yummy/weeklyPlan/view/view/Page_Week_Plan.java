@@ -14,6 +14,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +41,8 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface,on
     RecyclerView recyclerView1, recyclerView2, recyclerView3, recyclerView4, recyclerView5, recyclerView6, recyclerView7;
     WeeklyPlanAdapter adapter, adapter1, adapter2, adapter3, adapter4, adapter5, adapter6;
     ConcreteLocalSource cls;
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://yummy-app-f2567-default-rtdb.firebaseio.com/");
+
     WeekPlanPresenterInterface weekPlanPresenterInterface;
 
     @Override
@@ -52,6 +60,27 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface,on
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        cls = ConcreteLocalSource.getInstance(getContext());
+        SharedPreferences pref = getActivity().getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
+        String shP = pref.getString("USERNAME", "N/A");
+
+        databaseReference.child(shP).child("WeekPlan").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChildren()) {
+                    for(DataSnapshot Data1:snapshot.getChildren()){
+                        WeekPlan weekPlan=Data1.getValue(WeekPlan.class);
+
+                            weekPlanPresenterInterface.addToWeekPlan(weekPlan);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         recyclerView1 = view.findViewById(R.id.recycle1);
         recyclerView1.setHasFixedSize(true);
         weekPlanPresenterInterface = new WeekPlanPresenter(Repository.getInstance(
@@ -280,10 +309,6 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface,on
                     }
                 });
         recyclerView7.setAdapter(adapter6);
-
-        cls = ConcreteLocalSource.getInstance(getContext());
-        SharedPreferences pref = getActivity().getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
-        String shP = pref.getString("USERNAME", "N/A");
 
     }
 
