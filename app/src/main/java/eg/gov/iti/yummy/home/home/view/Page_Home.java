@@ -1,5 +1,7 @@
 package eg.gov.iti.yummy.home.home.view;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
+import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
 import eg.gov.iti.yummy.db.ConcreteLocalSource;
 import eg.gov.iti.yummy.home.home.presenter.HomePresenter;
 import eg.gov.iti.yummy.home.home.presenter.HomePresenterInterface;
@@ -29,6 +32,7 @@ import eg.gov.iti.yummy.weeklyPlan.view.view.WeeklyPlanAdapter;
 
 public class Page_Home extends Fragment implements HomeViewInterface,HomeOnClick {
     ViewPager viewPager;
+    String shP;
     public static final String TAG="pk";
     ForYouAdapter forYouAdapter;
     HomePresenterInterface PresenterInterface;
@@ -61,6 +65,9 @@ public class Page_Home extends Fragment implements HomeViewInterface,HomeOnClick
         //viewPager.setAdapter(forYouAdapter);
         PresenterInterface.getRandomMealsForYou();
 
+       SharedPreferences pref = getContext().getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
+        shP = pref.getString("USERNAME", "N/A");
+
         recyclerView = view.findViewById(R.id.myRecView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -80,6 +87,11 @@ public class Page_Home extends Fragment implements HomeViewInterface,HomeOnClick
         PresenterInterface.getRandomMealsNewDishes();
     }
 
+
+    @Override
+    public void addMealInFirebase(MealDetail mealDetail, String key) {
+        PresenterInterface.addMealToFavFirebase(mealDetail,key);
+    }
 
     @Override
     public void addMealToFavHome(MealDetail meal) {
@@ -111,6 +123,10 @@ public class Page_Home extends Fragment implements HomeViewInterface,HomeOnClick
     @Override
     public void addToFavHome(MealDetail mealDetail) {
         addMealToFavHome(mealDetail);
+    }
+    @Override
+    public void addToFavFireOnClick(MealDetail mealDetail) {
+        addMealInFirebase(mealDetail,shP);
     }
 
     public class ViewPagerStack implements ViewPager.PageTransformer {

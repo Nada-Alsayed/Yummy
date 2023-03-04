@@ -1,5 +1,6 @@
 package eg.gov.iti.yummy.meal_details.view;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,8 +28,11 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import eg.gov.iti.yummy.CalenderDialog;
 import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
 import eg.gov.iti.yummy.db.ConcreteLocalSource;
@@ -42,10 +48,13 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class page_item_details extends AppCompatActivity implements MealViewInterface, OnClick {
+public class page_item_details extends AppCompatActivity implements MealViewInterface, OnClick , DatePickerDialog.OnDateSetListener {
 
     YouTubePlayerView youTubePlayerView;
     ImageView mealPic;
+    String shP;
+    WeekPlan weekPlan;
+    String date2;
     TextView MealName, MealOrigin, steps;
     ArrayList<Recipe> myIngredients;
     MealPresenterInterface mealPresenterInterface;
@@ -54,8 +63,6 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     ConcreteLocalSource cls;
     RootMealDetail rootMealDetail;
     Button btnAddToFav, btnAddToWeekPlan;
-    RadioButton satBox, sunBox, monBox, tueBox, wedBox, thuBox, friBox;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,18 +72,8 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         MealOrigin = findViewById(R.id.mealOrigin);
         mealPic = findViewById(R.id.mealImage);
         steps = findViewById(R.id.step1);
-
-        satBox = findViewById(R.id.radioButtonSat);
-        sunBox = findViewById(R.id.radioButtonSun);
-        monBox = findViewById(R.id.radioButtonMon);
-        tueBox = findViewById(R.id.radioButtonTue);
-        wedBox = findViewById(R.id.radioButtonWed);
-        thuBox = findViewById(R.id.radioButtonThu);
-        friBox = findViewById(R.id.radioButtonFri);
-
         myIngredients = new ArrayList<>();
         rootMealDetail = new RootMealDetail();
-
 
         Intent intent = getIntent();
         String tableName =intent.getStringExtra("tableType");
@@ -92,7 +89,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         cls = ConcreteLocalSource.getInstance(getApplicationContext());
 
         SharedPreferences pref = getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
-        String shP = pref.getString("USERNAME", "N/A");
+        shP = pref.getString("USERNAME", "N/A");
 
         mealPresenterInterface = new MealPresenter(Repository.getInstance(API_Client.getInstance(getApplicationContext()), ConcreteLocalSource.getInstance(getApplicationContext()), getApplicationContext()), this);
 
@@ -170,7 +167,10 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         btnAddToWeekPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                WeekPlan weekPlan=new WeekPlan(
+                DialogFragment calenderDialog=new CalenderDialog();
+                calenderDialog.show(getSupportFragmentManager(),"Calender");
+
+                weekPlan=new WeekPlan(
                         rootMealDetail.meals.get(0).idMeal,
                         rootMealDetail.meals.get(0).strMeal,
                         rootMealDetail.meals.get(0).strCategory,
@@ -187,36 +187,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
                         rootMealDetail.meals.get(0).strIngredient15,rootMealDetail.meals.get(0).strIngredient16,
                         rootMealDetail.meals.get(0).strIngredient17,rootMealDetail.meals.get(0).strIngredient18,
                         rootMealDetail.meals.get(0).strIngredient19,rootMealDetail.meals.get(0).strIngredient20);
-                if(satBox.isChecked())
-                    weekPlan.sat="1";
-                else
-                    weekPlan.sat="0";
-                if(sunBox.isChecked())
-                    weekPlan.sun="1";
-                else
-                    weekPlan.sun="0";
-                if(monBox.isChecked())
-                    weekPlan.mon="1";
-                else
-                    weekPlan.mon="0";
-                if(tueBox.isChecked())
-                    weekPlan.tues="1";
-                else
-                    weekPlan.tues="0";
-                if(thuBox.isChecked())
-                    weekPlan.thurs="1";
-                else
-                    weekPlan.thurs="0";
-                if(friBox.isChecked())
-                    weekPlan.fri="1";
-                else
-                    weekPlan.fri="0";
-                if(wedBox.isChecked())
-                    weekPlan.wed="1";
-                else
-                    weekPlan.wed="0";
-                addMealsToWeekPlanOnClick(weekPlan);
-                insertMealInWeekPlanFirebase(weekPlan,shP);
+
             }
         });
 
@@ -484,4 +455,44 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     private void addMealsToWeekPlan(WeekPlan meal) {
         mealPresenterInterface.addToWeekPlan(meal);
     }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(Calendar.YEAR,year);
+        calendar.set(Calendar.MONTH,month);
+        calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+        String date= DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        if(date.contains("Saturday"))
+            weekPlan.sat="1";
+        else
+            weekPlan.sat="0";
+        if(date.contains("Sunday"))
+            weekPlan.sun="1";
+        else
+            weekPlan.sun="0";
+        if(date.contains("Monday"))
+            weekPlan.mon="1";
+        else
+            weekPlan.mon="0";
+        if(date.contains("Tuesday"))
+            weekPlan.tues="1";
+        else
+            weekPlan.tues="0";
+        if(date.contains("Thursday"))
+            weekPlan.thurs="1";
+        else
+            weekPlan.thurs="0";
+        if(date.contains("Friday"))
+            weekPlan.fri="1";
+        else
+            weekPlan.fri="0";
+        if(date.contains("Wednesday"))
+            weekPlan.wed="1";
+        else
+            weekPlan.wed="0";
+        addMealsToWeekPlanOnClick(weekPlan);
+        insertMealInWeekPlanFirebase(weekPlan,shP);
+    }
+
 }

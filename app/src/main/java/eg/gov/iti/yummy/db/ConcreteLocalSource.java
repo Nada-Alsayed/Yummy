@@ -117,6 +117,26 @@ public class ConcreteLocalSource implements LocalSource{
     }
 
     @Override
+    public void deleteMeals() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userDao.deleteMeals(); ;
+            }
+        }).start();
+    }
+
+    @Override
+    public void deletePlan() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userDao.deleteMyPlan();
+            }
+        }).start();
+    }
+
+    @Override
     public void deleteMeal(WeekPlan meal2) {
         new Thread(new Runnable() {
             @Override
@@ -138,7 +158,7 @@ public class ConcreteLocalSource implements LocalSource{
         return userDao.getOfflineMealWeek(mealName);
     }
 
-    @Override
+  /*  @Override
     public void registerUser(UserEntity userEntity) {
         userDao.registerUser(userEntity).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
             @Override
@@ -156,14 +176,14 @@ public class ConcreteLocalSource implements LocalSource{
                 Log.e("HI", "++++++++++++++++++++++++++failed insert user: concrete localsource ");
             }
         });
-    }
+    }*/
 
     @Override
     public Observable<List<MealDetail>> getAllStoredMeals() {
         return storeMeals;
     }
 
-    @Override
+  /*  @Override
     public String login(String userName, String password) {
 
        String c= userDao.login(userName, password).subscribeOn(Schedulers.io())
@@ -171,15 +191,15 @@ public class ConcreteLocalSource implements LocalSource{
                             Log.e(TAG, "itemfalselogin: " + item),
                         error -> error.printStackTrace()).toString();
         return c;
-    }
+    }*/
 
-    @Override
+   /* @Override
     public String is_Taken(String name) {
         String c= userDao.is_Taken(name).subscribeOn(Schedulers.io())
                 .subscribe(item -> Log.e(TAG, "Exist: " + item),
                         error -> error.printStackTrace()).toString();
         return c;
-    }
+    }*/
 
     @Override
     public void updateSaturday(String saturday) {

@@ -24,6 +24,8 @@ public interface RepositoryInterface {
     public Observable<List<MealDetail>> getStoredMeals();
     public void deleteMeal(MealDetail meal);
     public void deleteMeal(WeekPlan meal);
+    void deleteMeals();
+    void deletePlan();
     public void insertMeal(MealDetail meal);
     public void insertMealIntoWeek(WeekPlan meal);
 

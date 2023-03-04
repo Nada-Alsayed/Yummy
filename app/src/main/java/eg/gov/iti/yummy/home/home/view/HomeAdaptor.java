@@ -18,7 +18,6 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
-import eg.gov.iti.yummy.favourite.view.onFavouriteClickListener;
 import eg.gov.iti.yummy.meal_details.view.page_item_details;
 import eg.gov.iti.yummy.model.MealDetail;
 
@@ -29,11 +28,9 @@ public class HomeAdaptor extends RecyclerView.Adapter<HomeAdaptor.ViewHolder> {
 
     public HomeAdaptor(List<MealDetail> list, HomeOnClick listener, Context context) {
         this.context = context;
-        this.listener=listener;
+        this.listener = listener;
         this.list = list;
     }
-
-
     @Override
     public HomeAdaptor.ViewHolder onCreateViewHolder(ViewGroup recyclerView, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(recyclerView.getContext());
@@ -52,9 +49,9 @@ public class HomeAdaptor extends RecyclerView.Adapter<HomeAdaptor.ViewHolder> {
         holder.imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,  meal.strMeal+" added to your list", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, meal.strMeal + " added to your list", Toast.LENGTH_SHORT).show();
                 listener.addToFavHome(meal);
-
+                listener.addToFavFireOnClick(meal);
             }
         });
 

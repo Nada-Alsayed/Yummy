@@ -19,14 +19,16 @@ public interface LocalSource {
     void insertMeal(MealDetail meal);
     void insertMealToWeekPlan(WeekPlan meal);
     void deleteMeal(MealDetail meal);
+    void deleteMeals();
+    void deletePlan();
     void deleteMeal(WeekPlan meal2);
     Observable<MealDetail> getOfflineMeal(String mealName);
 
     abstract Observable<WeekPlan> getOfflineMealWeek(String mealName);
-    void registerUser(UserEntity userEntity);
+    /*void registerUser(UserEntity userEntity);*/
     Observable<List<MealDetail>> getAllStoredMeals();
-    String login(String userName, String password);
-    String is_Taken(String name);
+   /* String login(String userName, String password);
+    String is_Taken(String name);*/
 
 //  LiveData<UserEntity> getData(String username);
     void updateSaturday(String saturday);

@@ -27,17 +27,21 @@ public interface UserDao {
     Observable<MealDetail> getOfflineMeal(String mealName);
     @Query("Select * From WeekPlan Where strMeal=:mealName")
     Observable<WeekPlan> getOfflineMealWeek(String mealName);
+    @Query("DELETE FROM WeekPlan")
+    void deleteMyPlan();
+    @Query("DELETE FROM MealData")
+    void deleteMeals();
     @Delete
     void deleteMeal(MealDetail meal);
     @Delete
     void deleteMeal(WeekPlan meal);
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable registerUser(UserEntity userEntity);
-    @Query("Select exists(Select userName from UserData where userName=:username and password=:password)")
+    /*@Insert(onConflict = OnConflictStrategy.REPLACE)
+    Completable registerUser(UserEntity userEntity);*/
+    /*@Query("Select exists(Select userName from UserData where userName=:username and password=:password)")
     Observable<Boolean> login(String username, String password);
 
     @Query("Select exists(Select userName from UserData where userName=:username )")
-    Observable<Boolean> is_Taken(String username);
+    Observable<Boolean> is_Taken(String username);*/
 
     //insert meals in each day
     @Query("Update WeekPlan set sat=(:saturday) ")

@@ -3,8 +3,6 @@ package eg.gov.iti.yummy.model;
 import android.content.Context;
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
-
 import java.util.List;
 
 import eg.gov.iti.yummy.db.LocalSource;
@@ -15,27 +13,26 @@ import eg.gov.iti.yummy.network.RemoteSource;
 import eg.gov.iti.yummy.network.SearchNetworkDelegate;
 import io.reactivex.rxjava3.core.Observable;
 
-public class Repository implements RepositoryInterface{
+public class Repository implements RepositoryInterface {
     Context context;
     RemoteSource remoteSource;
     LocalSource localSource;
 
     private static Repository repository = null;
 
-    public Repository(RemoteSource remoteSource, LocalSource localSource,Context context) {
-        this.context=context;
-        this.localSource=localSource;
-        this.remoteSource=remoteSource;
+    public Repository(RemoteSource remoteSource, LocalSource localSource, Context context) {
+        this.context = context;
+        this.localSource = localSource;
+        this.remoteSource = remoteSource;
     }
 
     public Repository(Context context) {
         this.context = context;
     }
 
-    public static Repository getInstance(RemoteSource remoteSource, LocalSource localSource,Context context)
-    {
+    public static Repository getInstance(RemoteSource remoteSource, LocalSource localSource, Context context) {
         if (repository == null) {
-            repository = new Repository(remoteSource,localSource, context);
+            repository = new Repository(remoteSource, localSource, context);
         }
         return repository;
     }
@@ -61,9 +58,9 @@ public class Repository implements RepositoryInterface{
     }
 
     @Override
-    public void getMealFromRetrofit(DetailsNetworkDelegate detailsNetworkDelegate,String meal) {
-        Log.i("Repository", "getMealFromRetrofit: "+meal);
-        remoteSource.specificItem(detailsNetworkDelegate,meal);
+    public void getMealFromRetrofit(DetailsNetworkDelegate detailsNetworkDelegate, String meal) {
+        Log.i("Repository", "getMealFromRetrofit: " + meal);
+        remoteSource.specificItem(detailsNetworkDelegate, meal);
     }
 
     @Override
@@ -79,6 +76,16 @@ public class Repository implements RepositoryInterface{
     @Override
     public void deleteMeal(WeekPlan meal2) {
         localSource.deleteMeal(meal2);
+    }
+
+    @Override
+    public void deleteMeals() {
+        localSource.deleteMeals();
+    }
+
+    @Override
+    public void deletePlan() {
+        localSource.deletePlan();
     }
 
     @Override
@@ -164,7 +171,7 @@ public class Repository implements RepositoryInterface{
     @Override
     public Observable<MealDetail> getOfflineMeal(String name) {
         Log.e("joo", "getOfflineMeal:rebo ");
-       return localSource.getOfflineMeal(name);
+        return localSource.getOfflineMeal(name);
     }
 
     @Override
@@ -182,19 +189,20 @@ public class Repository implements RepositoryInterface{
     public void getAllCountriesFromRetrofit(SearchNetworkDelegate searchNetworkDelegate) {
         remoteSource.allCountries(searchNetworkDelegate);
     }
+
     @Override
-    public void filterByIngredientFromRetrofit(FilterNetworkDelegate filterNetworkDelegate,String ingredient) {
-        remoteSource.filterByIngredient(filterNetworkDelegate,ingredient);
+    public void filterByIngredientFromRetrofit(FilterNetworkDelegate filterNetworkDelegate, String ingredient) {
+        remoteSource.filterByIngredient(filterNetworkDelegate, ingredient);
     }
 
     @Override
-    public void filterByCategoryFromRetrofit(FilterNetworkDelegate filterNetworkDelegate,String category) {
-        remoteSource.filterByCategory(filterNetworkDelegate,category);
+    public void filterByCategoryFromRetrofit(FilterNetworkDelegate filterNetworkDelegate, String category) {
+        remoteSource.filterByCategory(filterNetworkDelegate, category);
     }
 
     @Override
-    public void filterByCountryFromRetrofit(FilterNetworkDelegate filterNetworkDelegate,String country) {
-        remoteSource.filterByCountry(filterNetworkDelegate,country);
+    public void filterByCountryFromRetrofit(FilterNetworkDelegate filterNetworkDelegate, String country) {
+        remoteSource.filterByCountry(filterNetworkDelegate, country);
     }
 
 

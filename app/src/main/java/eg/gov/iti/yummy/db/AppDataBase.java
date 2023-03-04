@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.WeekPlan;
 
-@Database(entities = {UserEntity.class, MealDetail.class, WeekPlan.class},version = 1)
+@Database(entities = {MealDetail.class, WeekPlan.class},version = 1)
 
 public abstract class AppDataBase extends RoomDatabase {
         private static AppDataBase appDataBase=null;
@@ -17,7 +17,7 @@ public abstract class AppDataBase extends RoomDatabase {
         public abstract UserDao userDao();
         public static synchronized AppDataBase getInstance(Context context){
             if(appDataBase==null){
-                appDataBase= Room.databaseBuilder(context.getApplicationContext(),AppDataBase.class,"j").build();
+                appDataBase= Room.databaseBuilder(context.getApplicationContext(),AppDataBase.class,"DataBase").build();
             }
             return appDataBase;
         }

@@ -1,6 +1,7 @@
 package eg.gov.iti.yummy.weeklyPlan.view.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.List;
 
@@ -53,21 +56,21 @@ public class WeeklyPlanAdapter extends RecyclerView.Adapter<WeeklyPlanAdapter.Vi
         holder.imageView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //action
-                if(mealDetail.fri.equals(1))
-                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
-                if(mealDetail.sat.equals(1))
-                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
-                if(mealDetail.sun.equals(1))
-                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
-                if(mealDetail.mon.equals(1))
-                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
-                if(mealDetail.tues.equals(1))
-                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
-                if(mealDetail.equals(1))
-                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
-                if(mealDetail.fri.equals(1))
-                    onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
+                AlertDialog dialog=new MaterialAlertDialogBuilder(context).setTitle("Delete")
+                        .setMessage("Are you sure you want to delete this item from your plan?").setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                onWeeklyPlanClickListener.deleteMealPlanOnClick(mealDetail);
+                                dialog.dismiss();
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).create();
+                dialog.show();
+
             }
         });
         holder.layout.setOnClickListener(new View.OnClickListener() {

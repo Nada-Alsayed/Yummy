@@ -24,11 +24,17 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
+import eg.gov.iti.yummy.db.ConcreteLocalSource;
+import eg.gov.iti.yummy.model.Repository;
+import eg.gov.iti.yummy.network.API_Client;
+import eg.gov.iti.yummy.profile.view.presenter.ProfilePresenter;
+import eg.gov.iti.yummy.profile.view.presenter.ProfilePresenterInterface;
 
 public class Page_Profile extends Fragment {
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
     FirebaseAuth firebaseAuth;
+ProfilePresenterInterface profilePresenterInterface;
     ImageView imgFav, imgWeekPlan, profilePic, logOutImg;
     TextView txtFav, txtWeekPlan, logout, name;
 
@@ -55,6 +61,10 @@ public class Page_Profile extends Fragment {
         txtWeekPlan = view.findViewById(R.id.txtWeekPlan);
         imgFav = view.findViewById(R.id.imgfav);
         txtFav = view.findViewById(R.id.txtfav);
+
+        profilePresenterInterface=new ProfilePresenter(Repository.getInstance(
+                API_Client.getInstance(getContext()),
+                ConcreteLocalSource.getInstance(getContext()), getContext()));
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(getContext(), gso);
@@ -142,7 +152,8 @@ public class Page_Profile extends Fragment {
     void signOut() {
         gsc.signOut();
         firebaseAuth.signOut();
-
+        profilePresenterInterface.deleteMeals();
+        profilePresenterInterface.deletePlan();
         Intent intent = new Intent(getActivity(), Page_Sign_In.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);

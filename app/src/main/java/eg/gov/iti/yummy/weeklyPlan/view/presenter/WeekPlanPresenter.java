@@ -2,14 +2,12 @@ package eg.gov.iti.yummy.weeklyPlan.view.presenter;
 
 import java.util.List;
 
-import eg.gov.iti.yummy.meal_details.view.MealViewInterface;
-import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.model.WeekPlan;
 import eg.gov.iti.yummy.weeklyPlan.view.view.WeekPlanViewInterface;
 import io.reactivex.rxjava3.core.Observable;
 
-public class WeekPlanPresenter implements WeekPlanPresenterInterface{
+public class WeekPlanPresenter implements WeekPlanPresenterInterface {
     private Repository repository;
     private WeekPlanViewInterface weekPlanViewInterface;
 
@@ -57,4 +55,5 @@ public class WeekPlanPresenter implements WeekPlanPresenterInterface{
     public Observable<List<WeekPlan>> getWeddayMeal() {
         return repository.getStoredWedMeals();
     }
+
 }
