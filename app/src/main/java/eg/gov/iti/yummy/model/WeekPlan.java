@@ -11,24 +11,28 @@ import org.jetbrains.annotations.NotNull;
 public class WeekPlan {
     @PrimaryKey(autoGenerate = true)
     @NotNull
-   public Integer id;
-    @ColumnInfo(defaultValue = "")
-    public String sat;
-    @ColumnInfo(defaultValue = "")
-    public String sun;
-    @ColumnInfo(defaultValue = "")
-    public String mon;
-    @ColumnInfo(defaultValue = "")
-    public String thurs;
-    @ColumnInfo(defaultValue = "")
-    public String wed;
-    @ColumnInfo(defaultValue = "")
-    public String tues;
-    @ColumnInfo(defaultValue = "")
-    public String fri;
+    public Integer id;
 
     public String idMeal;
     public String strMeal;
+
+    @ColumnInfo(defaultValue = "0")
+    public String sat;
+    @ColumnInfo(defaultValue = "0")
+    public String sun;
+    @ColumnInfo(defaultValue = "0")
+    public String mon;
+    @ColumnInfo(defaultValue = "0")
+    public String thurs;
+    @ColumnInfo(defaultValue = "0")
+    public String wed;
+    @ColumnInfo(defaultValue = "0")
+    public String tues;
+    @ColumnInfo(defaultValue = "0")
+    public String fri;
+
+
+
     @Ignore
     public Object strDrinkAlternate;
     public String strCategory;

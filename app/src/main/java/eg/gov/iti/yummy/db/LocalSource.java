@@ -16,7 +16,7 @@ public interface LocalSource {
     Observable<List<WeekPlan>>getThursdayMeals();
     Observable<List<WeekPlan>>getSatdayMeals();
     Observable<List<WeekPlan>>getFridayMeals();
-    void insertMeal(MealDetail meal);
+    void insertMealToFav(MealDetail meal);
     void insertMealToWeekPlan(WeekPlan meal);
     void deleteMeal(MealDetail meal);
     void deleteMeals();
@@ -31,12 +31,12 @@ public interface LocalSource {
     String is_Taken(String name);*/
 
 //  LiveData<UserEntity> getData(String username);
-    void updateSaturday(String saturday);
-    void updateSunday(String sunday);
-    void updateMonday(String monday);
-    void updateTuesday(String tuesday);
-    void updateWednesday(String wednesday);
-    void updateThursday(String thursday);
-    void updateFriday(String friday);
+    void updateSaturday(String saturday,String id);
+    void updateSunday(String sunday,String id);
+    void updateMonday(String monday,String id);
+    void updateTuesday(String tuesday,String id);
+    void updateWednesday(String wednesday,String id);
+    void updateThursday(String thursday,String id);
+    void updateFriday(String friday,String id);
     //void updateFavourite(String favourite);
 }

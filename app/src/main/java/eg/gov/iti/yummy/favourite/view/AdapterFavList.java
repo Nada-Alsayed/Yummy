@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +19,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
+import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
 import eg.gov.iti.yummy.meal_details.view.page_item_details;
 import eg.gov.iti.yummy.model.MealDetail;
 
 
 public class AdapterFavList extends RecyclerView.Adapter<AdapterFavList.Holder> {
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://yummy-app-f2567-default-rtdb.firebaseio.com/");
 
      List<FavList> listData;
     List<MealDetail> list;
@@ -62,6 +67,8 @@ public class AdapterFavList extends RecyclerView.Adapter<AdapterFavList.Holder> 
 
     @Override
     public void onBindViewHolder(@NonNull AdapterFavList.Holder holder,@SuppressLint("RecyclerView") int position) {
+        SharedPreferences pref = context.getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
+        String shP = pref.getString("USERNAME", "N/A");
         MealDetail meal = list.get(position);
         holder.title.setText( list.get(position).strMeal);
         holder.origin.setText( list.get(position).strArea);
@@ -75,6 +82,7 @@ public class AdapterFavList extends RecyclerView.Adapter<AdapterFavList.Holder> 
                                 .setMessage("Are you sure you want to delete this item?").setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                deleteFavFire(meal,shP);
                                 listener.OnClick(meal);
                                 dialog.dismiss();
                             }
@@ -87,7 +95,6 @@ public class AdapterFavList extends RecyclerView.Adapter<AdapterFavList.Holder> 
                 dialog.show();
             }
         });
-
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,6 +104,9 @@ public class AdapterFavList extends RecyclerView.Adapter<AdapterFavList.Holder> 
                 context.startActivity(intent);
             }
         });
+    }
+    void deleteFavFire(MealDetail meal,String c){
+        databaseReference.child(c).child("Favourite").child(meal.idMeal).removeValue();
     }
 
     @Override

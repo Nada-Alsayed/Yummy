@@ -1,5 +1,7 @@
 package eg.gov.iti.yummy.favourite.view;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -58,7 +60,7 @@ public class Page_Favourite extends Fragment implements FavViewInterface, onFavo
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        favMealPresenterInterface = new FavMealPresenter(Page_Favourite.this, Repository.getInstance(API_Client.getInstance(getContext()), ConcreteLocalSource.getInstance(getContext()), getContext()));
         SharedPreferences pref = getActivity().getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
         String shP = pref.getString("USERNAME", "N/A");
         databaseReference.child(shP).child("Favourite").addValueEventListener(new ValueEventListener() {
@@ -67,6 +69,7 @@ public class Page_Favourite extends Fragment implements FavViewInterface, onFavo
                 if (snapshot.hasChildren()) {
                     for(DataSnapshot Data:snapshot.getChildren()){
                         MealDetail mealDetail=Data.getValue(MealDetail.class);
+                        Log.e(TAG,"firebase");
                         favMealPresenterInterface.insertMeal(mealDetail);
                     }
                 }
@@ -76,16 +79,16 @@ public class Page_Favourite extends Fragment implements FavViewInterface, onFavo
 
             }
         });
+
         recyclerView=view.findViewById(R.id.recyclerView);
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-        favMealPresenterInterface = new FavMealPresenter(Page_Favourite.this, Repository.getInstance(API_Client.getInstance(getContext()), ConcreteLocalSource.getInstance(getContext()), getContext()));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapterFavList = new AdapterFavList(new ArrayList<>(), this, getContext());
 
 
-        recyclerView.setAdapter(adapterFavList);
+        //recyclerView.setAdapter(adapterFavList);
 
         favMealPresenterInterface.getStoredMeals().subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<MealDetail>>() {
@@ -122,6 +125,7 @@ public class Page_Favourite extends Fragment implements FavViewInterface, onFavo
 
     @Override
     public void deleteProduct(MealDetail meal) {
+
         favMealPresenterInterface.deleteMeal(meal);
     }
 

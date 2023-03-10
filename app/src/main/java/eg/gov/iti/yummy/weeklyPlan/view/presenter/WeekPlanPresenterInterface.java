@@ -9,6 +9,7 @@ import io.reactivex.rxjava3.core.Observable;
 public interface WeekPlanPresenterInterface {
     public void deleteMeal(WeekPlan product);
     void addToWeekPlan(WeekPlan meal);
+    void deletePlan();
     public Observable<List<WeekPlan>>  getFridayMeal();
     public Observable<List<WeekPlan>>  getSatdayMeal();
     public Observable<List<WeekPlan>>  getSundayMeal();

@@ -9,6 +9,7 @@ import java.util.List;
 
 import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.WeekPlan;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.CompletableObserver;
 import io.reactivex.rxjava3.core.Observable;
@@ -69,6 +70,25 @@ public class ConcreteLocalSource implements LocalSource{
     }
 
     @Override
+    public void insertMealToFav(MealDetail meal1) {
+        userDao.insertMealToL(meal1).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+            @Override
+            public void onComplete() {
+                Log.e("HP", "success insert meal: +++++++++++++++++++++++concrete fav localsource ");
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.e("HP", "failed insert meal: ++++++++++++++++++++++++concrete Fav localsource ");
+            }
+        });
+    }
+
+   /*
     public void insertMeal(MealDetail meal) {
         userDao.insertMeal(meal).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
             @Override
@@ -77,19 +97,21 @@ public class ConcreteLocalSource implements LocalSource{
             }
             @Override
             public void onComplete() {
-                Log.e("HI", "success insert meal: +++++++++++++++++++++++concrete localsource ");
+                Log.e("HI", "success insert meal: +++++++++++++++++++++++concrete fav localsource ");
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Log.e("HI", "failed insert meal: ++++++++++++++++++++++++concrete localsource ");
+                Log.e("HI", "failed insert meal: ++++++++++++++++++++++++concrete Fav localsource ");
             }
         });
-    }
+
+    }*/
+
 
     @Override
     public void insertMealToWeekPlan(WeekPlan meal) {
-        userDao.insertMealToWeekPlan(meal).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+        userDao.insertMealToWeekPlan(meal).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
@@ -202,8 +224,8 @@ public class ConcreteLocalSource implements LocalSource{
     }*/
 
     @Override
-    public void updateSaturday(String saturday) {
-        userDao.updateSaturday(saturday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+    public void updateSaturday(String saturday, String id) {
+        userDao.updateSaturday(saturday,id).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
@@ -224,8 +246,8 @@ public class ConcreteLocalSource implements LocalSource{
     }
 
     @Override
-    public void updateSunday(String sunday) {
-        userDao.updateSunday(sunday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+    public void updateSunday(String sunday, String id) {
+        userDao.updateSunday(sunday,id).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
@@ -246,8 +268,8 @@ public class ConcreteLocalSource implements LocalSource{
     }
 
     @Override
-    public void updateMonday(String monday) {
-        userDao.updateMonday(monday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+    public void updateMonday(String monday, String id) {
+        userDao.updateMonday(monday,id).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
@@ -268,8 +290,8 @@ public class ConcreteLocalSource implements LocalSource{
     }
 
     @Override
-    public void updateTuesday(String tuesday) {
-        userDao.updateTuesday(tuesday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+    public void updateTuesday(String tuesday, String id) {
+        userDao.updateTuesday(tuesday,id).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
@@ -289,9 +311,11 @@ public class ConcreteLocalSource implements LocalSource{
         });
     }
 
+
+
     @Override
-    public void updateWednesday(String wednesday) {
-        userDao.updateWednesday(wednesday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+    public void updateWednesday(String wednesday, String id) {
+        userDao.updateWednesday(wednesday,id).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
@@ -312,8 +336,8 @@ public class ConcreteLocalSource implements LocalSource{
     }
 
     @Override
-    public void updateThursday(String thursday) {
-        userDao.updateThursday(thursday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+    public void updateThursday(String thursday, String id) {
+        userDao.updateThursday(thursday,id).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
@@ -334,8 +358,8 @@ public class ConcreteLocalSource implements LocalSource{
     }
 
     @Override
-    public void updateFriday(String friday) {
-        userDao.updateFriday(friday).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+    public void updateFriday(String friday, String id) {
+        userDao.updateFriday(friday,id).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 

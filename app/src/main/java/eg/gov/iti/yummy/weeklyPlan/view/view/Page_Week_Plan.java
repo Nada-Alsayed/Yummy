@@ -60,19 +60,20 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface,on
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        weekPlanPresenterInterface = new WeekPlanPresenter(Repository.getInstance(
+                API_Client.getInstance(getContext()),
+                ConcreteLocalSource.getInstance(getContext()), getContext()), this);
         cls = ConcreteLocalSource.getInstance(getContext());
         SharedPreferences pref = getActivity().getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
         String shP = pref.getString("USERNAME", "N/A");
 
-        databaseReference.child(shP).child("WeekPlan").addValueEventListener(new ValueEventListener() {
+        /*databaseReference.child(shP).child("WeekPlan").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
                     for(DataSnapshot Data1:snapshot.getChildren()){
                         WeekPlan weekPlan=Data1.getValue(WeekPlan.class);
-
-                            weekPlanPresenterInterface.addToWeekPlan(weekPlan);
+                        weekPlanPresenterInterface.addToWeekPlan(weekPlan);
                     }
                 }
             }
@@ -80,12 +81,10 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface,on
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
         recyclerView1 = view.findViewById(R.id.recycle1);
         recyclerView1.setHasFixedSize(true);
-        weekPlanPresenterInterface = new WeekPlanPresenter(Repository.getInstance(
-                API_Client.getInstance(getContext()),
-                ConcreteLocalSource.getInstance(getContext()), getContext()), this);
+
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getContext());
         layoutManager1.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView1.setLayoutManager(layoutManager1);
@@ -315,6 +314,11 @@ public class Page_Week_Plan extends Fragment implements WeekPlanViewInterface,on
     @Override
     public void deleteMealPlanOnClick(WeekPlan Meal) {
         deleteMeal(Meal);
+    }
+
+    @Override
+    public void deletePlan() {
+        weekPlanPresenterInterface.deletePlan();
     }
 
     @Override

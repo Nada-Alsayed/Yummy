@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +46,7 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class page_item_details extends AppCompatActivity implements MealViewInterface, OnClick , DatePickerDialog.OnDateSetListener {
+public class page_item_details extends AppCompatActivity implements MealViewInterface, OnClick, DatePickerDialog.OnDateSetListener {
 
     YouTubePlayerView youTubePlayerView;
     ImageView mealPic;
@@ -63,6 +61,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     ConcreteLocalSource cls;
     RootMealDetail rootMealDetail;
     Button btnAddToFav, btnAddToWeekPlan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +75,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         rootMealDetail = new RootMealDetail();
 
         Intent intent = getIntent();
-        String tableName =intent.getStringExtra("tableType");
+        String tableName = intent.getStringExtra("tableType");
         String mealName = intent.getStringExtra("MealName");
         youTubePlayerView = findViewById(R.id.videoView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, GridLayoutManager.HORIZONTAL, false);
@@ -96,37 +95,44 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         if (isNetworkAvailable(getApplicationContext())) {
             mealPresenterInterface.getSpecificMeal(mealName);
             Toast.makeText(this, " connected", Toast.LENGTH_SHORT).show();
-        } else if(tableName.equals("favourite")) {
+        } else if (tableName.equals("favourite")) {
             mealPresenterInterface.getOffMeal(mealName).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<MealDetail>() {
-                @Override
-                public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {}
-                @Override
-                public void onNext(@io.reactivex.rxjava3.annotations.NonNull MealDetail mealDetail) {
-                    Log.e("TAG", "onChanged: kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk ");
-                    MealName.setText(mealDetail.strMeal);
-                    MealOrigin.setText(mealDetail.strArea);
-                    prepareOffIngredients(mealDetail);
-                    adapter = new IngredientsAdapter(myIngredients, getApplicationContext());
-                    recyclerView.setAdapter(adapter);
-                    String thumb = "https://www.themealdb.com/images/ingredients/" + mealDetail.strIngredient1 + ".png";
-                    myIngredients.add(new Recipe(mealDetail.strIngredient1, mealDetail.strMeasure1, thumb));
-                    steps.setText(mealDetail.strInstructions);
-                    Glide.with(getApplicationContext())
-                            .load(mealDetail.strMealThumb)
-                            .into(mealPic);
-                }
-                @Override
-                public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {}
-                @Override
-                public void onComplete() {}
-            });
+                        @Override
+                        public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                        }
+
+                        @Override
+                        public void onNext(@io.reactivex.rxjava3.annotations.NonNull MealDetail mealDetail) {
+                            Log.e("TAG", "onChanged: kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk ");
+                            MealName.setText(mealDetail.strMeal);
+                            MealOrigin.setText(mealDetail.strArea);
+                            prepareOffIngredients(mealDetail);
+                            adapter = new IngredientsAdapter(myIngredients, getApplicationContext());
+                            recyclerView.setAdapter(adapter);
+                            String thumb = "https://www.themealdb.com/images/ingredients/" + mealDetail.strIngredient1 + ".png";
+                            myIngredients.add(new Recipe(mealDetail.strIngredient1, mealDetail.strMeasure1, thumb));
+                            steps.setText(mealDetail.strInstructions);
+                            Glide.with(getApplicationContext())
+                                    .load(mealDetail.strMealThumb)
+                                    .into(mealPic);
+                        }
+
+                        @Override
+                        public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        }
+
+                        @Override
+                        public void onComplete() {
+                        }
+                    });
             Toast.makeText(this, "not connected favourite", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             mealPresenterInterface.getOffMealWeek(mealName).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<WeekPlan>() {
                         @Override
-                        public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {}
+                        public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                        }
 
                         @Override
                         public void onNext(@io.reactivex.rxjava3.annotations.NonNull WeekPlan weekPlan) {
@@ -150,7 +156,8 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
                         }
 
                         @Override
-                        public void onComplete() {}
+                        public void onComplete() {
+                        }
                     });
 
             Toast.makeText(this, "not connected favourite", Toast.LENGTH_SHORT).show();
@@ -160,39 +167,37 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
             @Override
             public void onClick(View v) {
                 addMealToFavOnClick(rootMealDetail.meals.get(0));
-                insertMealInFirebase(rootMealDetail.meals.get(0),shP);
+                insertMealInFirebase(rootMealDetail.meals.get(0), shP);
             }
         });
 
         btnAddToWeekPlan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment calenderDialog=new CalenderDialog();
-                calenderDialog.show(getSupportFragmentManager(),"Calender");
-
-                weekPlan=new WeekPlan(
+                DialogFragment calenderDialog = new CalenderDialog();
+                calenderDialog.show(getSupportFragmentManager(), "Calender");
+                weekPlan = new WeekPlan(
                         rootMealDetail.meals.get(0).idMeal,
                         rootMealDetail.meals.get(0).strMeal,
                         rootMealDetail.meals.get(0).strCategory,
                         rootMealDetail.meals.get(0).strArea,
                         rootMealDetail.meals.get(0).strInstructions,
                         rootMealDetail.meals.get(0).strMealThumb,
-                        rootMealDetail.meals.get(0).strIngredient1,rootMealDetail.meals.get(0).strIngredient2,
-                        rootMealDetail.meals.get(0).strIngredient3,rootMealDetail.meals.get(0).strIngredient4,
-                        rootMealDetail.meals.get(0).strIngredient5,rootMealDetail.meals.get(0).strIngredient6,
-                        rootMealDetail.meals.get(0).strIngredient7,rootMealDetail.meals.get(0).strIngredient8,
-                        rootMealDetail.meals.get(0).strIngredient9,rootMealDetail.meals.get(0).strIngredient10,
-                        rootMealDetail.meals.get(0).strIngredient11,rootMealDetail.meals.get(0).strIngredient12,
-                        rootMealDetail.meals.get(0).strIngredient13,rootMealDetail.meals.get(0).strIngredient14,
-                        rootMealDetail.meals.get(0).strIngredient15,rootMealDetail.meals.get(0).strIngredient16,
-                        rootMealDetail.meals.get(0).strIngredient17,rootMealDetail.meals.get(0).strIngredient18,
-                        rootMealDetail.meals.get(0).strIngredient19,rootMealDetail.meals.get(0).strIngredient20);
+                        rootMealDetail.meals.get(0).strIngredient1, rootMealDetail.meals.get(0).strIngredient2,
+                        rootMealDetail.meals.get(0).strIngredient3, rootMealDetail.meals.get(0).strIngredient4,
+                        rootMealDetail.meals.get(0).strIngredient5, rootMealDetail.meals.get(0).strIngredient6,
+                        rootMealDetail.meals.get(0).strIngredient7, rootMealDetail.meals.get(0).strIngredient8,
+                        rootMealDetail.meals.get(0).strIngredient9, rootMealDetail.meals.get(0).strIngredient10,
+                        rootMealDetail.meals.get(0).strIngredient11, rootMealDetail.meals.get(0).strIngredient12,
+                        rootMealDetail.meals.get(0).strIngredient13, rootMealDetail.meals.get(0).strIngredient14,
+                        rootMealDetail.meals.get(0).strIngredient15, rootMealDetail.meals.get(0).strIngredient16,
+                        rootMealDetail.meals.get(0).strIngredient17, rootMealDetail.meals.get(0).strIngredient18,
+                        rootMealDetail.meals.get(0).strIngredient19, rootMealDetail.meals.get(0).strIngredient20);
 
             }
         });
 
     }
-
 
 
     public static boolean isNetworkAvailable(Context context) {
@@ -206,8 +211,8 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     }
 
     @Override
-    public void addMealInFirebase(MealDetail mealDetail,String key) {
-        mealPresenterInterface.addMealToFavFirebase(mealDetail,key);
+    public void addMealInFirebase(MealDetail mealDetail, String key) {
+        mealPresenterInterface.addMealToFavFirebase(mealDetail, key);
     }
 
     @Override
@@ -304,6 +309,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         }
 
     }
+
     void prepareOffIngredientsWeek(WeekPlan meal) {
         if (!meal.strIngredient1.equals("")) {
             String thumb = "https://www.themealdb.com/images/ingredients/" + meal.strIngredient1 + ".png";
@@ -443,13 +449,13 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
     }
 
     @Override
-    public void insertMealInFirebase(MealDetail mealDetail,String key) {
-        addMealInFirebase(mealDetail,key);
+    public void insertMealInFirebase(MealDetail mealDetail, String key) {
+        addMealInFirebase(mealDetail, key);
     }
 
     @Override
     public void insertMealInWeekPlanFirebase(WeekPlan mealDetail, String key) {
-        addMealInWeekPlanFirebase(mealDetail,key);
+        addMealInWeekPlanFirebase(mealDetail, key);
     }
 
     private void addMealsToWeekPlan(WeekPlan meal) {
@@ -458,41 +464,90 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar calendar=Calendar.getInstance();
-        calendar.set(Calendar.YEAR,year);
-        calendar.set(Calendar.MONTH,month);
-        calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-        String date= DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
-        if(date.contains("Saturday"))
-            weekPlan.sat="1";
-        else
-            weekPlan.sat="0";
-        if(date.contains("Sunday"))
-            weekPlan.sun="1";
-        else
-            weekPlan.sun="0";
-        if(date.contains("Monday"))
-            weekPlan.mon="1";
-        else
-            weekPlan.mon="0";
-        if(date.contains("Tuesday"))
-            weekPlan.tues="1";
-        else
-            weekPlan.tues="0";
-        if(date.contains("Thursday"))
-            weekPlan.thurs="1";
-        else
-            weekPlan.thurs="0";
-        if(date.contains("Friday"))
-            weekPlan.fri="1";
-        else
-            weekPlan.fri="0";
-        if(date.contains("Wednesday"))
-            weekPlan.wed="1";
-        else
-            weekPlan.wed="0";
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
+        if (date.contains("Saturday")) {
+            weekPlan.sat = "1";
+            Toast.makeText(this, "" + weekPlan.sat, Toast.LENGTH_SHORT).show();
+        } else {
+            weekPlan.sat = "0";
+        }
+        if (date.contains("Sunday")) {
+            weekPlan.sun = "1";
+        }
+        // Toast.makeText(this, ""+weekPlan.sat, Toast.LENGTH_SHORT).show();
+        else {
+            weekPlan.sun = "0";
+        }
+        if (date.contains("Monday")) {
+            weekPlan.mon = "1";
+
+        } else {
+            weekPlan.mon = "0";
+        }
+        if (date.contains("Tuesday")) {
+            weekPlan.tues = "1";
+            // Toast.makeText(this, ""+weekPlan.sat, Toast.LENGTH_SHORT).show();
+        } else {
+            weekPlan.tues = "0";
+        }
+        if (date.contains("Thursday")) {
+            weekPlan.thurs = "1";
+            //  Toast.makeText(this, ""+weekPlan.sat, Toast.LENGTH_SHORT).show();
+        } else {
+            weekPlan.thurs = "0";
+        }
+        if (date.contains("Friday")) {
+            weekPlan.fri = "1";
+            //  Toast.makeText(this, ""+weekPlan.sat, Toast.LENGTH_SHORT).show();
+        } else {
+            weekPlan.fri = "0";
+        }
+        if (date.contains("Wednesday")) {
+            weekPlan.wed = "1";
+            //Toast.makeText(this, ""+weekPlan.sat, Toast.LENGTH_SHORT).show();
+
+        } else {
+            weekPlan.wed = "0";
+        }
         addMealsToWeekPlanOnClick(weekPlan);
-        insertMealInWeekPlanFirebase(weekPlan,shP);
+        insertMealInWeekPlanFirebase(weekPlan, shP);
+
+        /*if(date.contains("Saturday")){
+            mealPresenterInterface.updateSat("1", weekPlan.idMeal);
+            Toast.makeText(this, ""+weekPlan.sat, Toast.LENGTH_SHORT).show();}
+        else
+            mealPresenterInterface.updateSat("0", weekPlan.idMeal);
+        if(date.contains("Sunday"))
+            mealPresenterInterface.updateSun("1", weekPlan.idMeal);
+        else
+            mealPresenterInterface.updateSun("0", weekPlan.idMeal);
+        if(date.contains("Monday"))
+            mealPresenterInterface.updateMon("1", weekPlan.idMeal);
+        else
+            mealPresenterInterface.updateMon("0", weekPlan.idMeal);
+        if(date.contains("Tuesday")){
+            mealPresenterInterface.updateTues("1", weekPlan.idMeal);
+            Toast.makeText(this, ""+weekPlan.tues, Toast.LENGTH_SHORT).show();
+        }
+        else
+            mealPresenterInterface.updateTues("0",weekPlan.idMeal);
+        if(date.contains("Thursday"))
+            mealPresenterInterface.updateThurs("1", weekPlan.idMeal);
+        else
+            mealPresenterInterface.updateThurs("0", weekPlan.idMeal);
+        if(date.contains("Friday"))
+            mealPresenterInterface.updateFri("1", weekPlan.idMeal);
+        else
+            mealPresenterInterface.updateFri("0", weekPlan.idMeal);
+        if(date.contains("Wednesday"))
+            mealPresenterInterface.updateWed("1", weekPlan.idMeal);
+        else
+            mealPresenterInterface.updateWed("0", weekPlan.idMeal);*/
+
     }
 
 }

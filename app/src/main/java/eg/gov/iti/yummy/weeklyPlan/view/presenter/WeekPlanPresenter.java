@@ -27,6 +27,11 @@ public class WeekPlanPresenter implements WeekPlanPresenterInterface {
     }
 
     @Override
+    public void deletePlan() {
+        repository.deletePlan();
+    }
+
+    @Override
     public Observable<List<WeekPlan>> getFridayMeal() {
         return repository.getStoredFriMeals();
     }

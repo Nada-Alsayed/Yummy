@@ -17,8 +17,8 @@ import io.reactivex.rxjava3.core.Observable;
 @Dao
 public interface UserDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable insertMeal(MealDetail meal);
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    Completable insertMealToL(MealDetail meal);
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Completable insertMealToWeekPlan(WeekPlan week);
     @Query("Select * From MealData")
@@ -44,32 +44,32 @@ public interface UserDao {
     Observable<Boolean> is_Taken(String username);*/
 
     //insert meals in each day
-    @Query("Update WeekPlan set sat=(:saturday) ")
+    @Query("Update WeekPlan set sat=(:saturday) where idMeal=(:id)")
    // @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable updateSaturday(String saturday );
-    @Query("Update WeekPlan set sun=(:sunday) ")
+    Completable updateSaturday(String saturday,String id);
+    @Query("Update WeekPlan set sun=(:sunday) where idMeal=(:id)")
    //@Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable updateSunday(String sunday );
+    Completable updateSunday(String sunday ,String id);
 
-    @Query("Update weekplan set mon=(:monday) ")
+    @Query("Update weekplan set mon=(:monday) where idMeal=(:id)")
    // @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable updateMonday(String monday );
+    Completable updateMonday(String monday,String id);
 
-    @Query("Update WeekPlan set tues=(:tuesday) ")
+    @Query("Update WeekPlan set tues=(:tuesday) where idMeal=(:id)")
    // @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable updateTuesday(String tuesday);
+    Completable updateTuesday(String tuesday,String id);
 
-    @Query("Update WeekPlan set wed=(:wednesday) ")
+    @Query("Update WeekPlan set wed=(:wednesday) where idMeal=(:id)")
    //@Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable updateWednesday(String wednesday);
+    Completable updateWednesday(String wednesday,String id);
 
-    @Query("Update WeekPlan set thurs=(:thursday) ")
+    @Query("Update WeekPlan set thurs=(:thursday)where idMeal=(:id)")
     //@Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable updateThursday(String thursday );
+    Completable updateThursday(String thursday ,String id);
 
-   @Query("Update WeekPlan set fri=(:friday) ")
+   @Query("Update WeekPlan set fri=(:friday) where idMeal=(:id)")
    //@Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable updateFriday(String friday );
+    Completable updateFriday(String friday ,String id);
 
     //get meals by day
     @Query("Select * From WeekPlan where fri=(:friday)")

@@ -1,24 +1,16 @@
 package eg.gov.iti.yummy.meal_details.presenter;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import javax.security.auth.login.LoginException;
-
-import eg.gov.iti.yummy.SignUp.view.Page_Sign_Up;
 import eg.gov.iti.yummy.meal_details.view.MealViewInterface;
-import eg.gov.iti.yummy.meal_details.view.WeekMeals;
 import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.model.RootMealDetail;
@@ -31,10 +23,47 @@ public class MealPresenter implements MealPresenterInterface, DetailsNetworkDele
     private Repository repository;
     private MealViewInterface mealViewInterface;
 
-    public MealPresenter(){}
+    public MealPresenter() {
+    }
+
     public MealPresenter(Repository repository, MealViewInterface mealViewInterface) {
         this.repository = repository;
         this.mealViewInterface = mealViewInterface;
+    }
+
+    @Override
+    public void updateSat(String x,String id) {
+        repository.updateSat(x,id);
+    }
+
+    @Override
+    public void updateSun(String x,String id) {
+        repository.updateSun(x,id);
+    }
+
+    @Override
+    public void updateMon(String x,String id) {
+        repository.updateMon(x,id);
+    }
+
+    @Override
+    public void updateTues(String x ,String id) {
+        repository.updateTues(x,id);
+    }
+
+    @Override
+    public void updateWed(String x,String id) {
+        repository.updateWed(x,id);
+    }
+
+    @Override
+    public void updateThurs(String x,String id) {
+        repository.updateThurs(x,id);
+    }
+
+    @Override
+    public void updateFri(String x,String id) {
+        repository.updateFri(x,id);
     }
 
     @Override
@@ -43,7 +72,7 @@ public class MealPresenter implements MealPresenterInterface, DetailsNetworkDele
     }
 
     @Override
-    public void addMealToFavFirebase(MealDetail meal,String key) {
+    public void addMealToFavFirebase(MealDetail meal, String key) {
         databaseReference.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -58,27 +87,25 @@ public class MealPresenter implements MealPresenterInterface, DetailsNetworkDele
             }
         });
     }
-
+    final int[] i = {0};
     @Override
     public void addMealToWeekPlanFirebase(WeekPlan meal, String key) {
         databaseReference.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChild(key)) {
-                    databaseReference.child(key).child("WeekPlan").child(meal.idMeal).setValue(meal);
+                    databaseReference.child(key).child("WeekPlan").child(meal.idMeal+ i[0]++).setValue(meal);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
 
     @Override
     public void getSpecificMeal(String meal) {
-        repository.getMealFromRetrofit(this,meal);
+        repository.getMealFromRetrofit(this, meal);
     }
 
     @Override

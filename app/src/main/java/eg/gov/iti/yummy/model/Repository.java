@@ -90,8 +90,9 @@ public class Repository implements RepositoryInterface {
 
     @Override
     public void insertMeal(MealDetail meal) {
-        localSource.insertMeal(meal);
+        localSource.insertMealToFav(meal);
     }
+
 
     @Override
     public void insertMealIntoWeek(WeekPlan meal) {
@@ -134,38 +135,38 @@ public class Repository implements RepositoryInterface {
     }
 
     @Override
-    public void updateSat(String x) {
-        localSource.updateSaturday(x);
+    public void updateSat(String x,String id) {
+        localSource.updateSaturday(x,id);
     }
 
     @Override
-    public void updateSun(String x) {
-        localSource.updateSunday(x);
+    public void updateSun(String x,String id) {localSource.updateSunday(x,id);
     }
 
     @Override
-    public void updateMon(String x) {
-        localSource.updateMonday(x);
+    public void updateMon(String x,String id) {
+        localSource.updateMonday(x,id);
     }
 
     @Override
-    public void updateTues(String x) {
-        localSource.updateTuesday(x);
+    public void updateTues(String x,String id) {
+        localSource.updateTuesday(x,id);
     }
 
     @Override
-    public void updateWed(String x) {
-        localSource.updateWednesday(x);
+    public void updateWed(String x,String id) {
+        localSource.updateWednesday(x,id);
     }
 
     @Override
-    public void updateThurs(String x) {
-        localSource.updateThursday(x);
+    public void updateThurs(String x,String id) {
+
+        localSource.updateThursday(x,id);
     }
 
     @Override
-    public void updateFri(String x) {
-        localSource.updateFriday(x);
+    public void updateFri(String x,String id) {
+        localSource.updateFriday(x,id);
     }
 
     @Override
