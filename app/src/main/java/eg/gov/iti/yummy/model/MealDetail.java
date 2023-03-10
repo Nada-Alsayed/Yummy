@@ -1,8 +1,17 @@
 package eg.gov.iti.yummy.model;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import org.jetbrains.annotations.NotNull;
+
+@Entity(tableName="MealData")
 public class MealDetail {
+    @PrimaryKey
+    @NotNull
     public String idMeal;
     public String strMeal;
+    @Ignore
     public Object strDrinkAlternate;
     public String strCategory;
     public String strArea;
@@ -51,8 +60,12 @@ public class MealDetail {
     public String strMeasure19;
     public String strMeasure20;
     public String strSource;
+    public String Fav;
+    @Ignore
     public Object strImageSource;
+    @Ignore
     public Object strCreativeCommonsConfirmed;
+    @Ignore
     public Object dateModified;
 
 }

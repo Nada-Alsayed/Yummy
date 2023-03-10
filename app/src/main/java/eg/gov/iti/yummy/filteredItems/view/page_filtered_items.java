@@ -24,6 +24,7 @@ import java.util.List;
 
 import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.country.AdapterCountry;
+import eg.gov.iti.yummy.db.ConcreteLocalSource;
 import eg.gov.iti.yummy.filteredItems.Presenter.FilterPresenter;
 import eg.gov.iti.yummy.filteredItems.Presenter.FilterPresenterInterface;
 import eg.gov.iti.yummy.model.Repository;
@@ -66,7 +67,7 @@ public class page_filtered_items extends Fragment implements FilterViewInterface
         originList = page_filtered_itemsArgs.fromBundle(getArguments()).getFilterType();
         header.setText(pageName);
 
-        filterPresenterInterface = new FilterPresenter(Repository.getInstance(API_Client.getInstance(getContext()),getContext()),this);
+        filterPresenterInterface = new FilterPresenter(Repository.getInstance(API_Client.getInstance(getContext()), ConcreteLocalSource.getInstance(getContext()),getContext()),this);
         if(originList==1)filterPresenterInterface.getAllMealsFilterByIngredient(pageName);
         else if(originList==2)filterPresenterInterface.getAllMealsFilterByCategory(pageName);
         else filterPresenterInterface.getAllMealsFilterByCountry(pageName);

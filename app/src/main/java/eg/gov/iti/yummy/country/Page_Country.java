@@ -20,11 +20,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Arrays;
 import java.util.List;
 
 import eg.gov.iti.yummy.R;
-import eg.gov.iti.yummy.favourite.FavList;
+import eg.gov.iti.yummy.db.ConcreteLocalSource;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.model.RootCategory;
 import eg.gov.iti.yummy.model.RootCountry;
@@ -56,7 +55,7 @@ public class Page_Country extends Fragment implements SearchViewInterface {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        searchPresenterInterface = new SearchPresenter(Repository.getInstance(API_Client.getInstance(getContext()), getContext()), this);
+        searchPresenterInterface = new SearchPresenter(Repository.getInstance(API_Client.getInstance(getContext()), ConcreteLocalSource.getInstance(getContext()), getContext()), this);
         searchPresenterInterface.getAllIngredients();
         searchPresenterInterface.getAllCategories();
         searchPresenterInterface.getAllCountries();

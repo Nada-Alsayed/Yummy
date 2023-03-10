@@ -1,4 +1,4 @@
-package eg.gov.iti.yummy.weeklyPlan.view;
+package eg.gov.iti.yummy.weeklyPlan.view.view;
 
 public class planListItem {
 

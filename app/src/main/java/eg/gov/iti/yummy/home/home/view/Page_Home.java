@@ -1,7 +1,7 @@
 package eg.gov.iti.yummy.home.home.view;
 
 import android.content.Context;
-import android.net.ConnectivityManager;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,30 +15,32 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import eg.gov.iti.yummy.DialogLogin;
 import eg.gov.iti.yummy.R;
+import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
+import eg.gov.iti.yummy.db.ConcreteLocalSource;
 import eg.gov.iti.yummy.home.home.presenter.HomePresenter;
 import eg.gov.iti.yummy.home.home.presenter.HomePresenterInterface;
+import eg.gov.iti.yummy.meal_details.presenter.MealPresenterInterface;
+import eg.gov.iti.yummy.meal_details.view.OnClick;
 import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.network.API_Client;
-import eg.gov.iti.yummy.weeklyPlan.view.WeeklyPlanAdapter;
-import okhttp3.Interceptor;
-import okhttp3.Request;
-import okhttp3.Response;
+import eg.gov.iti.yummy.weeklyPlan.view.view.WeeklyPlanAdapter;
 
-public class Page_Home extends Fragment implements HomeViewInterface {
+public class Page_Home extends Fragment implements HomeViewInterface,HomeOnClick {
     ViewPager viewPager;
+    String shP;
     public static final String TAG="pk";
     ForYouAdapter forYouAdapter;
     HomePresenterInterface PresenterInterface;
 
     RecyclerView recyclerView, recyclerView1;
 
-    WeeklyPlanAdapter weeklyPlanAdapter,weeklyPlanAdapter1;
+    HomeAdaptor weeklyPlanAdapter,weeklyPlanAdapter1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,18 +60,21 @@ public class Page_Home extends Fragment implements HomeViewInterface {
 
         viewPager = view.findViewById(R.id.stack_view);
         forYouAdapter = new ForYouAdapter(new ArrayList<>(), getContext());
-        PresenterInterface = new HomePresenter(Repository.getInstance(API_Client.getInstance(getContext()), getContext()), this);
+        PresenterInterface = new HomePresenter(Repository.getInstance(API_Client.getInstance(getContext()),ConcreteLocalSource.getInstance(getContext()),getContext()), this);
         viewPager.setPageTransformer(true, new ViewPagerStack());
         viewPager.setOffscreenPageLimit(3);
         //viewPager.setAdapter(forYouAdapter);
         PresenterInterface.getRandomMealsForYou();
+
+       SharedPreferences pref = getContext().getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
+        shP = pref.getString("USERNAME", "N/A");
 
         recyclerView = view.findViewById(R.id.myRecView);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-        weeklyPlanAdapter = new WeeklyPlanAdapter(new ArrayList<>(),getContext());
+        weeklyPlanAdapter = new HomeAdaptor(new ArrayList<>(),this,getContext());
         recyclerView.setAdapter(weeklyPlanAdapter);
         PresenterInterface.getRandomMealsTrending();
 
@@ -78,10 +83,22 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getContext());
         layoutManager1.setOrientation(RecyclerView.HORIZONTAL);
         recyclerView1.setLayoutManager(layoutManager1);
-        weeklyPlanAdapter1 = new WeeklyPlanAdapter(new ArrayList<>(),getContext());
+        weeklyPlanAdapter1 = new HomeAdaptor(new ArrayList<>(),this,getContext());
         recyclerView1.setAdapter(weeklyPlanAdapter1);
         PresenterInterface.getRandomMealsNewDishes();
     }
+
+
+    @Override
+    public void addMealInFirebase(MealDetail mealDetail, String key) {
+        PresenterInterface.addMealToFavFirebase(mealDetail,key);
+    }
+
+    @Override
+    public void addMealToFavHome(MealDetail meal) {
+        PresenterInterface.addToFavHome(meal);
+    }
+
     @Override
     public void showDataForYou(List<MealDetail> Categories) {
         forYouAdapter.setList(Categories);
@@ -104,6 +121,24 @@ public class Page_Home extends Fragment implements HomeViewInterface {
         weeklyPlanAdapter1.notifyDataSetChanged();
     }
 
+    @Override
+    public void addToFavHome(MealDetail mealDetail) {
+        /*if(shP.equals("Guest"))
+        {
+            login();
+        }*/
+//        else
+//        {
+            addMealToFavHome(mealDetail);
+//        }
+
+    }
+    @Override
+    public void addToFavFireOnClick(MealDetail mealDetail) {
+        addMealInFirebase(mealDetail,shP);
+
+    }
+
     public class ViewPagerStack implements ViewPager.PageTransformer {
 
         @Override
@@ -115,6 +150,10 @@ public class Page_Home extends Fragment implements HomeViewInterface {
                 page.setTranslationY(-20 * position);
             }
         }
+    }
+    void login() {
+        DialogLogin dialogLogin = new DialogLogin();
+        dialogLogin.show(getFragmentManager(), "Test");
     }
 }
 

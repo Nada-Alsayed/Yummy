@@ -1,49 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="180dp"
+    android:layout_height="200dp"
+    android:elevation="10dp"
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/grey"
+    android:id="@+id/home"
+    app:cardCornerRadius="20dp">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="180dp"
-        android:layout_height="170dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardElevation="5dp"
-        app:cardUseCompatPadding="true"
-        app:cardCornerRadius="20dp">
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/chickenalfredo" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cardAvailableDish"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                app:shapeAppearanceOverlay="@style/roundedimg"
-                android:scaleType="fitXY"
-                android:id="@+id/imageavailabledish"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@id/cardAvailableDish"
-                app:layout_constraintEnd_toEndOf="@+id/cardAvailableDish"
-                app:layout_constraintStart_toStartOf="@id/cardAvailableDish"
-                app:layout_constraintTop_toTopOf="@id/cardAvailableDish"
-                app:srcCompat="@drawable/cook" />
-
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#99141414"
+        android:gravity="center"
+        android:padding="6dp"
+        android:text="@string/pasta"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
             <ImageView
                 android:id="@+id/imglove"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:elevation="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/imageavailabledish"
-                app:layout_constraintTop_toTopOf="@+id/imageavailabledish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:padding="8dp"
                 app:srcCompat="@drawable/baseline_favorite_24" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
