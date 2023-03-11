@@ -95,7 +95,7 @@ public class Page_Favourite extends Fragment implements FavViewInterface, onFavo
 
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        Log.i("LO", "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+                       // Log.i("LO", "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
                     }
 
                     @Override
@@ -106,12 +106,12 @@ public class Page_Favourite extends Fragment implements FavViewInterface, onFavo
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.e("LO", "888888888888888888888888888888888888888888888888888888");
+                        //Log.e("LO", "888888888888888888888888888888888888888888888888888888");
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.e("LO", "7777777777777777777777777777777777777777777777");
+                        //Log.e("LO", "7777777777777777777777777777777777777777777777");
                     }
                 });
         recyclerView.setAdapter(adapterFavList);

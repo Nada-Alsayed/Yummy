@@ -37,6 +37,7 @@ public class Page_Sign_Up extends AppCompatActivity {
     ConcreteLocalSource concreteLocalSource;
     ImageView skip;
     public static final String PREF_NAME = "PREF";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,7 @@ public class Page_Sign_Up extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
-                editor.putString("USERNAME","Guest");
+                editor.putString("USERNAME", "Guest");
                 editor.commit();
                 Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
                 startActivity(intent);
@@ -82,16 +83,20 @@ public class Page_Sign_Up extends AppCompatActivity {
                                 Toast.makeText(Page_Sign_Up.this, "User already exist", Toast.LENGTH_SHORT).show();
                             } else {
                                 databaseReference.child("Users").child(name).child("UserPassword").setValue(passWord);
-
+                                SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("USERNAME",name);
+                                editor.commit();
                                 //show
-                                Toast.makeText(Page_Sign_Up.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Page_Sign_Up.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                                startActivity(intent);
                                 finish();
                             }
                         }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
                     });
                 }
             }
@@ -100,6 +105,7 @@ public class Page_Sign_Up extends AppCompatActivity {
         txtSignIn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), Page_Sign_In.class);
             startActivity(intent);
+            finish();
         });
     }
 
@@ -107,7 +113,7 @@ public class Page_Sign_Up extends AppCompatActivity {
     public static boolean isValidText(String text) {
         String regex = "^(?=.*[0-9])"
                 + "(?=.*[a-z])(?=.*[A-Z])"
-                + "(?=.*[@#$%^&+=])"
+                + "(?=.*[@#$%&+_])"
                 + "(?=\\S+$).{8,20}$";
         Pattern p = Pattern.compile(regex);
         if (text.isEmpty()) {

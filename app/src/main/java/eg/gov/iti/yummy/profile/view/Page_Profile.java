@@ -112,13 +112,13 @@ ProfilePresenterInterface profilePresenterInterface;
         logOutImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signOut();
+                signOut( pref);
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signOut();
+                signOut( pref);
             }
         });
         imgFav.setOnClickListener(new View.OnClickListener() {
@@ -149,11 +149,14 @@ ProfilePresenterInterface profilePresenterInterface;
 
     }
 
-    void signOut() {
+    void signOut(SharedPreferences pref) {
         gsc.signOut();
         firebaseAuth.signOut();
         profilePresenterInterface.deleteMeals();
         profilePresenterInterface.deletePlan();
+        SharedPreferences.Editor editor= pref.edit();
+        editor.putString("USERNAME","null");
+        editor.apply();
         Intent intent = new Intent(getActivity(), Page_Sign_In.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);

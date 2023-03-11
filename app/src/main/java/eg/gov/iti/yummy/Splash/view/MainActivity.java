@@ -1,22 +1,25 @@
 package eg.gov.iti.yummy.Splash.view;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
+import eg.gov.iti.yummy.MainActivity2;
 import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.SignIn.view.Page_Sign_In;
-import eg.gov.iti.yummy.SignUp.view.Page_Sign_Up;
 
 public class MainActivity extends AppCompatActivity {
-    Animation animationRight, animationLeft , animationDown , animationUp , animationCornerUp,animationCornerDown;
+    Animation animationRight, animationLeft, animationDown, animationUp, animationCornerUp, animationCornerDown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +54,29 @@ public class MainActivity extends AppCompatActivity {
         sashimi.startAnimation(animationRight);
         pasta.startAnimation(animationRight);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this, Page_Sign_In.class);
-                startActivity(intent);
-            }
-        }, 3000);
+
+        SharedPreferences pref = this.getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
+        String shP = pref.getString("USERNAME", "N/A");
+        if (shP.equals("null")) {
+           // Toast.makeText(this, "mmmmmmmmmmmmmmmmmmm"+shP, Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(MainActivity.this, Page_Sign_In.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }, 1000);
+        } else {
+          //  Toast.makeText(this, ""+shP, Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }, 1000);
+        }
     }
 }

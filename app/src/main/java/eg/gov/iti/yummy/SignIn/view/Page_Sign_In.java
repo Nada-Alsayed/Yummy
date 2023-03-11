@@ -87,15 +87,16 @@ public class Page_Sign_In extends AppCompatActivity {
                 String password = passwordUser.getText().toString();
                 if (name.isEmpty() || password.isEmpty()) {
                     Toast.makeText(Page_Sign_In.this, "Fill The Required Data", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else {
                     databaseReference.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.hasChild(name)) {
-                                final String firePassword = snapshot.child(name).child("UserPassword").getValue(String.class);
+                               String firePassword = snapshot.child(name).child("UserPassword").getValue(String.class);
 
                                 if (firePassword.equals(password)) {
-                                    Toast.makeText(Page_Sign_In.this, "Logged In", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(Page_Sign_In.this, "Logged In", Toast.LENGTH_SHORT).show();
 
                                     SharedPreferences pref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = pref.edit();
@@ -107,15 +108,12 @@ public class Page_Sign_In extends AppCompatActivity {
                                             if (snapshot.hasChildren()) {
                                                 for(DataSnapshot Data1:snapshot.getChildren()){
                                                     WeekPlan weekPlan=Data1.getValue(WeekPlan.class);
-//                                                    signInPresenter.addToWeekPlan(weekPlan);
-                                                    observeInsertionDataToPlan(weekPlan);
+                                                    signInPresenter.addToWeekPlan(weekPlan);
                                                 }
                                             }
                                         }
                                         @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
+                                        public void onCancelled(@NonNull DatabaseError error) {}
                                     });
 
                                     Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
@@ -130,9 +128,7 @@ public class Page_Sign_In extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
+                        public void onCancelled(@NonNull DatabaseError error) {}
                     });
                 }
             }
@@ -164,8 +160,8 @@ public class Page_Sign_In extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                String[] nameGoogle= account.getEmail().split("@",5);
                 AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                String[] nameGoogle= account.getEmail().split("@",5);
                 FirebaseAuth.getInstance().signInWithCredential(credential)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -179,7 +175,7 @@ public class Page_Sign_In extends AppCompatActivity {
                                             SharedPreferences.Editor editor = pref.edit();
                                             editor.putString("USERNAME",nameGoogle[0]);
                                             editor.commit();
-                                            /*databaseReference.child(nameGoogle[0]).child("WeekPlan").addValueEventListener(new ValueEventListener() {
+                                            databaseReference.child(nameGoogle[0]).child("WeekPlan").addValueEventListener(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                     if (snapshot.hasChildren()) {
@@ -190,10 +186,8 @@ public class Page_Sign_In extends AppCompatActivity {
                                                     }
                                                 }
                                                 @Override
-                                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                                }
-                                            });*/
+                                                public void onCancelled(@NonNull DatabaseError error) {}
+                                            });
                                             Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
                                             startActivity(intent);
                                             finish();
@@ -214,10 +208,13 @@ public class Page_Sign_In extends AppCompatActivity {
                 throw new RuntimeException(e);
             }
         }
+        else{
+            finish();
+        }
     }
 
-    private void observeInsertionDataToPlan(WeekPlan weekPlannerModel) {
+    /*private void observeInsertionDataToPlan(WeekPlan weekPlannerModel) {
         signInPresenter.addToWeekPlan(weekPlannerModel);
 
-    }
+    }*/
 }

@@ -94,7 +94,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
 
         if (isNetworkAvailable(getApplicationContext())) {
             mealPresenterInterface.getSpecificMeal(mealName);
-            Toast.makeText(this, " connected", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, " connected", Toast.LENGTH_SHORT).show();
         } else if (tableName.equals("favourite")) {
             mealPresenterInterface.getOffMeal(mealName).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<MealDetail>() {
@@ -126,7 +126,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
                         public void onComplete() {
                         }
                     });
-            Toast.makeText(this, "not connected favourite", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "not connected favourite", Toast.LENGTH_SHORT).show();
         } else {
             mealPresenterInterface.getOffMealWeek(mealName).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<WeekPlan>() {
@@ -160,7 +160,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
                         }
                     });
 
-            Toast.makeText(this, "not connected favourite", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this, "not connected favourite", Toast.LENGTH_SHORT).show();
         }
 
         btnAddToFav.setOnClickListener(new View.OnClickListener() {
@@ -471,7 +471,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         String date = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
         if (date.contains("Saturday")) {
             weekPlan.sat = "1";
-            Toast.makeText(this, "" + weekPlan.sat, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "" + weekPlan.sat, Toast.LENGTH_SHORT).show();
         } else {
             weekPlan.sat = "0";
         }

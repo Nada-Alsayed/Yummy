@@ -116,7 +116,7 @@ public class MealPresenter implements MealPresenterInterface, DetailsNetworkDele
 
     @Override
     public Observable<MealDetail> getOffMeal(String meal) {
-        Log.e("TAG", "getOffMeal: meal presenter");
+       // Log.e("TAG", "getOffMeal: meal presenter");
         //repository.getOfflineMeal(meal).observe(meal);
         return repository.getOfflineMeal(meal);
 
@@ -124,7 +124,7 @@ public class MealPresenter implements MealPresenterInterface, DetailsNetworkDele
 
     @Override
     public Observable<WeekPlan> getOffMealWeek(String meal) {
-        Log.e("TAG", "getOffMeal: meal presenter");
+       // Log.e("TAG", "getOffMeal: meal presenter");
         //repository.getOfflineMeal(meal).observe(meal);
         return repository.getOfflineMealWeek(meal);
 
