@@ -63,7 +63,7 @@ public class Page_Favourite extends Fragment implements FavViewInterface, onFavo
         favMealPresenterInterface = new FavMealPresenter(Page_Favourite.this, Repository.getInstance(API_Client.getInstance(getContext()), ConcreteLocalSource.getInstance(getContext()), getContext()));
         SharedPreferences pref = getActivity().getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
         String shP = pref.getString("USERNAME", "N/A");
-        databaseReference.child(shP).child("Favourite").addValueEventListener(new ValueEventListener() {
+        /*databaseReference.child(shP).child("Favourite").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
@@ -78,7 +78,7 @@ public class Page_Favourite extends Fragment implements FavViewInterface, onFavo
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        });*/
 
         recyclerView=view.findViewById(R.id.recyclerView);
         linearLayoutManager = new LinearLayoutManager(getContext());
@@ -125,7 +125,6 @@ public class Page_Favourite extends Fragment implements FavViewInterface, onFavo
 
     @Override
     public void deleteProduct(MealDetail meal) {
-
         favMealPresenterInterface.deleteMeal(meal);
     }
 

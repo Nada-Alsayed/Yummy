@@ -1,9 +1,12 @@
 package eg.gov.iti.yummy.SignIn.view;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +40,7 @@ import eg.gov.iti.yummy.R;
 import eg.gov.iti.yummy.SignIn.view.presenter.SignInPresenterInterface;
 import eg.gov.iti.yummy.SignIn.view.presenter.SignIn_Presenter;
 import eg.gov.iti.yummy.db.ConcreteLocalSource;
+import eg.gov.iti.yummy.model.MealDetail;
 import eg.gov.iti.yummy.model.Repository;
 import eg.gov.iti.yummy.model.WeekPlan;
 import eg.gov.iti.yummy.network.API_Client;
@@ -116,6 +120,23 @@ public class Page_Sign_In extends AppCompatActivity {
                                         public void onCancelled(@NonNull DatabaseError error) {}
                                     });
 
+                                    databaseReference.child(name).child("Favourite").addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot.hasChildren()) {
+                                                for(DataSnapshot Data:snapshot.getChildren()){
+                                                    MealDetail mealDetail=Data.getValue(MealDetail.class);
+                                                    Log.e(TAG,"firebase");
+                                                    signInPresenter.addToFav(mealDetail);
+                                                }
+                                            }
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+
                                     Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
                                     startActivity(intent);
                                     finish();
@@ -187,6 +208,22 @@ public class Page_Sign_In extends AppCompatActivity {
                                                 }
                                                 @Override
                                                 public void onCancelled(@NonNull DatabaseError error) {}
+                                            });
+                                            databaseReference.child(nameGoogle[0]).child("Favourite").addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    if (snapshot.hasChildren()) {
+                                                        for(DataSnapshot Data:snapshot.getChildren()){
+                                                            MealDetail mealDetail=Data.getValue(MealDetail.class);
+                                                            Log.e(TAG,"firebase");
+                                                            signInPresenter.addToFav(mealDetail);
+                                                        }
+                                                    }
+                                                }
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                }
                                             });
                                             Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
                                             startActivity(intent);

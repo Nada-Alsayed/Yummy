@@ -92,10 +92,11 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
 
         mealPresenterInterface = new MealPresenter(Repository.getInstance(API_Client.getInstance(getApplicationContext()), ConcreteLocalSource.getInstance(getApplicationContext()), getApplicationContext()), this);
 
-        if (isNetworkAvailable(getApplicationContext())) {
+       // if (isNetworkAvailable(getApplicationContext())) {
             mealPresenterInterface.getSpecificMeal(mealName);
           //  Toast.makeText(this, " connected", Toast.LENGTH_SHORT).show();
-        } else if (tableName.equals("favourite")) {
+       // }
+        /*else if (tableName.equals("favourite")) {
             mealPresenterInterface.getOffMeal(mealName).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<MealDetail>() {
                         @Override
@@ -161,7 +162,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
                     });
 
           //  Toast.makeText(this, "not connected favourite", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
         btnAddToFav.setOnClickListener(new View.OnClickListener() {
             @Override
