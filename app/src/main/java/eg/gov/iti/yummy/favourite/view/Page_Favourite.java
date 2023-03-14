@@ -41,8 +41,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class Page_Favourite extends Fragment implements FavViewInterface, onFavouriteClickListener {
     RecyclerView recyclerView;
     FavMealPresenterInterface favMealPresenterInterface;
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://yummy-app-f2567-default-rtdb.firebaseio.com/");
-
+    //DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://yummy-app-f2567-default-rtdb.firebaseio.com/");
     AdapterFavList adapterFavList;
     LinearLayoutManager linearLayoutManager;
 
@@ -63,22 +62,6 @@ public class Page_Favourite extends Fragment implements FavViewInterface, onFavo
         favMealPresenterInterface = new FavMealPresenter(Page_Favourite.this, Repository.getInstance(API_Client.getInstance(getContext()), ConcreteLocalSource.getInstance(getContext()), getContext()));
         SharedPreferences pref = getActivity().getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
         String shP = pref.getString("USERNAME", "N/A");
-        /*databaseReference.child(shP).child("Favourite").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChildren()) {
-                    for(DataSnapshot Data:snapshot.getChildren()){
-                        MealDetail mealDetail=Data.getValue(MealDetail.class);
-                        Log.e(TAG,"firebase");
-                        favMealPresenterInterface.insertMeal(mealDetail);
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
 
         recyclerView=view.findViewById(R.id.recyclerView);
         linearLayoutManager = new LinearLayoutManager(getContext());
@@ -86,10 +69,6 @@ public class Page_Favourite extends Fragment implements FavViewInterface, onFavo
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapterFavList = new AdapterFavList(new ArrayList<>(), this, getContext());
-
-
-        //recyclerView.setAdapter(adapterFavList);
-
         favMealPresenterInterface.getStoredMeals().subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<MealDetail>>() {
 
@@ -134,3 +113,19 @@ public class Page_Favourite extends Fragment implements FavViewInterface, onFavo
     }
 
 }
+ /*databaseReference.child(shP).child("Favourite").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChildren()) {
+                    for(DataSnapshot Data:snapshot.getChildren()){
+                        MealDetail mealDetail=Data.getValue(MealDetail.class);
+                        Log.e(TAG,"firebase");
+                        favMealPresenterInterface.insertMeal(mealDetail);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/

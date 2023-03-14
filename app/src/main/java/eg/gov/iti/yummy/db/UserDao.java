@@ -19,7 +19,7 @@ public interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     Completable insertMealToL(MealDetail meal);
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     Completable insertMealToWeekPlan(WeekPlan week);
     @Query("Select * From MealData")
     Observable<List<MealDetail>> getAllProducts();

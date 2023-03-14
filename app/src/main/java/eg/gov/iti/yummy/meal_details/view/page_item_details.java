@@ -516,8 +516,7 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         }
         addMealsToWeekPlanOnClick(weekPlan);
         insertMealInWeekPlanFirebase(weekPlan, shP);
-
-        /*if(date.contains("Saturday")){
+       /* if(date.contains("Saturday")){
             mealPresenterInterface.updateSat("1", weekPlan.idMeal);
             Toast.makeText(this, ""+weekPlan.sat, Toast.LENGTH_SHORT).show();}
         else
@@ -547,8 +546,53 @@ public class page_item_details extends AppCompatActivity implements MealViewInte
         if(date.contains("Wednesday"))
             mealPresenterInterface.updateWed("1", weekPlan.idMeal);
         else
-            mealPresenterInterface.updateWed("0", weekPlan.idMeal);*/
-
+            mealPresenterInterface.updateWed("0", weekPlan.idMeal);
+*/
     }
 
 }
+
+/*if (date.contains("Saturday")) {
+            weekPlan.sat = "1";
+            //Toast.makeText(this, "" + weekPlan.sat, Toast.LENGTH_SHORT).show();
+        } else {
+            weekPlan.sat = "0";
+        }
+        if (date.contains("Sunday")) {
+            weekPlan.sun = "1";
+        }
+        // Toast.makeText(this, ""+weekPlan.sat, Toast.LENGTH_SHORT).show();
+        else {
+            weekPlan.sun = "0";
+        }
+        if (date.contains("Monday")) {
+            weekPlan.mon = "1";
+
+        } else {
+            weekPlan.mon = "0";
+        }
+        if (date.contains("Tuesday")) {
+            weekPlan.tues = "1";
+            // Toast.makeText(this, ""+weekPlan.sat, Toast.LENGTH_SHORT).show();
+        } else {
+            weekPlan.tues = "0";
+        }
+        if (date.contains("Thursday")) {
+            weekPlan.thurs = "1";
+            //  Toast.makeText(this, ""+weekPlan.sat, Toast.LENGTH_SHORT).show();
+        } else {
+            weekPlan.thurs = "0";
+        }
+        if (date.contains("Friday")) {
+            weekPlan.fri = "1";
+            //  Toast.makeText(this, ""+weekPlan.sat, Toast.LENGTH_SHORT).show();
+        } else {
+            weekPlan.fri = "0";
+        }
+        if (date.contains("Wednesday")) {
+            weekPlan.wed = "1";
+            //Toast.makeText(this, ""+weekPlan.sat, Toast.LENGTH_SHORT).show();
+
+        } else {
+            weekPlan.wed = "0";
+        }*/

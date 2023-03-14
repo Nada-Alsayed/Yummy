@@ -21,6 +21,7 @@ import io.reactivex.rxjava3.core.Observable;
 public class MealPresenter implements MealPresenterInterface, DetailsNetworkDelegate {
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://yummy-app-f2567-default-rtdb.firebaseio.com/");
     private Repository repository;
+    final int[] i = {0};
     private MealViewInterface mealViewInterface;
 
     public MealPresenter() {
@@ -87,14 +88,15 @@ public class MealPresenter implements MealPresenterInterface, DetailsNetworkDele
             }
         });
     }
-    final int[] i = {0};
+
     @Override
     public void addMealToWeekPlanFirebase(WeekPlan meal, String key) {
         databaseReference.child("Users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChild(key)) {
-                    databaseReference.child(key).child("WeekPlan").child(meal.idMeal+ i[0]++).setValue(meal);
+                    databaseReference.child(key).child("WeekPlan").child(meal.idMeal+meal.sat+
+                            meal.sun+meal.mon+meal.tues+meal.wed+meal.thurs+meal.fri+i[0]++).setValue(meal);
                 }
             }
             @Override

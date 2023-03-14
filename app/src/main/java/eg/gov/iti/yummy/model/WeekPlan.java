@@ -3,34 +3,43 @@ package eg.gov.iti.yummy.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
 
 import org.jetbrains.annotations.NotNull;
 
-@Entity(tableName = "WeekPlan")
+@Entity(
+        tableName = "WeekPlan",
+        primaryKeys = {"idMeal", "sat", "sun", "mon", "thurs", "wed", "tues", "fri"}
+)
 public class WeekPlan {
-    @PrimaryKey(autoGenerate = true)
-    @NotNull
-    public Integer id;
+    // @PrimaryKey(autoGenerate = true)
 
+    //    @ColumnInfo(au)
+//    public Integer id;
+    @NotNull
     public String idMeal;
     public String strMeal;
 
     @ColumnInfo(defaultValue = "0")
+    @NotNull
     public String sat;
     @ColumnInfo(defaultValue = "0")
+    @NotNull
     public String sun;
     @ColumnInfo(defaultValue = "0")
+    @NotNull
     public String mon;
     @ColumnInfo(defaultValue = "0")
+    @NotNull
     public String thurs;
     @ColumnInfo(defaultValue = "0")
+    @NotNull
     public String wed;
     @ColumnInfo(defaultValue = "0")
+    @NotNull
     public String tues;
     @ColumnInfo(defaultValue = "0")
+    @NotNull
     public String fri;
-
 
 
     @Ignore
