@@ -96,7 +96,7 @@ public class MealPresenter implements MealPresenterInterface, DetailsNetworkDele
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChild(key)) {
                     databaseReference.child(key).child("WeekPlan").child(meal.idMeal+meal.sat+
-                            meal.sun+meal.mon+meal.tues+meal.wed+meal.thurs+meal.fri+i[0]++).setValue(meal);
+                            meal.sun+meal.mon+meal.tues+meal.wed+meal.thurs+meal.fri).setValue(meal);
                 }
             }
             @Override

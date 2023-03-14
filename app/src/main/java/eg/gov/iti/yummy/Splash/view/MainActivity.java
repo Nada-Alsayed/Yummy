@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences pref = this.getSharedPreferences(Page_Sign_In.PREF_NAME, Context.MODE_PRIVATE);
         String shP = pref.getString("USERNAME", "N/A");
-        if (shP.equals("null")) {
+        if (shP.equals("null")||shP.equals("Guest")) {
            // Toast.makeText(this, "mmmmmmmmmmmmmmmmmmm"+shP, Toast.LENGTH_SHORT).show();
             new Handler().postDelayed(new Runnable() {
                 @Override
